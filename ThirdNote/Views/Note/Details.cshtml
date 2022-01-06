@@ -1,0 +1,69 @@
+﻿@model ThirdNote.Models.Note
+@{ IEnumerable<ThirdNote.Models.Tag> oTag = ViewBag.tags as IEnumerable<ThirdNote.Models.Tag>; }
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <dl>
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Title)
+                </dt>*@
+
+            <dd>
+                <div class="dir-txt-auto">
+                    @Html.Raw("<b>" + Model.Title + "</b>")
+                    <br />
+                    <small dir="ltr">
+                        @{ string days = (DateTime.Now - Model.WrittenDate).Duration().Days.ToString(); }
+                        <b>@days days</b> ago at
+                        @Html.DisplayFor(model => model.WrittenDate)
+                    </small>
+                    <br />
+                </div>
+            </dd>
+
+            <dd>
+                <br />
+                <div class="dir-txt-auto">
+                    @if (Model.Markdown)
+                    {
+                        @Html.Raw(Model.Text);
+                    }
+                    else
+                    {
+                        @Html.Raw(Model.Text.Replace("\n", "<br/>"));
+                    }
+                </div>
+            </dd>
+
+            <dd>
+                <br />
+                <div class="dir-txt-auto">
+                    @foreach (var tag in ViewBag.tags)
+                    {
+                        <a class="m-1" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
+                    }
+                </div>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dir-auto")
+}

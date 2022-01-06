@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="~/logo.png" />
+    <title>@ViewBag.Title - ThirdNote</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>*@
+
+</head>
+
+
+<body>
+    <nav class="navbar bg-light border-bottom">
+        <div class="container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pen-fill navbar-brand" viewBox="0 0 16 16">
+                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+            </svg>
+            @*<a class="navbar-brand" href="#">&deg;&clubs;</a>*@
+            <ul class="navbar-nav me-auto">
+                @*<div class="container justify-content-between">*@
+                @*<div class="d-flex justify-content-evenly">*@
+                <li class="nav-item mx-md-3"><a class="nav-link active" href="/">Dashboard</a></li>
+                <li class="nav-item mx-md-3"><a class="nav-link" href="/Note/Timeline">Timeline</a></li>
+                <li class="nav-item mx-md-3"><a class="nav-link" href="/Note/List">List</a></li>
+                <li class="nav-item mx-md-3"><a class="nav-link" href="/Note/Create">Create</a></li>
+                <li class="nav-item mx-md-3"><a class="nav-link" href="/Tag/Index">Tags</a></li>
+                <li class="nav-item mx-md-3"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Export</a></li>
+                @*</div>*@
+                @*</div>*@
+            </ul>
+
+            @*<form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>*@
+        </div>
+    </nav>
+
+
+    <div class="container body-content mt-4">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div>Copyright &copy; @DateTime.Now.Year Sina Saeedi. all rights reserved.</div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(".nav .nav-link").on("click", function () {
+            $(".nav .nav-link").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
+</body>
+</html>

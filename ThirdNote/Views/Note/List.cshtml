@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ThirdNote.Models.Note>
+
+@*####################( Style )####################*@
+
+<style>
+    .table {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+
+@*####################( All Notes )####################*@
+<table class="table table-sm caption-top mb-5 dir-rtl">
+    <caption>Your Notes in a glance</caption>
+    <tr class="table-light">
+        <th style="width:5%;">
+            #
+        </th>
+        <th style="width:55%;">
+            @*@Html.DisplayNameFor(model => model.Title)*@
+            Title
+        </th>
+
+        @*<th style="width:30%;">
+                @Html.DisplayNameFor(model => model.Text)
+            </th>*@
+
+        <th style="width:18%;">
+            @*@Html.DisplayNameFor(model => model.CreatedDate)*@
+            Written Date
+        </th>
+        <th style="width:4%;">
+            @*@Html.DisplayNameFor(model => model.Markdown)*@
+            Md
+        </th>
+        <th style="width:4%;">
+            @*@Html.DisplayNameFor(model => model.Hidden)*@
+            Hd
+        </th>
+        <th style="width:4%;">
+            @*@Html.DisplayNameFor(model => model.Pin)*@
+            Pin
+        </th>
+
+        <th style="width:6%;">
+            @*@Html.DisplayNameFor(model => model.ViewCount)*@
+            View
+        </th>
+        <th style="width:160px;"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Note/Details/@item.Id">@item.Id</a>
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Title)*@
+                <a href="\Note\Details\@item.Id" class="link-row"><div class="">@item.Title</div></a>
+            </td>
+
+            @*<td style="width:300px;">
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.WrittenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Markdown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hidden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pin)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Actionable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewCount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ThirdNote.Models.Note>
+
+@{
+    ViewBag.Title = "Timeline";
+}
+
+<h2>Timeline</h2>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h4>Latest Notes</h4>
+            <ul class="timeline">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        @Html.ActionLink(item.Title, "Details", new { id = item.Id })
+                        <br/>
+                        @Html.Raw("<small> &gt; " + item.CreatedDate + "</small>")
+                        <br/>
+                        <div class="dir-txt-auto">
+                            @Html.Raw(item.Text.Trim().Replace("\n", "<br/>"))
+                        </div>
+                    </li>
+                    <br/>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dir-auto")
+}

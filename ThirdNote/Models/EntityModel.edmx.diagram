@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59a188f025f04ea69fb49264b4f8917b" Name="Diagram1" >
+        <EntityTypeShape EntityType="EntityModel.Note" Width="1.5" PointX="5" PointY="0.5" />
+        <EntityTypeShape EntityType="EntityModel.Tag" Width="1.5" PointX="2.625" PointY="0.5" />
+        <AssociationConnector Association="EntityModel.TagNote" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="EntityModel.Meta" Width="1.5" PointX="7.25" PointY="0.5" />
+        <EntityTypeShape EntityType="EntityModel.Rate" Width="1.5" PointX="0.625" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="EntityModel.NoteRate" />
+        <AssociationConnector Association="EntityModel.MetaNote" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

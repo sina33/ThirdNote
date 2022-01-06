@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ThirdNote.Models.Note>
+
+@{
+    ViewBag.Title = "(Tag) " + ViewBag.Tag;
+}
+
+<h2>@ViewBag.Tag</h2>
+
+<p>
+    @Html.ActionLink("Edit Tag", "Edit", new { id = ViewBag.TagId })
+</p>
+<table class="table table-sm caption-top mb-5">
+    <caption>Tagged with <i>@ViewBag.Tag</i></caption>
+    <tr class="table-light">
+        <th style="width:5%;">
+            #
+        </th>
+        <th style="width:55%;">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+       
+        <th style="width:18%;">
+            @*@Html.DisplayNameFor(model => model.CreatedDate)*@
+            Written Date
+        </th>
+        <th style="width:4%;">
+            @*@Html.DisplayNameFor(model => model.Markdown)*@
+            Md
+        </th>
+        <th style="width:4%;">
+            @*@Html.DisplayNameFor(model => model.Hidden)*@
+            Hd
+        </th>
+        <th style="width:4%;">
+            @Html.DisplayNameFor(model => model.Pin)
+        </th>
+
+        <th style="width:6%;">
+            @*@Html.DisplayNameFor(model => model.ViewCount)*@
+            View
+        </th>
+        <th style="width:160px;"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.WrittenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Markdown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hidden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pin)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewCount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Note", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "Details", "Note", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "Note", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>

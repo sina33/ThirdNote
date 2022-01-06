@@ -1,0 +1,135 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    /*background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+    background: linear-gradient(to right, #25c481, #25b7c4);*/
+    /*font-family: 'Roboto', sans-serif;*/
+}
+ form {
+     margin-left:100px;
+ }
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 80%;*/
+    outline:none;
+    border: none;
+}
+
+footer {
+    font-size: 0.8rem;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+
+label {
+    text-align: end;
+/*    justify-self:center;*/
+}
+
+.dir-rtl {
+    direction: rtl;
+}
+
+
+.dir-ltr {
+    direction: ltr;
+}
+
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+
+    ul.timeline:before {
+        content: ' ';
+        background: #d4d9df;
+        display: inline-block;
+        position: absolute;
+        left: 29px;
+        width: 2px;
+        height: 100%;
+        z-index: 400;
+    }
+
+    ul.timeline > li {
+        margin: 20px 0;
+        padding-left: 20px;
+    }
+
+        ul.timeline > li:before {
+            content: ' ';
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #22c0e8;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 400;
+        }
+
+.crop {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10em;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/* Table Sticky Header */
+table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.right {
+    float: right;
+}
+
+blockquote {
+    
+}
+
+.link-row {
+    text-decoration: none;
+    color:inherit;
+}
+.link-row:hover {
+    color:darkorange;
+}

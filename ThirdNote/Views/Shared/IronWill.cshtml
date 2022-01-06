@@ -1,0 +1,116 @@
+﻿@model ThirdNote.ViewModels.Dashboard
+<link href="~/Content/css-circular-prog-bar.css" rel="stylesheet" />
+@*####################( Style )####################*@
+<style>
+    .dashboard {
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .iwill {
+        border-radius: 50px;
+        background-image: linear-gradient(to bottom right, khaki, white);
+        font-family: 'Times New Roman', Times, serif;
+    }
+</style>
+
+@*####################( Dashboard )####################*@
+
+<div class="row justify-content-end dashboard">
+    @*##########( New Note Shortcut )##########*@
+    <div class="col-6 p-3">
+        @* Create Note *@
+        <h2>
+            <a href="\Note\Create" class="px-2 btn btn-outline btn-outline-success"> <img src="~/Content/addnote.png" style="width:86px; height:auto;"/> </a>
+        </h2>
+    </div>
+
+    @*##########( Iron Will )##########*@
+    <div class="col-6 iwill">
+        <div class="row justify-content-end">
+            @*##########( Level-up Daily Counter )##########*@
+            <div class="col-4">
+                @*##########( Milestones )##########*@
+                @{
+                    List<int> milestones = new List<int> { 0, 1, 3, 5, 7, 10, 14, 21, 30, 44, 66, 99, 150, 200, 254, 365 };
+                    int strike = Model.Strikes.First();
+                    int nextMile = milestones.Where(m => m > strike).Min();
+                    int percent = 100 * ((strike * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / ((nextMile * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
+                    double dpercent = 100.0 * ((strike * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / ((nextMile * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
+                }
+                @*#####( Dynamic Tag )#####*@
+                @*<div class="progress-circle p60">*@
+                <div class="@(percent<=50 ? "progress-circle p"+percent : "progress-circle over50 p"+percent)">
+                    <span style="text-shadow: 1px 1px 2px #888888;"><b>@Math.Round(@dpercent, 1)</b> </span>
+                    <div class="left-half-clipper">
+                        <div class="first50-bar"></div>
+                        <div class="value-bar"></div>
+                    </div>
+                </div>
+            </div>
+            @*##########( Badge )##########*@
+            <div class="col-8">
+                @* Badge *@
+                <div style="margin-top:25px;">
+                    @*##########( Nickname Titles )##########*@
+                    @{
+                        string getNikename(int days)
+                        {
+                            string nike = "Astronaut";
+                            if (days > 365)
+                                nike = "Immortal";
+                            else if (days > 254)
+                                nike = "King of Will Power";
+                            else if (days > 200)
+                                nike = "General";
+                            else if (days > 150)
+                                nike = "Commander";
+                            else if (days > 99)
+                                nike = "Champion";
+                            else if (days > 66)
+                                nike = "Master";
+                            else if (days > 44)
+                                nike = "Guardian";
+                            else if (days > 30)
+                                nike = "Cavalier";
+                            else if (days > 21)
+                                nike = "Holy Knight (Warrior III)";
+                            else if (days > 14)
+                                nike = "Knight (Warrior II)";
+                            else if (days > 10)
+                                nike = "Warrior";
+                            else if (days > 7)
+                                nike = "Sergeant";
+                            else if (days > 5)
+                                nike = "Scout";
+                            else if (days > 3)
+                                nike = "Soldier";
+                            else if (days > 1)
+                                nike = "Man of Courage";
+                            return nike;
+                        }
+
+                    }
+                    <h2>@getNikename(strike)</h2>
+                    <h4>
+                        You are on a <b style="text-shadow: 2px 2px 4px #ff6a00; ">@Model.Strikes.First() days </b>strike!
+                        @*##########( Private Link to relapse history page )##########*@
+                        @Html.ActionLink("..", "Index", "Relapse", null, new { @style = "color:#f5f5dd;" })
+                    </h4>
+
+
+
+                    @*##########( Strikes History )##########*@
+                    @*
+                        <a href="\Relapse\Create" class="mx-2"> + </a>
+                        <div class="d-flex flex-wrap">
+                            @foreach (var item in Model.Strikes)
+                            {
+                                <div class="mx-2" style="text-shadow: 2px 2px 4px #888888;"> @item </div>
+                            }
+                        </div>
+                    *@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
