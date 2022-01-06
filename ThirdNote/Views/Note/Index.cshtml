@@ -45,12 +45,13 @@
 
     @foreach (var item in Model.Pinned)
     {
-        <tr>
+        <tr class="link-row">
             <td>
                 <a href="/Note/Details/@item.Id">@item.Id</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                <a href="/Note/Details/@item.Id" class="link-row"><div>@item.Title</div></a>
+                @*@Html.DisplayFor(modelItem => item.Title)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WrittenDate)

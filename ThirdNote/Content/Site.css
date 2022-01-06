@@ -126,10 +126,29 @@ blockquote {
     
 }
 
-.link-row {
+.link-row a {
+
     text-decoration: none;
-    color:inherit;
+    color: inherit;
+
 }
-.link-row:hover {
+.link-row:hover a{
     color:darkorange;
+   // background-color:darkgrey;
+}
+
+.link-row:hover{
+    background-color: beige;
+}
+
+.btn-nav {
+    width: 70%;
+    align-self:center;
+    flex-flow: column;
+    display: flex;
+    vertical-align:unset;
+}
+
+.btn {
+    vertical-align: unset;
 }

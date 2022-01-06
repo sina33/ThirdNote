@@ -4,56 +4,55 @@
     ViewBag.Title = "(Tag) " + ViewBag.Tag;
 }
 
-<h2>@ViewBag.Tag</h2>
 
-<p>
-    @Html.ActionLink("Edit Tag", "Edit", new { id = ViewBag.TagId })
-</p>
-<table class="table table-sm caption-top mb-5">
-    <caption>Tagged with <i>@ViewBag.Tag</i></caption>
-    <tr class="table-light">
-        <th style="width:5%;">
-            #
-        </th>
-        <th style="width:55%;">
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-       
-        <th style="width:18%;">
-            @*@Html.DisplayNameFor(model => model.CreatedDate)*@
-            Written Date
-        </th>
-        <th style="width:4%;">
-            @*@Html.DisplayNameFor(model => model.Markdown)*@
-            Md
-        </th>
-        <th style="width:4%;">
-            @*@Html.DisplayNameFor(model => model.Hidden)*@
-            Hd
-        </th>
-        <th style="width:4%;">
-            @Html.DisplayNameFor(model => model.Pin)
-        </th>
+<div class="row">
+    <div class="col-2 offset-1 d-flex flex-column justify-content-between">
+        <a class="btn btn-outline-warning btn-nav" href="/Tag/Edit/@ViewBag.TagId">Edit Tag</a>
+        <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return alse;">Back To List</p>
+    </div>
+    <div class="col-8">
+        <h2 class="d-inline-flex">@ViewBag.Tag</h2>
+        @*####################( Only Tagged Notes )####################*@
+        <table class="table table-sm caption-top mb-5 dir-rtl">
+            <caption>Tagged with <i>@ViewBag.Tag</i></caption>
+            <tr class="table-light">
+                <th style="width:5%;">
+                    #
+                </th>
+                <th style="width:55%;">
+                    Title
+                </th>
+                <th style="width:18%;">
+                    Written Date
+                </th>
+                <th style="width:4%;">
+                    Md
+                </th>
+                <th style="width:4%;">
+                    Hd
+                </th>
+                <th style="width:4%;">
+                    Pin
+                </th>
+                <th style="width:6%;">
+                    View
+                </th>
+                @*<th style="width:160px;"></th>*@
+            </tr>
 
-        <th style="width:6%;">
-            @*@Html.DisplayNameFor(model => model.ViewCount)*@
-            View
-        </th>
-        <th style="width:160px;"></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
+            @foreach (var item in Model)
+            {
+        <tr class="link-row">
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                <a href="/Note/Details/@item.Id">@item.Id</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                <a href="/Note/Details/@item.Id"><div>@item.Title</div></a>
             </td>
-            
+
             <td>
-                @Html.DisplayFor(modelItem => item.WrittenDate)
+                @Convert.ToDateTime(item.WrittenDate).ToString("dd/MM/yyyy")
+                @*@Html.DisplayFor(modelItem => item.WrittenDate, "{0:dd/MM/yyyy}", new { @class = "form-control" })*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Markdown)
@@ -64,16 +63,28 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Pin)
             </td>
-           
             <td>
                 @Html.DisplayFor(modelItem => item.ViewCount)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Note", new { id = item.Id }, null) |
-                @Html.ActionLink("Details", "Details", "Note", new { id = item.Id }, null) |
-                @Html.ActionLink("Delete", "Delete", "Note", new { id = item.Id }, null)
-            </td>
-        </tr>
-    }
+            @* 
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            *@
 
+        </tr> 
+            }
 </table>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dir-auto")
+}

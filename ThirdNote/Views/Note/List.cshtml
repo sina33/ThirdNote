@@ -51,13 +51,13 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="link-row">
             <td>
                 <a href="/Note/Details/@item.Id">@item.Id</a>
             </td>
-            <td>
+            <td >
                 @*@Html.DisplayFor(modelItem => item.Title)*@
-                <a href="\Note\Details\@item.Id" class="link-row"><div class="">@item.Title</div></a>
+                <a href="\Note\Details\@item.Id" ><div>@item.Title</div></a>
             </td>
 
             @*<td style="width:300px;">
