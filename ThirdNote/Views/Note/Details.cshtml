@@ -38,7 +38,9 @@
                     }
                     else
                     {
-                        @Html.Raw(Model.Text.Replace("\n", "<br/>"));
+                        @*@Html.Raw(Model.Text.Replace("\n", "<br/>"));*@
+                        @Html.Raw( HttpUtility.HtmlEncode(Model.Text) );
+
                     }
                 </div>
             </dd>
