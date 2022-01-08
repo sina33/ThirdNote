@@ -5,7 +5,7 @@
     background: linear-gradient(to right, #25c481, #25b7c4);*/
     /*font-family: 'Roboto', sans-serif;*/
 }
- form {
+form {
      margin-left:100px;
  }
 /* Set padding to keep content from hitting the edges */
@@ -36,11 +36,30 @@ footer {
 
 .navbar-nav {
     flex-direction: row;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.navbar-nav a {
+    flex: 1;
+    /*background-color: #333;*/
+    /*color: #fff;*/
+    /*border: 1px solid;*/
+    padding: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.5s ease-out;
+}
+
+.navbar-nav a:hover, a:focus {
+    text-shadow: 0 0 10px #000000;
+    /*background-color: #d4d9df;*/
+    color: #333;
 }
 
 label {
     text-align: end;
-/*    justify-self:center;*/
+    /*    justify-self:center;*/
 }
 
 .dir-rtl {
@@ -151,4 +170,8 @@ blockquote {
 
 .btn {
     vertical-align: unset;
+}
+
+.nav-link {
+
 }
