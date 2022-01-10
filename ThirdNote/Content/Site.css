@@ -51,7 +51,7 @@ footer {
     transition: all 0.5s ease-out;
 }
 
-.navbar-nav a:hover, a:focus {
+.navbar-nav a:hover {
     text-shadow: 0 0 10px #000000;
     /*background-color: #d4d9df;*/
     color: #333;
@@ -172,6 +172,7 @@ blockquote {
     vertical-align: unset;
 }
 
-.nav-link {
-
+#collapseDiv {
+    display:none;
+    transition: all 1s linear;
 }

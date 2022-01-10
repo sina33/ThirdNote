@@ -51,10 +51,10 @@
             </dd>
             @*###############( Tags )###############*@
             <dd>
-                <div class="dir-txt-auto pb-2">
+                <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pb-2">
                     @foreach (var tag in ViewBag.tags)
                     {
-                        <a class="m-1" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
+                        <a class="m-2" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
                     }
                 </div>
             </dd>
