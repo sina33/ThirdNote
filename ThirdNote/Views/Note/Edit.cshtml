@@ -8,130 +8,98 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-
-    <div class="row">
-        @*####################( Vertical Control Buttons )####################*@
-        <div class="col-2 offset-1 d-flex flex-column justify-content-between">
-            <a class="btn btn-outline-warning btn-nav" href="/Note/Edit/@Model.Id">Edit</a>
-            <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return false;">Back To List</p>
-        </div>
-
-        @*####################( Title )####################*@
-        <div class="form-group row mb-3">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @*####################( Text )####################*@
-        <div class="form-group row mb-3">
-            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 15 } })
-                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @*####################( Tags )####################*@
-        <div class="form-group row mb-3">
-            <label for="tagsInput" class="control-label col-md-2">Tags</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control dir-auto" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ..." value="@ViewBag.tagString">
-                @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
-                @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
-            </div>
-        </div>
-        @*###############( Date & Time )###############*@
-        <div class="form-group row mb-3">
-            @Html.Label("Written Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
-                @Html.TextBox("MyDate", Model.WrittenDate.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control", type = "date" })
-                @*@Html.ValidationMessage("MyDate", "", new { @class = "text-danger" })*@
-            </div>
-            <div class="col-md-3">
-                @Html.TextBox("MyTime", Model.WrittenDate.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control", type = "time" })
-                @*@Html.ValidationMessage("MyTime", "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CreatedDate)
 
         <div class="row">
-            <div class="col-2"></div>
-            @*##########( Markdown )##########*@
-            <div class="form-group col-2 mb-3">
-                <div class="checkbox d-inline">
-                    @Html.EditorFor(model => model.Markdown)
-                    @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
-                </div>
-                @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "control-label mx-2" })
+            @*####################( Vertical Control Buttons )####################*@
+            <div class="col-2 d-flex flex-column justify-content-between">
+                <a class="btn btn-outline-warning btn-nav disabled" href="/Note/Edit/@Model.Id">Edit</a>
+                <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
             </div>
-            @*##########( Private )##########*@
-            <div class="form-group col-2 mb-3">
-                <div class="checkbox d-inline">
-                    @Html.EditorFor(model => model.Hidden)
-                    @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+            <div class="col">
+                @*####################( Title )####################*@
+                <div class="form-group row mb-3">
+                    @*@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "control-label mx-2" })
-            </div>
-            @*##########( Pin )##########*@
-            <div class="form-group col-2 mb-3">
-                <div class="checkbox d-inline">
-                    @Html.EditorFor(model => model.Pin)
-                    @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                @*####################( Text )####################*@
+                <div class="form-group row mb-3">
+                    @*@Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 12 } })
+                        @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label mx-2" })
-            </div>
-            <div class="col-md"></div>
-        </div>
+                @*####################( Tags )####################*@
+                <div class="form-group row mb-3">
+                    @*<label for="tagsInput" class="control-label col-md-2">Tags</label>*@
+                    <div class="col-md-10">
+                        <input type="text" class="form-control dir-auto" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ..." value="@ViewBag.tagString">
+                        @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
+                        @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
+                    </div>
+                </div>
+                @*###############( Date, Time & Save )###############*@
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group mb-3">
+                            @*@Html.Label("Written Date", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            @Html.TextBox("MyDate", Model.WrittenDate.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control", type = "date" })
+                            @*@Html.ValidationMessage("MyDate", "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mb-3">
+                            @Html.TextBox("MyTime", Model.WrittenDate.ToString("hh:mm:ss"), htmlAttributes: new { @class = "form-control", type = "time" })
+                            @*@Html.ValidationMessage("MyTime", "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="col-2 offset-2">
+                        <div class="form-group mb-3">
+                            <input type="submit" value="Save" class="btn btn-success form-control" />
+                        </div>
+                    </div>
 
-        @*
-            <div class="form-group row mb-3">
-                @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-                    <div class="checkbox">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                @*##########( Markdown )##########*@
+                <div class="form-group col-2 mb-3">
+                    <div class="checkbox d-inline">
                         @Html.EditorFor(model => model.Markdown)
                         @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
                     </div>
+                    @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "control-label mx-2" })
                 </div>
-            </div>
-
-            <div class="form-group row mb-3">
-                @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
+                @*##########( Private )##########*@
+                <div class="form-group col-2 mb-3">
+                    <div class="checkbox d-inline">
                         @Html.EditorFor(model => model.Hidden)
                         @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
                     </div>
+                    @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "control-label mx-2" })
                 </div>
-            </div>
-
-            <div class="form-group row mb-3">
-                @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
+                @*##########( Pin )##########*@
+                <div class="form-group col-2 mb-3">
+                    <div class="checkbox d-inline">
                         @Html.EditorFor(model => model.Pin)
                         @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
                     </div>
+                    @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label mx-2" })
                 </div>
-            </div>
-        *@
-        @Html.HiddenFor(model => model.CreatedDate)
-
-        <div class="form-group row mb-3">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <div class="col-md"></div>
             </div>
         </div>
     </div>
-</div>
-
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdNote", "ThirdNote\ThirdNote.csproj", "{3E37522F-AB8A-490B-9DCA-B8BEB32C23E9}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database1", "..\Users\Sina\Documents\Database1\Database1.sqlproj", "{A7127ED0-653C-428A-82AA-4DFA481B53B2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +15,6 @@ Global
 		{3E37522F-AB8A-490B-9DCA-B8BEB32C23E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E37522F-AB8A-490B-9DCA-B8BEB32C23E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E37522F-AB8A-490B-9DCA-B8BEB32C23E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7127ED0-653C-428A-82AA-4DFA481B53B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7127ED0-653C-428A-82AA-4DFA481B53B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7127ED0-653C-428A-82AA-4DFA481B53B2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A7127ED0-653C-428A-82AA-4DFA481B53B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7127ED0-653C-428A-82AA-4DFA481B53B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7127ED0-653C-428A-82AA-4DFA481B53B2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
