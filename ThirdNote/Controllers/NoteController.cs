@@ -190,35 +190,28 @@ namespace ThirdNote.Controllers
                 char[] delimiters = new char[] { ',', '،' };
                 var inputTagLabels = formCollection["tagsInput"].Split(delimiters).Select(t => t.Trim()).Where(w => !w.Equals(String.Empty));
                 var existingNoteTags = db.NoteTags.Include(nt => nt.Tag).Where(nt => nt.NoteID == note.Id);
-                foreach (var existingNT in existingNoteTags.Where(existingNT => !inputTagLabels.Any(tl => existingNT.Tag.Label.Equals(tl))))
-                {
-                    db.NoteTags.Remove(existingNT);
-                }
 
-                foreach (var tagLabel in inputTagLabels)
+                //remove omitted note-tags
+                foreach (var omittedNT in existingNoteTags.Where(eNT => !inputTagLabels.Any(tl => eNT.Tag.Lable_en.Equals(tl, StringComparison.OrdinalIgnoreCase) || eNT.Tag.Lable_en.Equals(tl))))
+                    db.NoteTags.Remove(omittedNT);
+                // select inputTagLabels not included in existingNoteTags
+                foreach (var newTagLabel in inputTagLabels.Where(t=> !existingNoteTags.Any(eNT => eNT.Tag.Lable_en.Equals(t, StringComparison.OrdinalIgnoreCase) || eNT.Tag.Lable_fa.Equals(t))))
                 {
-                    if (existingNoteTags.Any(nt => nt.Tag.Label.Equals(tagLabel)))
-                    {
-                        continue;
-                    }
-                    if (!db.Tags.Any(t => t.Label.Equals(tagLabel, StringComparison.OrdinalIgnoreCase)))
+                    if (!db.Tags.Any(t => t.Lable_en.Equals(newTagLabel, StringComparison.OrdinalIgnoreCase) || t.Lable_en.Equals(newTagLabel)))
                     {   // Create both Tag and NoteTag
-                        Tag tag = db.Tags.Add(new Tag { Label = tagLabel });
+                        Tag tag = db.Tags.Add(new Tag { Label = newTagLabel });
                         db.NoteTags.Add(new NoteTag(note, tag));
                     }
                     else
                     {   // Only add to NoteTags
-                        Tag tag = db.Tags.Single(t => t.Label.Equals(tagLabel, StringComparison.OrdinalIgnoreCase));
+                        Tag tag = db.Tags.First(t => t.Lable_en.Equals(newTagLabel, StringComparison.OrdinalIgnoreCase) || t.Lable_fa.Equals(newTagLabel, StringComparison.OrdinalIgnoreCase));
                         db.NoteTags.Add(new NoteTag(note, tag));
-                        tag.Label = tagLabel;   // update case format
+                        //tag.Label = tagLabel;   // update case format
                                                 //db.Entry(tag).State = EntityState.Modified;
                     }
                 }
 
-                if (note.Text == null)
-                {
-                    note.Text = "";
-                }
+                note.Text = (note.Text == null) ? note.Text : "";
                 //if (note.WrittenDate == null)
                 //{
                 //    note.WrittenDate = note.CreatedDate;
