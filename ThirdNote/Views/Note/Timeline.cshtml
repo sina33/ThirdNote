@@ -4,30 +4,51 @@
     ViewBag.Title = "Timeline";
 }
 
-<h2>Timeline</h2>
 
 <div class="container mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h4>Latest Notes</h4>
-            <ul class="timeline">
-                @foreach (var item in Model)
-                {
-                    <li>
-                        @Html.ActionLink(item.Title, "Details", new { id = item.Id })
-                        <br/>
-                        @Html.Raw("<small> &gt; " + item.CreatedDate + "</small>")
-                        <br/>
-                        <div class="dir-txt-auto">
-                            @Html.Raw(item.Text.Trim().Replace("\n", "<br/>"))
+    @foreach (var item in Model)
+    {
+        <div class="row m-1">
+            <div class="col-6 offset-3 timeline">
+                <dl class="bg-opacity-10 bg-success p-2 px-3 rounded">
+                    <dt></dt>
+                    <dd>
+                        <div class=" dir-txt-auto">
+                            <a href="/Note/Details/@item.Id"><b>@item.Title</b></a>
+                            <br />
+                            <small>
+                                @{ string days = (DateTime.Now - item.WrittenDate).Duration().Days.ToString(); }
+                                <i>@days days</i> ago
+                            </small>
+                            <br />
+
                         </div>
-                    </li>
-                    <br/>
-                }
-            </ul>
+                    </dd>
+                    <dd>
+                        <div class="dir-txt-auto mt-3">
+                            @if (item.Markdown)
+                            {
+                                @Html.Raw(item.Text);
+                            }
+                            else
+                            {
+                                foreach (var txt in item.Text.Split('\n'))
+                                {
+                                    @Html.Raw(HttpUtility.HtmlEncode(txt));
+                                    @Html.Raw("<br />");
+
+                                }
+                            }
+                        </div>
+                    </dd>
+                </dl>
+            </div>
         </div>
-    </div>
-</div>
+}
+                        
+                   
+                    
+               
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

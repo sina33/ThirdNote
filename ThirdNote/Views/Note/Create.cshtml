@@ -18,15 +18,13 @@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
-
         @*####################( Text )####################*@
         <div class="form-group row mb-3">
             <div class="col-10">
-                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 15 } })
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 13 } })
                 @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
             </div>
         </div>
-
         @*####################( Tags )####################*@
         <div class="form-group row mb-3">
             <div class="col-md-10">
@@ -35,53 +33,45 @@
                 @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
             </div>
         </div>
-
-        @*####################( Extra & Submit )####################*@
+        @*####################( Extra & Save )####################*@
         <div class="form-group row mb-3 ">
             <div class="col-10">
                 <div class="row justify-content-between">
-                    <div class="col-4">
-                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseDiv" role="button" aria-expanded="false" aria-controls="collapseDiv">
+                    @*###############( Extra Button )###############*@
+                    <div class="col-2">
+                        <a id="extraBtn" class="btn btn-secondary" onclick="toggleExtraOptionsFunction();">
                             Extra
                         </a>
                     </div>
-                    <div class="col-4">
-                        <input type="submit" value="Submit" class="btn btn-primary right">
+                    @*###############( Date & Time )###############*@
+                    <div id="DatePicker" class="col-4" style="display:none">
+                        <div class="input-group col-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Written Date</div>
+                            </div>
+                            @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control small", type = "date" })
+
+                            @*<input type="text" class="form-control" id="written_date" placeholder="Date">*@
+                        </div>
+                    </div>
+                    <div id="TimePicker" class="col-4" style="display:none">
+                        <div class="input-group col-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">&#64;</div>
+                            </div>
+                            @Html.TextBox("MyTime", DateTime.Now.ToString("hh:mm:ss"), htmlAttributes: new { @class = "form-control", type = "time" })
+                            @*<input type="text" class="form-control" id="written_time" placeholder="Time">*@
+                        </div>
+                    </div>
+                    @*###############( Save Button )###############*@
+                    <div class="col-2">
+                        <input type="submit" value="Save" class="btn btn-primary right">
                     </div>
                 </div>
             </div>
         </div>
-
         @*####################( Collapsible )####################*@
-       <div class="collapse mb-3" id="collapseDiv">
-
-            @*####################( Date & Time )####################*@
-            <div class="form-group row">
-                <div class="col-10">
-                    <div class="row justify-content-between">
-                        <div class="col-4">
-                            <div class="input-group mb-2 col-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">written</div>
-                                </div>
-                                @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control small", type = "date" })
-
-                                @*<input type="text" class="form-control" id="written_date" placeholder="Date">*@
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="input-group mb-2 col-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">at</div>
-                                </div>
-                                @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control", type = "time" })
-                                @*<input type="text" class="form-control" id="written_time" placeholder="Time">*@
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="mb-3" id="collapseDiv">
             <div class="col-10">
                 <div class="row justify-content-start">
                     @*##########( Markdown )##########*@
@@ -93,7 +83,7 @@
                         @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "control-label mx-2" })
                         @*<button type="button" class="btn btn-secondary">Secondary</button>*@
                     </div>
-                    @*##########( Hidden )##########*@
+                    @*##########( Private )##########*@
                     <div class="form-group col-2">
                         <div class="checkbox d-inline">
                             @Html.EditorFor(model => model.Hidden)
@@ -112,19 +102,28 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 }
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
+    <script type="text/javascript">
+        function toggleExtraOptionsFunction() {
+            var x = document.getElementById("DatePicker");
+            var y = document.getElementById("TimePicker");
+            var z = document.getElementById("collapseDiv");
+            if (x.style.display === "none") {
+                x.style.display = "flex";
+                y.style.display = "flex";
+                z.style.display = "block";
+            } else {
+                x.style.display = "none";
+                y.style.display = "none";
+                z.style.display = "none"; 
+            }
+        }
+    </script>
+
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/bootstrap-tagsinput.js"></script>
     @Scripts.Render("~/bundles/dir-auto")

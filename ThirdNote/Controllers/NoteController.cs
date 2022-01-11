@@ -17,8 +17,10 @@ namespace ThirdNote.Controllers
     {
 
         private NotebookDbContext db = new NotebookDbContext();
+        private Markdig.MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder()
+            .UseAdvancedExtensions().UseEmphasisExtras()
+            .UseSoftlineBreakAsHardlineBreak().Build();
 
-        
         // GET: Note
         public ActionResult Index()
         {
@@ -57,13 +59,6 @@ namespace ThirdNote.Controllers
             return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList());
         }
 
-
-        // GET: Note/Timeline
-        public ActionResult Timeline()
-        {
-            return View(db.Notes.OrderByDescending(n => n.WrittenDate).ToList());
-        }
-
         // GET: Note/Details/5
         public ActionResult Details(int? id)
         {
@@ -83,8 +78,6 @@ namespace ThirdNote.Controllers
                 (nt, t) => t);
             if(note.Markdown)
             {
-                var pipeline = new Markdig.MarkdownPipelineBuilder().UseAdvancedExtensions().UseEmphasisExtras()
-                    .UseSoftlineBreakAsHardlineBreak().Build();
                 var result = Markdig.Markdown.ToHtml(note.Text, pipeline);
                 note.Text = result;
             }
@@ -152,12 +145,11 @@ namespace ThirdNote.Controllers
                     }
                     //db.SaveChanges();
                 }
-
+                
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
-            return View(note);
+            return RedirectToAction("Details", new { id = note.Id });
         }
 
         // GET: Note/Edit/5
@@ -248,9 +240,9 @@ namespace ThirdNote.Controllers
                 }
                 db.Entry(note).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(note);
+            return RedirectToAction("Details", new { id = note.Id });
+
         }
 
         // GET: Note/Delete/5
@@ -287,5 +279,23 @@ namespace ThirdNote.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Note/Timeline
+        public ActionResult Timeline()
+        {
+
+            //return View(db.Notes.OrderByDescending(n => n.WrittenDate).ToList());
+
+            List<Note> notes = db.Notes.OrderByDescending(n => n.WrittenDate).ToList();
+            foreach (Note note in notes)
+            {
+                if (note.Markdown)
+                {
+                    notes.SingleOrDefault(n => n.Id == note.Id).Text = Markdig.Markdown.ToHtml(note.Text, pipeline);
+                }
+            }
+            return View(notes);
+        }
+
     }
 }
