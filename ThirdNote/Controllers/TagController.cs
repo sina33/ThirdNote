@@ -17,36 +17,26 @@ namespace ThirdNote.Controllers
         // GET: Tag
         public ActionResult Index(string sort, string columns, string lang)
         {
-            // delete tags with no reference in noteTag     
-            var OrphanTags = db.Tags.Where(t => t.NoteTags.Count == 0);
-            foreach (var item in OrphanTags)
-                db.Tags.Remove(item);
-            db.SaveChanges();
+            using (var ctx = new NotebookDbContext())
+            {
+                // delete tags with no reference in noteTag 
+                var OrphanTags = ctx.Tags.Where(t => t.NoteTags.Count == 0);
+                //db.Tags.RemoveRange(OrphanTags);
+                foreach (var item in OrphanTags)
+                    ctx.Entry(item).State = EntityState.Deleted;
+                ctx.SaveChanges();
 
-            switch (sort)
-            {
-                case "alpha":
-                    return View(db.Tags.OrderBy(tag => "en".Equals(lang)?tag.Lable_en:tag.Lable_fa).ToList());
-                case "num":
-                    return View(db.Tags.OrderByDescending(tag => tag.NoteTags.Count)
-                        .ThenBy(tag => "en".Equals(lang)?tag.Lable_en:tag.Lable_fa).ToList());
-                case "group":
-                    return View(db.Tags.OrderBy(tag => ("en".Equals(lang) ? tag.Lable_en : tag.Lable_fa))
-                        .ThenBy(tag => "en".Equals(lang) ? tag.Lable_en : tag.Lable_fa).ToList());
-                default:
-                    return View(db.Tags.OrderBy(tag => ("en".Equals(lang) ? tag.Lable_en : tag.Lable_fa))
-                        .ThenBy(tag => "en".Equals(lang) ? tag.Lable_en : tag.Lable_fa).ToList());
+                switch (sort)
+                {
+                    case "alpha":
+                        return View(ctx.Tags.Include(t=>t.NoteTags).OrderBy(tag => "en".Equals(lang) ? tag.Lable_en : tag.Lable_fa).ToList());
+                    case "num":
+                        return View(ctx.Tags.Include(t => t.NoteTags).OrderByDescending(tag => tag.NoteTags.Count)
+                            .ThenBy(tag => "en".Equals(lang)?tag.Lable_en:tag.Lable_fa).ToList());
+                    default:
+                        return View(ctx.Tags.Include(t => t.NoteTags).OrderBy(tag => "en".Equals(lang) ? tag.Lable_en : tag.Lable_fa).ToList());
+                }
             }
-
-            if (String.IsNullOrEmpty(sort) || sort.Equals("alpha"))
-            {
-                return View(db.Tags.OrderBy(tag => lang.Equals("en")?tag.Lable_en:tag.Lable_fa).ToList());
-            } else if (sort.Equals("num"))
-            {
-                return View(db.Tags.OrderByDescending(tag=>tag.NoteTags.Count)
-                    .ThenBy(tag => lang.Equals("en") ? tag.Lable_en : tag.Lable_fa).ToList());
-            }
-            return View(db.Tags.OrderBy(tag => lang.Equals("en") ? tag.Lable_en : tag.Lable_fa).ToList());
         }
 
         // GET: Tag/Details/5
