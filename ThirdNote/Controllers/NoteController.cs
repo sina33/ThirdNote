@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ThirdNote.Models;
 using ThirdNote.ViewModels;
-using HeyRed.MarkdownSharp;
 using Markdig;
 
 namespace ThirdNote.Controllers
@@ -17,7 +16,7 @@ namespace ThirdNote.Controllers
     {
 
         private NotebookDbContext db = new NotebookDbContext();
-        private Markdig.MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder()
+        private MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder()
             .UseAdvancedExtensions().UseEmphasisExtras()
             .UseSoftlineBreakAsHardlineBreak().Build();
 
@@ -101,10 +100,8 @@ namespace ThirdNote.Controllers
         {            
             if (ModelState.IsValid)
             {
-                if (note.Text == null)
-                {
-                    note.Text = "";
-                }
+                note.Text = string.IsNullOrEmpty(note.Text) ? "" : note.Text;
+
                 if (DateTime.TryParse(formCollection["MyDate"], out DateTime dt))
                 {
                     note.WrittenDate = formCollection["MyTime"] == null ? DateTime.Parse(formCollection["MyDate"]) 
@@ -121,11 +118,9 @@ namespace ThirdNote.Controllers
                     if (tagLabel == string.Empty || tagLabel == null) continue;
                     
                     // this tagLabel Exists in Tags Table. Just add it's NoteTags record.
-                    if (db.Tags.Any(x => x.Lable_en.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) || 
-                        x.Lable_fa.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) ))
+                    if (db.Tags.Any(x => x.Lable_en.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) || x.Lable_fa.Equals(tagLabel) ))
                     {
-                        Tag tag = db.Tags.Single(t => t.Lable_en.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) ||
-                            t.Lable_fa.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) );
+                        Tag tag = db.Tags.Single(t => t.Lable_en.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) || t.Lable_fa.Equals(tagLabel) );
                         // update tagLabel Case to the latest form
                         //tag.Label = tagLabel;
                         if(db.NoteTags.Count(nt => nt.NoteID == note.Id && nt.TagID == tag.ID) == 0)
@@ -211,7 +206,7 @@ namespace ThirdNote.Controllers
                     }
                 }
 
-                note.Text = (note.Text == null) ? note.Text : "";
+                note.Text = string.IsNullOrEmpty(note.Text) ? "" : note.Text;
                 //if (note.WrittenDate == null)
                 //{
                 //    note.WrittenDate = note.CreatedDate;

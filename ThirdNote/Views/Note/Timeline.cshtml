@@ -6,7 +6,8 @@
 
 
 <div class="container mt-5 mb-5">
-    @foreach (var item in Model)
+
+    @foreach (var item in Model.Where(t => !t.Hidden))
     {
         <div class="row m-1">
             <div class="col-6 offset-3 timeline">
