@@ -115,20 +115,18 @@ namespace ThirdNote.Controllers
                 char[] delimiters = new char[] { ',', '،' };
                 foreach (var tagLabel in formCollection["tagsInput"].Split(delimiters).Select(t => t.Trim()))
                 {
-                    if (tagLabel == string.Empty || tagLabel == null) continue;
+                    if (string.IsNullOrEmpty(tagLabel)) continue;
                     
                     // this tagLabel Exists in Tags Table. Just add it's NoteTags record.
                     if (db.Tags.Any(x => x.Lable_en.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) || x.Lable_fa.Equals(tagLabel) ))
                     {
                         Tag tag = db.Tags.Single(t => t.Lable_en.Equals(tagLabel, StringComparison.OrdinalIgnoreCase) || t.Lable_fa.Equals(tagLabel) );
-                        // update tagLabel Case to the latest form
-                        //tag.Label = tagLabel;
                         if(db.NoteTags.Count(nt => nt.NoteID == note.Id && nt.TagID == tag.ID) == 0)
                         {
                             db.NoteTags.Add(new NoteTag(note, tag));
                         }
                     }
-                    else // Create Tag recored. Insert both Tag & NoteTag records to their tables.
+                    else // Create Tag record. Insert both Tag & NoteTag records to their tables.
                     {
                         Tag tag = new Tag
                         {
@@ -136,11 +134,8 @@ namespace ThirdNote.Controllers
                         };
                         db.Tags.Add(tag);
                         db.NoteTags.Add(new NoteTag(note, tag));
-                        
                     }
-                    //db.SaveChanges();
                 }
-                
                 db.SaveChanges();
             }
 
@@ -161,7 +156,7 @@ namespace ThirdNote.Controllers
                 .Join(db.Tags,
                     nt => nt.TagID,
                     t => t.ID,
-                    (nt, t) => t.Label
+                    (nt, t) => t.Lable_fa
                 ).ToList() ;
             ViewBag.tagString = String.Join(",", tagLabels);
             if (note == null)
