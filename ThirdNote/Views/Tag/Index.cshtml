@@ -5,6 +5,10 @@
     var L = Request.Params["lang"];
     var Z = Request.Params["sort"];
     var K = Request.Params["columns"].AsInt();
+    foreach (ThirdNote.Models.Tag item in Model)
+    {
+        item.Lable_en = string.IsNullOrEmpty(item.Lable_en) ? "" : item.Lable_en.ToLower();
+    }
 }
 
 @{
