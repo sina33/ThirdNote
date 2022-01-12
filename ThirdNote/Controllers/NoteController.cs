@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ThirdNote.Models;
 using ThirdNote.ViewModels;
-using HeyRed.MarkdownSharp;
 using Markdig;
 
 namespace ThirdNote.Controllers
@@ -17,7 +16,7 @@ namespace ThirdNote.Controllers
     {
 
         private NotebookDbContext db = new NotebookDbContext();
-        private Markdig.MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder()
+        private MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder()
             .UseAdvancedExtensions().UseEmphasisExtras()
             .UseSoftlineBreakAsHardlineBreak().Build();
 
@@ -101,7 +100,7 @@ namespace ThirdNote.Controllers
         {            
             if (ModelState.IsValid)
             {
-                note.Text = (note.Text == null) ? note.Text : "";
+                note.Text = string.IsNullOrEmpty(note.Text) ? "" : note.Text;
 
                 if (DateTime.TryParse(formCollection["MyDate"], out DateTime dt))
                 {
@@ -207,7 +206,7 @@ namespace ThirdNote.Controllers
                     }
                 }
 
-                note.Text = (note.Text == null) ? note.Text : "";
+                note.Text = string.IsNullOrEmpty(note.Text) ? "" : note.Text;
                 //if (note.WrittenDate == null)
                 //{
                 //    note.WrittenDate = note.CreatedDate;

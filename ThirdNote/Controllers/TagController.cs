@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ThirdNote.Models;
 using System.Data.Entity.Migrations;
+using System.Data.Entity;
 
 namespace ThirdNote.Controllers
 {
@@ -16,16 +17,26 @@ namespace ThirdNote.Controllers
         // GET: Tag
         public ActionResult Index(string sort, string columns, string lang)
         {
-            // delete tags with no reference in noteTag
-                        
+            // delete tags with no reference in noteTag     
             var OrphanTags = db.Tags.Where(t => t.NoteTags.Count == 0);
             foreach (var item in OrphanTags)
-            {
-                db.Set<Tag>().Remove(item);
-            }
-
-            //db.Tags.RemoveRange(OrphanTags);
+                db.Tags.Remove(item);
             db.SaveChanges();
+
+            switch (sort)
+            {
+                case "alpha":
+                    return View(db.Tags.OrderBy(tag => "en".Equals(lang)?tag.Lable_en:tag.Lable_fa).ToList());
+                case "num":
+                    return View(db.Tags.OrderByDescending(tag => tag.NoteTags.Count)
+                        .ThenBy(tag => "en".Equals(lang)?tag.Lable_en:tag.Lable_fa).ToList());
+                case "group":
+                    return View(db.Tags.OrderBy(tag => ("en".Equals(lang) ? tag.Lable_en : tag.Lable_fa))
+                        .ThenBy(tag => "en".Equals(lang) ? tag.Lable_en : tag.Lable_fa).ToList());
+                default:
+                    return View(db.Tags.OrderBy(tag => ("en".Equals(lang) ? tag.Lable_en : tag.Lable_fa))
+                        .ThenBy(tag => "en".Equals(lang) ? tag.Lable_en : tag.Lable_fa).ToList());
+            }
 
             if (String.IsNullOrEmpty(sort) || sort.Equals("alpha"))
             {
