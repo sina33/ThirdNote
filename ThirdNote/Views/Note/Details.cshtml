@@ -39,11 +39,14 @@
                     }
                     else
                     {
-                        @*@Html.Raw(string.Join( "", Model.Text.Split('\n').Select(p => HttpUtility.HtmlEncode(p) + "<br />")) );*@
-                        foreach (var txt in Model.Text.Split('\n'))
+                        //Html.Raw(string.Join("", Model.Text.Split('\n').Select(p => HttpUtility.HtmlEncode(p) + "<br />")));
+                        if (!string.IsNullOrEmpty(Model.Text))
                         {
+                            foreach (var txt in Model.Text.Split('\n'))
+                            {
                             @Html.Raw(HttpUtility.HtmlEncode(txt));
                             @Html.Raw("<br />");
+                            }
                         }
                     }
                 </div>

@@ -1,23 +1,34 @@
-﻿\@model IEnumerable<ThirdNote.Models.Tag>
+﻿@model IEnumerable<ThirdNote.Models.Tag>
 
 @{
     ViewBag.Title = "Tags";
+    var L = Request.Params["lang"];
+    var Z = Request.Params["sort"];
     var K = Request.Params["columns"].AsInt();
 }
 
-
+@{
+    string basePath = "/Tag/Index";
+    string pathLang = "?lang=fa";
+    string pathSort = ",sort=alpha";
+    string pathCol = ",columns=4";
+    pathLang = "en".Equals(L) ? "?lang=en" : pathLang;
+    pathSort = "num".Equals(Z) ? ",sort=num" : "group".Equals(Z) ? ",sort=group" : pathSort;
+    pathCol = ",columns=" + K;
+}
 <i class="mx-3">
     Lang:
-    <small>@Html.ActionLink("en", "Index", new { lang = "en", sort = Request.Params["sort"], columns = Request.Params["columns"] })</small> |
-    <small>@Html.ActionLink("fa", "Index", new { lang = "fa", sort = Request.Params["sort"], columns = Request.Params["columns"] })</small>
+    <small>@Html.ActionLink("en", "Index", new { lang = "en", sort = L, columns = K })</small> |
+    <small>@Html.ActionLink("fa", "Index", new { lang = "fa", sort = L, columns = K })</small> 
 </i>
-<br />
+
 <i class="mx-3">
     Sort:
-    <small>@Html.ActionLink("Alphabetical", "Index", new { lang = Request.Params["lang"], sort = "alpha", columns = Request.Params["columns"] })</small> |
-    <small>@Html.ActionLink("Numerical", "Index", new { lang = Request.Params["lang"], sort = "num", columns = Request.Params["columns"] })</small>
+    <small>@Html.ActionLink("abc", "Index", new { lang = Request.Params["lang"], sort = "alpha", columns = Request.Params["columns"] })</small> |
+    <small>@Html.ActionLink("123", "Index", new { lang = Request.Params["lang"], sort = "num", columns = Request.Params["columns"] })</small> |
+    <small>@Html.ActionLink("grp", "Index", new { lang = Request.Params["lang"], sort = "group", columns = Request.Params["columns"] })</small>
 </i>
-<br />
+
 <i class="mx-3">
     Columns:
     <small>@Html.ActionLink("1", "Index", new { lang = Request.Params["lang"], sort = Request.Params["sort"], columns = 1 })</small> |
@@ -32,16 +43,16 @@
     <div class="row">
         @foreach (var tag in Model)
         {
-        <div class="col-12">
-            @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-            {
-                <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-            }
-            else
-            {
-                <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-            }
-        </div>
+            <div class="col-12">
+                @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                {
+                    <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                }
+                else
+                {
+                    <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                }
+            </div>
         }
     </div>
 }
@@ -52,16 +63,16 @@ else if (K == 2)
             <div class="row">
                 @foreach (var tag in Model.Take((Model.Count() + 1) / 2))
                 {
-                <div class="col-12">
-                    @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -69,16 +80,16 @@ else if (K == 2)
             <div class="row">
                 @foreach (var tag in Model.Skip((Model.Count() + 1) / 2))
                 {
-                <div class="col-12">
-                    @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -91,16 +102,16 @@ else if (K == 3)
             <div class="row">
                 @foreach (var tag in Model.Take((Model.Count() + 2) / 3))
                 {
-                <div class="col-12">
-                    @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -108,16 +119,16 @@ else if (K == 3)
             <div class="row">
                 @foreach (var tag in Model.Skip((Model.Count() + 2) / 3).Take((Model.Count() + 2) / 3))
                 {
-                <div class="col-12">
-                    @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -125,16 +136,16 @@ else if (K == 3)
             <div class="row">
                 @foreach (var tag in Model.Skip(2 * (Model.Count() + 2) / 3))
                 {
-                <div class="col-12">
-                    @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -147,16 +158,16 @@ else
             <div class="row">
                 @foreach (var tag in Model.Take((Model.Count() + 3) / 4))
                 {
-                <div class="col-12">
-                    @if ( !String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en" ))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -164,16 +175,16 @@ else
             <div class="row">
                 @foreach (var tag in Model.Skip((Model.Count() + 3) / 4).Take((Model.Count() + 3) / 4))
                 {
-                <div class="col-12">
-                    @if ( !String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en" ))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -181,16 +192,16 @@ else
             <div class="row">
                 @foreach (var tag in Model.Skip(2 * (Model.Count() + 3) / 4).Take((Model.Count() + 3) / 4))
                 {
-                <div class="col-12">
-                    @if ( !String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en") )
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -198,16 +209,16 @@ else
             <div class="row">
                 @foreach (var tag in Model.Skip(3 * (Model.Count() + 3) / 4))
                 {
-                <div class="col-12">
-                    @if ( !String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en" ))
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                    }
-                    else
-                    {
-                        <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                    }
-                </div>
+                    <div class="col-12">
+                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                        }
+                        else
+                        {
+                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
+                        }
+                    </div>
                 }
             </div>
         </div>
