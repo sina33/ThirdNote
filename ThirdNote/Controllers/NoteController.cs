@@ -182,12 +182,12 @@ namespace ThirdNote.Controllers
                 var existingNoteTags = db.NoteTags.Include(nt => nt.Tag).Where(nt => nt.NoteID == note.Id);
 
                 //remove omitted note-tags
-                foreach (var omittedNT in existingNoteTags.Where(eNT => !inputTagLabels.Any(tl => eNT.Tag.Lable_en.Equals(tl, StringComparison.OrdinalIgnoreCase) || eNT.Tag.Lable_en.Equals(tl))))
+                foreach (var omittedNT in existingNoteTags.Where(eNT => !inputTagLabels.Any(tl => eNT.Tag.Lable_en.Equals(tl, StringComparison.OrdinalIgnoreCase) || eNT.Tag.Lable_fa.Equals(tl))))
                     db.NoteTags.Remove(omittedNT);
                 // select inputTagLabels not included in existingNoteTags
-                foreach (var newTagLabel in inputTagLabels.Where(t=> !existingNoteTags.Any(eNT => eNT.Tag.Lable_en.Equals(t, StringComparison.OrdinalIgnoreCase) || eNT.Tag.Lable_fa.Equals(t))))
+                foreach (var newTagLabel in inputTagLabels.Where(t => !existingNoteTags.Any(eNT => eNT.Tag.Lable_en.Equals(t, StringComparison.OrdinalIgnoreCase) || eNT.Tag.Lable_fa.Equals(t))))
                 {
-                    if (!db.Tags.Any(t => t.Lable_en.Equals(newTagLabel, StringComparison.OrdinalIgnoreCase) || t.Lable_en.Equals(newTagLabel)))
+                    if (!db.Tags.Any(t => t.Lable_en.Equals(newTagLabel, StringComparison.OrdinalIgnoreCase) || t.Lable_fa.Equals(newTagLabel)))
                     {   // Create both Tag and NoteTag
                         Tag tag = db.Tags.Add(new Tag { Label = newTagLabel });
                         db.NoteTags.Add(new NoteTag(note, tag));
