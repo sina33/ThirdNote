@@ -16,9 +16,7 @@ namespace ThirdNote.Controllers
     {
 
         private NotebookDbContext db = new NotebookDbContext();
-        private MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder()
-            .UseAdvancedExtensions().UseEmphasisExtras()
-            .UseSoftlineBreakAsHardlineBreak().Build();
+        private MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
 
         // GET: Note
         public ActionResult Index()
@@ -94,7 +92,7 @@ namespace ThirdNote.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {            
@@ -170,7 +168,7 @@ namespace ThirdNote.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {

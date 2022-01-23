@@ -11,7 +11,7 @@
 
 @*####################( All Notes )####################*@
 <table class="table table-sm caption-top mb-5 dir-rtl">
-    <caption>Your Notes in a glance</caption>
+    <caption>Your Notes in a glance (@Model.Count() notes)</caption>
     <tr class="table-light">
         <th style="width:5%;">
             #
@@ -48,7 +48,7 @@
         </th>
         <th style="width:160px;"></th>
     </tr>
-    @foreach (var item in Model.Where(m => !m.Hidden))
+    @foreach (var item in Model @* Model.Where(m => !m.Hidden)*@)
         {
         <tr class="link-row">
             <td>
@@ -58,10 +58,11 @@
                 @*@Html.DisplayFor(modelItem => item.Title)*@
                 <a href="\Note\Details\@item.Id">
 
-                    @if (item.Hidden)
+                    @*@if (item.Hidden)
                     {
                         item.Title = "";
-                    }
+                    }*@
+
                     <div>
                         @item.Title
                     </div>
