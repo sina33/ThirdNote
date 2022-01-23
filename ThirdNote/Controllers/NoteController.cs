@@ -82,6 +82,7 @@ namespace ThirdNote.Controllers
         }
 
         // GET: Note/Create
+        [HttpGet]
         [ValidateInput(false)]
         public ActionResult Create()
         {
@@ -92,7 +93,7 @@ namespace ThirdNote.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {            
