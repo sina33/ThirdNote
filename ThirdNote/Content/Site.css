@@ -179,3 +179,34 @@ blockquote {
     display:none;
     transition: all 1s linear;
 }
+
+p {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.red {
+    color:red;
+}
+
+.task-todo  {
+    background-color: blue;
+    background-clip: text;
+    color: darkblue;
+}
+.task-doing  {
+    background-color: darkorange;
+    background-clip: text;
+    color: orangered;
+}
+.task-done  {
+    background-color: chartreuse;
+    background-clip: text;
+    opacity: 50%;
+    color: forestgreen;
+}
+.task-notdo {
+    opacity: 50%;
+    text-decoration:line-through;
+}
+
