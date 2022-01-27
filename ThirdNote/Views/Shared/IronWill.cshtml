@@ -36,6 +36,7 @@
                     int nextMile = milestones.Where(m => m > strike).Min();
                     int percent = 100 * ((strike * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / ((nextMile * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
                     double dpercent = 100.0 * ((strike * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / ((nextMile * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
+                    
                 }
                 @*#####( Dynamic Tag )#####*@
                 @*<div class="progress-circle p60">*@
@@ -88,7 +89,6 @@
                                 nike = "Man of Courage";
                             return nike;
                         }
-
                     }
                     <h2>@getNikename(strike)</h2>
                     <h4>

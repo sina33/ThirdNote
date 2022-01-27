@@ -28,19 +28,20 @@ namespace ThirdNote.Controllers
             };
             if (db.Relapses.Count() > 0)
             {
-                var dates = db.Relapses.OrderBy(r => r.Date).Select(r=>r.Date).ToList();
-                var lastDate = dates.First();
+                var dates = db.Relapses.OrderByDescending(r => r.Date).Select(r=>r.Date).ToList();
+                var recentRelapseDate = DateTime.Now;
                 List<int> Strikes = new List<int>();
                 foreach (var item in dates)
                 {
-                    int offset = (item - lastDate).Days;
+                    int offset = (recentRelapseDate - item).Days;
                     Strikes.Add(offset);
-                    lastDate = item;
+                    recentRelapseDate = item;
                 }
-                Strikes.Add((DateTime.Now - lastDate).Days);
-                Strikes.Reverse();
+                //Strikes.Reverse();
                 indexViewData.Strikes = Strikes;
                 //indexViewData.LastStrike = (DateTime.Now - db.Relapses.OrderByDescending(r => r.Date).First().Date).Days;
+                System.Diagnostics.Debug.WriteLine(dates);
+                System.Diagnostics.Debug.WriteLine(Strikes);
             }
             else
             {
@@ -93,7 +94,6 @@ namespace ThirdNote.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {            
@@ -169,7 +169,6 @@ namespace ThirdNote.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {
