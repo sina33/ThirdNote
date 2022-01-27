@@ -80,34 +80,34 @@ dl.timeline {
     position: relative;
 }
 
-    dl.timeline:before {
-        content: ' ';
-        background: #d4d9df;
-        display: inline-block;
-        position: absolute;
-        left: 29px;
-        width: 2px;
-        height: 100%;
-        z-index: 400;
-    }
+dl.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
 
-    dl.timeline > dd {
-        margin: 20px 0;
-        padding-left: 20px;
-    }
+dl.timeline > dd {
+    margin: 20px 0;
+    padding-left: 20px;
+}
 
-        dl.timeline > dd:before {
-            content: ' ';
-            background: white;
-            display: inline-block;
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid #22c0e8;
-            left: 20px;
-            width: 20px;
-            height: 20px;
-            z-index: 400;
-        }
+dl.timeline > dd:before {
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #22c0e8;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+}
 
 .crop {
     white-space: nowrap;
@@ -209,4 +209,22 @@ p {
     opacity: 50%;
     text-decoration:line-through;
 }
+h6.subtask {
+    color:maroon;
+    margin-inline-start: 20px;
+}
+h6.subtask > a {
+    color:darkslategray;
+    /*text-decoration:none;*/
+}
+ul > .subtask {
+    list-style-type:none;
+}
+li > h6.subtask {
+    list-style-type: circle;
+}
 
+li {
+    padding-left: 2em;
+    /*text-indent: -2em;*/
+}
