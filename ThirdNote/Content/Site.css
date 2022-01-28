@@ -190,20 +190,18 @@ p {
 }
 
 .task-todo  {
-    background-color: blue;
-    background-clip: text;
+    /*background-color: blue;*/
     color: darkblue;
 }
-.task-doing  {
-    background-color: darkorange;
-    background-clip: text;
-    color: orangered;
+.task-doing {
+    background-color: lemonchiffon;
+    color: darkorange;
 }
 .task-done  {
-    background-color: chartreuse;
-    background-clip: text;
+    /*background-color: chartreuse;*/
     opacity: 50%;
     color: forestgreen;
+    text-decoration:line-through;
 }
 .task-notdo {
     opacity: 50%;
@@ -216,15 +214,4 @@ h6.subtask {
 h6.subtask > a {
     color:darkslategray;
     /*text-decoration:none;*/
-}
-ul > .subtask {
-    list-style-type:none;
-}
-li > h6.subtask {
-    list-style-type: circle;
-}
-
-li {
-    padding-left: 2em;
-    /*text-indent: -2em;*/
 }
