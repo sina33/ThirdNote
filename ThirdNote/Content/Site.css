@@ -185,20 +185,13 @@ p {
     margin-top: 0;
 }
 
-.red {
-    color:red;
-}
-
 .task-todo  {
-    /*background-color: blue;*/
     color: darkblue;
 }
 .task-doing {
-    background-color: lemonchiffon;
     color: darkorange;
 }
 .task-done  {
-    /*background-color: chartreuse;*/
     opacity: 50%;
     color: forestgreen;
     text-decoration:line-through;
@@ -206,12 +199,4 @@ p {
 .task-notdo {
     opacity: 50%;
     text-decoration:line-through;
-}
-h6.subtask {
-    color:maroon;
-    margin-inline-start: 20px;
-}
-h6.subtask > a {
-    color:darkslategray;
-    /*text-decoration:none;*/
 }
