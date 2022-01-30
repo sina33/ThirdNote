@@ -185,46 +185,18 @@ p {
     margin-top: 0;
 }
 
-.red {
-    color:red;
-}
-
 .task-todo  {
-    background-color: blue;
-    background-clip: text;
     color: darkblue;
 }
-.task-doing  {
-    background-color: darkorange;
-    background-clip: text;
-    color: orangered;
+.task-doing {
+    color: darkorange;
 }
 .task-done  {
-    background-color: chartreuse;
-    background-clip: text;
     opacity: 50%;
     color: forestgreen;
+    text-decoration:line-through;
 }
 .task-notdo {
     opacity: 50%;
     text-decoration:line-through;
-}
-h6.subtask {
-    color:maroon;
-    margin-inline-start: 20px;
-}
-h6.subtask > a {
-    color:darkslategray;
-    /*text-decoration:none;*/
-}
-ul > .subtask {
-    list-style-type:none;
-}
-li > h6.subtask {
-    list-style-type: circle;
-}
-
-li {
-    padding-left: 2em;
-    /*text-indent: -2em;*/
 }
