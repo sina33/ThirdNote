@@ -15,7 +15,7 @@ namespace ThirdNote.Controllers
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class NoteController : Controller
     {
-        private int REF_TAG_ID = 1049;
+        public static int REF_TAG_ID = 4113;
         private NotebookDbContext db = new NotebookDbContext();
         private MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
 
