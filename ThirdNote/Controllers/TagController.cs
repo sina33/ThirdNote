@@ -42,16 +42,12 @@ namespace ThirdNote.Controllers
         // GET: Tag/Details/5
         public ActionResult Details(int id)
         {
-            var data = db.NoteTags
-                .Where( nt => nt.TagID == id)
-                .Join(db.Notes,
-                    nt => nt.NoteID,
-                    n => n.Id,
-                    (nt, n) => n
-                ).ToList();
             var tag = db.Tags.Where(t => t.ID == id).First();
             ViewBag.Tag = tag.Label;
             ViewBag.TagId = tag.ID;
+
+            var data = db.Notes.Include(s => s.NoteTags).Where(n => n.NoteTags.Any(nt => nt.TagID == id))
+                .OrderByDescending(n=>n.WrittenDate);
             return View(data);
         }
 
