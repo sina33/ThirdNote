@@ -17,7 +17,7 @@
     @*####################(  Form )####################*@
     <div class="col-6 mb-2">
         @*###############( Parent Notes )###############*@
-        @if (!PNotes.Equals(null))
+        @if (PNotes != null)
         {
             <div class="mb-3">
                 @foreach (ThirdNote.Models.Note pNote in PNotes)
@@ -74,7 +74,7 @@
             </dd>
         </dl>
         @*###############( Child Notes )###############*@
-        @if (!CNotes.Equals(null))
+        @if (CNotes != null)
         {
             <div class="mt-3">
                 @foreach (ThirdNote.Models.Note cNote in CNotes)
