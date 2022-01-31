@@ -21,7 +21,7 @@
             <div class="mb-3">
                 @foreach (ThirdNote.Models.Note parentNote in ViewBag.ParentNotes)
                 {
-                    <p class="small"><code>Reference: </code><a href="/Note/Details/@parentNote.Id"><span class="badge bg-light text-dark">@parentNote.Title</span></a></p>
+                    <p class="small"><code>Reference to #@parentNote.Id: </code><a href="/Note/Details/@parentNote.Id"><span class="badge bg-light text-dark">@parentNote.Title</span></a></p>
                 }
             </div>
         }
