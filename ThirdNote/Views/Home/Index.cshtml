@@ -1,3 +1,88 @@
-﻿@{
+﻿
+
+@model ThirdNote.ViewModels.Dashboard
+@*@model IEnumerable<ThirdNote.Models.Note>*@
+
+@{
     ViewBag.Title = "Home Page";
 }
+
+@Html.Partial("~/Views/Home/IronWill.cshtml")
+
+<br />
+
+<style>
+    .table {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+@if (Model.Pinned.Count() > 0)
+{
+
+    <table class="table table-sm caption-top mb-5 dir-rtl">
+        <caption>Pinned Notes</caption>
+        <tr class="table-light">
+            <th style="width:5%;">
+                #
+            </th>
+            <th style="width:55%;">
+                Title
+            </th>
+
+            <th style="width:18%;">
+                Written Date
+            </th>
+            <th style="width:4%;">
+                Md
+            </th>
+            <th style="width:4%;">
+                Hd
+            </th>
+            <th style="width:4%;">
+                Pin
+            </th>
+
+            <th style="width:6%;">
+                View
+            </th>
+            <th style="width:160px;"></th>
+        </tr>
+
+        @foreach (var item in Model.Pinned)
+        {
+            <tr class="link-row">
+                <td>
+                    <a href="/Note/Details/@item.Id">@item.Id</a>
+                </td>
+                <td>
+                    <a href="/Note/Details/@item.Id" class="link-row"><div>@item.Title</div></a>
+                    @*@Html.DisplayFor(modelItem => item.Title)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WrittenDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Markdown)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hidden)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewCount)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@Html.Partial("~/Views/Note/List.cshtml", Model.Sorted)

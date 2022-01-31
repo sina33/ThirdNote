@@ -232,6 +232,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Dashboard.cs" />
+    <Compile Include="ViewModels\NoteDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addnote.png" />
@@ -254,13 +255,11 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css-circular-prog-bar.css" />
     <Content Include="Content\jquery-ui.css" />
-    <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap.css.bkp" />
     <Content Include="Content\bootstrap.min.css.bkp" />
-    <Content Include="logo.png" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap-tagsinput.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -311,7 +310,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\tags-autocomplete.js" />
-    <Content Include="vector-pen.svg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -340,7 +338,7 @@
     <Content Include="Views\Relapse\Details.cshtml" />
     <Content Include="Views\Relapse\Edit.cshtml" />
     <Content Include="Views\Relapse\Index.cshtml" />
-    <Content Include="Views\Shared\IronWill.cshtml" />
+    <Content Include="Views\Home\IronWill.cshtml" />
     <Content Include="Views\Note\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
