@@ -232,7 +232,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Dashboard.cs" />
-    <Compile Include="ViewModels\NoteDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addnote.png" />
