@@ -14,7 +14,7 @@ namespace ThirdNote.Controllers
 {
     public class NoteController : Controller
     {
-
+        private int REF_TAG_ID = 1049;
         private NotebookDbContext db = new NotebookDbContext();
         private MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
 
@@ -74,9 +74,32 @@ namespace ThirdNote.Controllers
                 nt => nt.TagID, 
                 t => t.ID, 
                 (nt, t) => t);
-            if(note.Markdown)
+
+            int x = 0;
+            //this note has reference tag, so it has parents
+            if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))             
             {
-                var result = Markdig.Markdown.ToHtml(note.Text, pipeline);
+                List<Note> RefNotes = new List<Note>(); 
+                foreach (var parent in note.Text.Split('#').Select(s=>s.Split(' ').First()).Where(s=>Int32.TryParse(s, out x)))
+                {
+                    RefNotes.Add(db.Notes.Find(Int32.Parse(parent)));
+                }
+                ViewBag.ParentNotes = RefNotes.ToArray();
+            }
+            //this note is referred to by other notes. so it has children.
+            if ( db.Notes.Include(n=>n.NoteTags).Any(n=>n.NoteTags.Any(nt => nt.TagID == REF_TAG_ID && n.Text.Contains("n#" + note.Id))) )
+            {
+                List<Note> Children = new List<Note>();
+                foreach (var child in db.Notes.Include(n => n.NoteTags).Where(n => n.NoteTags.Any(nt => nt.TagID == REF_TAG_ID && n.Text.Contains("n#" + note.Id))))
+                {
+                    Children.Add(child);
+                }
+                ViewBag.Children = Children.ToArray();
+            }
+
+            if (note.Markdown)
+            {
+                var result = Markdown.ToHtml(note.Text, pipeline);
                 note.Text = result;
             }
             return View(note);

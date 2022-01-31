@@ -1,5 +1,6 @@
 ﻿@model ThirdNote.Models.Note
 @{ IEnumerable<ThirdNote.Models.Tag> oTag = ViewBag.tags as IEnumerable<ThirdNote.Models.Tag>; }
+@{ IEnumerable<ThirdNote.Models.Note> oNote = ViewBag.ParentNotes as IEnumerable<ThirdNote.Models.Note>; }
 @{
     ViewBag.Title = "Details";
 }
@@ -13,7 +14,17 @@
     </div>
 
     @*####################(  Form )####################*@
-    <div class="col-6 ">
+    <div class="col-6 mb-2">
+        @*###############( Parent Notes )###############*@
+        @if (ViewBag.ParentNotes != null)
+        {
+            <div class="mb-3">
+                @foreach (ThirdNote.Models.Note parentNote in ViewBag.ParentNotes)
+                {
+                    <p class="small"><code>Reference:</code> <a href="/Note/Details/@parentNote.Id"><span class="badge bg-light text-dark">@parentNote.Title</span></a></p>
+                }
+            </div>
+        }
         <dl>
             <dt></dt>
             @*###############( Title & Date )###############*@
@@ -44,8 +55,8 @@
                         {
                             foreach (var txt in Model.Text.Split('\n'))
                             {
-                            @Html.Raw(HttpUtility.HtmlEncode(txt));
-                            @Html.Raw("<br />");
+                                @Html.Raw(HttpUtility.HtmlEncode(txt));
+                                @Html.Raw("<br />");
                             }
                         }
                     }
@@ -61,6 +72,17 @@
                 </div>
             </dd>
         </dl>
+        @*###############( Child Notes )###############*@
+        @if (ViewBag.Children != null)
+        {
+            <div class="mt-3">
+                @foreach (ThirdNote.Models.Note child in ViewBag.Children)
+                {
+                <p class="small"><code>Cited in:</code><a href="/Note/Details/@child.Id" class="mx-3"><span class="badge bg-light text-dark">@child.Title</span></a></p>
+                    @*<p class="btn btn-outline-light btn-sm btn-block"><a href="/Note/Details/@child.Id">@child.Title</a></p>*@
+                }
+            </div>
+        }
     </div>
 </div>
 
