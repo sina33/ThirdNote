@@ -12,6 +12,7 @@ using Markdig;
 
 namespace ThirdNote.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class NoteController : Controller
     {
         private int REF_TAG_ID = 1049;

@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace ThirdNote.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)] 
     public class TagController : Controller
     {
         private static readonly NotebookDbContext db = new NotebookDbContext();
@@ -40,10 +41,11 @@ namespace ThirdNote.Controllers
         }
 
         // GET: Tag/Details/5
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)] // will disable caching for Index only
         public ActionResult Details(int id)
         {
             var tag = db.Tags.Where(t => t.ID == id).First();
-            ViewBag.Tag = tag.Label;
+            ViewBag.Tag = tag.Lable_en;
             ViewBag.TagId = tag.ID;
 
             var data = db.Notes.Include(s => s.NoteTags).Where(n => n.NoteTags.Any(nt => nt.TagID == id))

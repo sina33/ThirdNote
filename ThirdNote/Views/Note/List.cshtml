@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<ThirdNote.Models.Note>
+@{
+    ViewBag.Title = "Note List";
+}
 
 @*####################( Style )####################*@
 
@@ -48,60 +51,60 @@
         </th>
         <th style="width:160px;"></th>
     </tr>
-    @foreach (var item in Model @* Model.Where(m => !m.Hidden)*@)
-        {
-        <tr class="link-row">
-            <td>
-                <a href="/Note/Details/@item.Id">@item.Id</a>
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Title)*@
-                <a href="\Note\Details\@item.Id">
+    @foreach (var item in Model@* Model.Where(m => !m.Hidden)*@)
+{
+<tr class="link-row">
+    <td>
+        <a href="/Note/Details/@item.Id">@item.Id</a>
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.Title)*@
+        <a href="\Note\Details\@item.Id">
 
-                    @*@if (item.Hidden)
-                    {
-                        item.Title = "";
-                    }*@
+            @*@if (item.Hidden)
+                {
+                    item.Title = "";
+                }*@
 
-                    <div>
-                        @item.Title
-                    </div>
-                    
-                </a>
+            <div>
+                @item.Title
+            </div>
 
-            </td>
+        </a>
 
-            @*<td style="width:300px;">
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.WrittenDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Markdown)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hidden)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pin)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Actionable)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.ViewCount)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+    </td>
+
+    @*<td style="width:300px;">
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.WrittenDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Markdown)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Hidden)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Pin)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Actionable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.ViewCount)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
+}
 
 </table>
 
