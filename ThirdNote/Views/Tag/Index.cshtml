@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<ThirdNote.Models.Tag>
 
 @{
+    ViewBag.Title = "Tag";
+}
+
+
+@{
     ViewBag.Title = "Tags";
     var L = Request.Params["lang"];
     var Z = Request.Params["sort"];
@@ -23,7 +28,7 @@
 <i class="mx-3">
     Lang:
     <small>@Html.ActionLink("en", "Index", new { lang = "en", sort = L, columns = K })</small> |
-    <small>@Html.ActionLink("fa", "Index", new { lang = "fa", sort = L, columns = K })</small> 
+    <small>@Html.ActionLink("fa", "Index", new { lang = "fa", sort = L, columns = K })</small>
 </i>
 
 <i class="mx-3">

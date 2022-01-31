@@ -2,7 +2,7 @@
 @{ IEnumerable<ThirdNote.Models.Tag> oTag = ViewBag.tags as IEnumerable<ThirdNote.Models.Tag>; }
 @{ IEnumerable<ThirdNote.Models.Note> oNote = ViewBag.ParentNotes as IEnumerable<ThirdNote.Models.Note>; }
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Note " + Model.Id;
 }
 
 
@@ -10,7 +10,7 @@
     @*####################( Vertical Control Buttons )####################*@
     <div class="col-2 offset-1 d-flex flex-column justify-content-between">
         <a class="btn btn-outline-warning btn-nav" href="/Note/Edit/@Model.Id">Edit</a>
-        <p class="btn btn-outline-primary btn-nav disabled" onclick="window.history.go(-1); return false;">Back To List</p>
+        <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
     </div>
 
     @*####################(  Form )####################*@
