@@ -45,8 +45,8 @@ namespace ThirdNote.Controllers
         public ActionResult Details(int id)
         {
             var tag = db.Tags.Where(t => t.ID == id).First();
-            ViewBag.Tag = tag.Lable_en;
-            ViewBag.TagId = tag.ID;
+            ViewBag.Tag = tag;
+            //ViewBag.TagId = tag.ID;
 
             var data = db.Notes.Include(s => s.NoteTags).Where(n => n.NoteTags.Any(nt => nt.TagID == id))
                 .OrderByDescending(n=>n.WrittenDate);
