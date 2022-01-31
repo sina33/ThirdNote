@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<ThirdNote.Models.Note>
 
 @{
-    ViewBag.Title = "Tag " + ViewBag.Tag.ID;
+    ViewBag.Title = "Tag | " + (ViewBag.Tag.Lable_en as string).ToLower();
+    //"Tag " + ViewBag.Tag.Lable_en;
 }
 
 
