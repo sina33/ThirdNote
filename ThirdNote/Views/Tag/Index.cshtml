@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<ThirdNote.Models.Tag>
 
 @{
-    ViewBag.Title = "Tag";
+    ViewBag.Title = "Tags";
 }
 
 
 @{
-    ViewBag.Title = "Tags";
+    var X = ThirdNote.Controllers.NoteController.ACCORDION_NOTE_ID;
     var L = Request.Params["lang"];
     var Z = Request.Params["sort"];
     var K = Request.Params["columns"].AsInt();
@@ -35,7 +35,8 @@
     Sort:
     <small>@Html.ActionLink("abc", "Index", new { lang = Request.Params["lang"], sort = "alpha", columns = Request.Params["columns"] })</small> |
     <small>@Html.ActionLink("123", "Index", new { lang = Request.Params["lang"], sort = "num", columns = Request.Params["columns"] })</small> |
-    <small>@Html.ActionLink("grp", "Index", new { lang = Request.Params["lang"], sort = "group", columns = Request.Params["columns"] })</small>
+    <small><a href="\Note\Details\@X"> grp </a></small>
+    @*<small>@Html.ActionLink("grp", "Index", new { lang = Request.Params["lang"], sort = "group", columns = Request.Params["columns"] })</small>*@
 </i>
 
 <i class="mx-3">

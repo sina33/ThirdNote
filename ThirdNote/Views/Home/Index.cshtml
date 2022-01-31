@@ -49,7 +49,7 @@
             <th style="width:160px;"></th>
         </tr>
 
-        @foreach (var item in Model.Pinned)
+        @foreach (var item in Model.Pinned.OrderBy(p=>p.Title))
         {
             <tr class="link-row">
                 <td>

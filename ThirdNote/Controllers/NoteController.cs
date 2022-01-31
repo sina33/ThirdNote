@@ -15,7 +15,8 @@ namespace ThirdNote.Controllers
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class NoteController : Controller
     {
-        private int REF_TAG_ID = 1049;
+        public static int ACCORDION_NOTE_ID = 4113;
+        public static int REF_TAG_ID = 1049;
         private NotebookDbContext db = new NotebookDbContext();
         private MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
 
@@ -70,7 +71,7 @@ namespace ThirdNote.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tags = db.NoteTags.Where(nt => nt.NoteID == note.Id)
+            ViewBag.Tags = db.NoteTags.Where(nt => nt.NoteID == note.Id)
                 .Join(db.Tags, 
                 nt => nt.TagID, 
                 t => t.ID, 
@@ -80,12 +81,12 @@ namespace ThirdNote.Controllers
             //this note has reference tag, so it has parents
             if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))             
             {
-                List<Note> RefNotes = new List<Note>(); 
+                List<Note> PNotes = new List<Note>();
                 foreach (var parent in note.Text.Split('#').Select(s=>s.Split(' ').First()).Where(s=>Int32.TryParse(s, out x)))
                 {
-                    RefNotes.Add(db.Notes.Find(Int32.Parse(parent)));
+                    PNotes.Add(db.Notes.Find(Int32.Parse(parent)));
                 }
-                ViewBag.ParentNotes = RefNotes.ToArray();
+                ViewBag.ParentNotes = PNotes;
             }
             //this note is referred to by other notes. so it has children.
             if ( db.Notes.Include(n=>n.NoteTags).Any(n=>n.NoteTags.Any(nt => nt.TagID == REF_TAG_ID && n.Text.Contains("n#" + note.Id))) )
