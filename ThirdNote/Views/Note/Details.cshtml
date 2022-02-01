@@ -1,8 +1,8 @@
 ﻿@model ThirdNote.Models.Note
 @{
     IEnumerable<ThirdNote.Models.Tag> Tags = ViewBag.Tags as IEnumerable<ThirdNote.Models.Tag>; 
-    IEnumerable<ThirdNote.Models.Note> PNotes = ViewBag.ParentNotes as IEnumerable<ThirdNote.Models.Note>; 
-    IEnumerable<ThirdNote.Models.Note> CNotes = ViewBag.Children as IEnumerable<ThirdNote.Models.Note>;
+    IEnumerable<ThirdNote.Models.Note> PNotes = ViewBag.PNotes as IEnumerable<ThirdNote.Models.Note>; 
+    IEnumerable<ThirdNote.Models.Note> CNotes = ViewBag.CNotes as IEnumerable<ThirdNote.Models.Note>;
     ViewBag.Title = "Note " + Model.Id;
 }
 
