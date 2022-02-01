@@ -78,11 +78,12 @@ namespace ThirdNote.Controllers
                 (nt, t) => t);
 
             int x = 0;
+            char[] delimiters = new char[] { ',', '،', ' ', '\n', ']', '[', ')', '(' };
             // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
             if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))             
             {
                 List<Note> PNotes = new List<Note>();
-                foreach (var parentId in note.Text.Split('#').Select(s=>s.Split(' ').First()).Where(s=>Int32.TryParse(s, out x)))
+                foreach (var parentId in note.Text.Split('#').Skip(1).Select(s => s.Split(' ').First()).Where(s=>Int32.TryParse(s, out x)))
                 {
                     PNotes.Add(db.Notes.Find(Int32.Parse(parentId)));
                 }

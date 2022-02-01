@@ -79,7 +79,7 @@
             <div class="mt-3">
                 @foreach (ThirdNote.Models.Note cNote in CNotes)
                 {
-                    <p class="small"><code>Cited in: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+                    <p class="small"><code>Cited in #@cNote.Id: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
                 }
             </div>
         }
