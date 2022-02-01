@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ThirdNote.Models.Note>
 
 @{
-    ViewBag.Title = "Tag | " + (ViewBag.Tag.Lable_en as string).ToLower();
+    ViewBag.Title = "Tag | " + (string.IsNullOrEmpty(ViewBag.Tag.Lable_en)? ViewBag.Tag.Label:ViewBag.Tag.Lable_en).ToLower();
     //"Tag " + ViewBag.Tag.Lable_en;
 }
 
@@ -80,9 +80,6 @@
 </table>
     </div>
 </div>
-
-
-
 
 
 @section Scripts {
