@@ -200,3 +200,6 @@ p {
     opacity: 50%;
     text-decoration:line-through;
 }
+img[alt=doc] {
+    width: 100%;
+}
