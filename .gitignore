@@ -362,4 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-/ThirdNote/Resources/Images/
+/ThirdNote/Content/img
+/ThirdNote/Content/audio
