@@ -200,3 +200,9 @@ p {
     opacity: 50%;
     text-decoration:line-through;
 }
+img[alt=doc] {
+    width: 100%;
+}
+audio {
+    width: 100%;
+}

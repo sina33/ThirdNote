@@ -270,7 +270,7 @@ namespace ThirdNote.Controllers
             Note note = db.Notes.Find(id);
             db.Notes.Remove(note);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)
