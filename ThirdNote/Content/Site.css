@@ -64,11 +64,15 @@ label {
 
 .dir-rtl {
     direction: rtl;
+    text-align: justify;
+    text-justify: kashida;
 }
 
 
 .dir-ltr {
     direction: ltr;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 dl {
