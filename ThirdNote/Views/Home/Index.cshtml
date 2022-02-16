@@ -19,7 +19,7 @@
 @if (Model.Pinned.Count() > 0)
 {
 
-    <table class="table table-sm caption-top mb-5 dir-rtl">
+    <table class="table table-sm caption-top mb-3 dir-rtl">
         <caption class="dir-ltr"><img src="~/Content/pin-icon.png" style="width:16px; height:auto;margin-right:5px;" /> Pinned Notes</caption>
         <tr class="table-light">
             <th style="width:5%;">
@@ -55,7 +55,7 @@
                     <a href="/Note/Details/@item.Id">@item.Id</a>
                 </td>
                 <td>
-                    <a href="/Note/Details/@item.Id" class="link-row"><div>@item.Title</div></a>
+                    <a href="/Note/Details/@item.Id" class="link-row"><div class="ellipsis">@item.Title</div></a>
                     @*@Html.DisplayFor(modelItem => item.Title)*@
                 </td>
                 <td>

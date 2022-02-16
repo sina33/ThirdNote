@@ -210,3 +210,10 @@ img[alt=doc] {
 audio {
     width: 100%;
 }
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
