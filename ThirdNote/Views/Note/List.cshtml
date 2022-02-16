@@ -14,7 +14,7 @@
 
 @*####################( All Notes )####################*@
 <table class="table table-sm caption-top mb-5 dir-rtl">
-    <caption>Your Notes in a glance (@Model.Count() notes)</caption>
+    <caption class="dir-ltr"><img src="~/Content/all-icon.png" style="width:16px; height:auto;margin-right:10px;" />All Notes (@Model.Count() notes)</caption>
     <tr class="table-light">
         <th style="width:5%;">
             #
@@ -66,7 +66,7 @@
                     item.Title = "";
                 }*@
 
-            <div>
+            <div class="ellipsis">
                 @item.Title
             </div>
 
