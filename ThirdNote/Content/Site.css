@@ -158,9 +158,8 @@ blockquote {
     color: inherit;
 
 }
-.link-row:hover a{
+.link-row:hover a {
     color:darkorange;
-   // background-color:darkgrey;
 }
 
 .link-row:hover{

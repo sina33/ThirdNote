@@ -33,9 +33,8 @@
                     @Html.Raw("<b>" + Model.Title + "</b>")
                     <br />
                     <small dir="ltr">
-                        @{ string days = (DateTime.Now - Model.WrittenDate).Duration().Days.ToString(); }
-                        <b>@days days</b> ago at
-                        @Html.DisplayFor(model => model.WrittenDate)
+                        <b>@ViewBag.TimeAgo</b> at  
+                        <i>@Model.WrittenDate.ToString("d")</i>
                     </small>
                     <br />
                 </div>

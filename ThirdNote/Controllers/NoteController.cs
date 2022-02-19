@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using ThirdNote.Models;
 using ThirdNote.ViewModels;
 using Markdig;
+using Humanizer;
+using System.Globalization;
 
 namespace ThirdNote.Controllers
 {
@@ -100,6 +102,8 @@ namespace ThirdNote.Controllers
                 var result = Markdown.ToHtml(note.Text, pipeline);
                 note.Text = result;
             }
+            //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
+            ViewBag.TimeAgo = note.WrittenDate.Humanize();
             return View(note);
         }
 
