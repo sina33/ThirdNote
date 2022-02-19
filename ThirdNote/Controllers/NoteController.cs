@@ -103,7 +103,7 @@ namespace ThirdNote.Controllers
                 note.Text = result;
             }
             //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
-            ViewBag.TimeAgo = note.WrittenDate.Humanize();
+            ViewBag.TimeAgo = note.WrittenDate.Humanize(false);
             return View(note);
         }
 
@@ -128,7 +128,7 @@ namespace ThirdNote.Controllers
 
                 if (DateTime.TryParse(formCollection["MyDate"], out DateTime dt))
                 {
-                    note.WrittenDate = formCollection["MyTime"] == null ? DateTime.Parse(formCollection["MyDate"]) 
+                    note.WrittenDate = (formCollection["MyTime"] == null) ? DateTime.Parse(formCollection["MyDate"]) 
                         : DateTime.Parse(formCollection["MyDate"] + " " + formCollection["MyTime"]);
                 }
                 else
