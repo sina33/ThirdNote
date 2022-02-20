@@ -15,16 +15,6 @@
     </div>
     @*####################(  Form )####################*@
     <div class="col-6 mb-2">
-        @*###############( Child Notes )###############*@
-        @if (CNotes != null)
-        {
-            <div class="mt-3">
-                @foreach (ThirdNote.Models.Note cNote in CNotes)
-                {
-                    <p class="small"><code>Cited in #@cNote.Id: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
-                }
-            </div>
-        }
         <dl>
             <dt></dt>
             @*###############( Title & Date )###############*@
@@ -33,7 +23,7 @@
                     @Html.Raw("<b>" + Model.Title + "</b>")
                     <br />
                     <small dir="ltr">
-                        <b>@ViewBag.TimeAgo</b> at  
+                        <b>@ViewBag.TimeAgo</b> at
                         <i>@Model.WrittenDate.ToString("d")</i>
                     </small>
                     <br />
@@ -71,13 +61,26 @@
                 </div>
             </dd>
         </dl>
-        @*###############( Parent Notes )###############*@
-        @if (PNotes != null)
+        @*###############( Citation )###############*@
+        @if (PNotes != null || CNotes != null)
         {
-            <div class="mb-3">
-                @foreach (ThirdNote.Models.Note pNote in PNotes)
+            <p class="small"><strong>Citation</strong></p>
+            <div class="mt-2">
+                @*###############( Parent Notes )###############*@
+                @if (PNotes != null)
                 {
-                    <p class="small"><code>Reference to #@pNote.Id: </code><a href="/Note/Details/@pNote.Id"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+                    foreach (ThirdNote.Models.Note pNote in PNotes)
+                    {
+                        <p class="small">&ensp;<code>Reference:</code>&ensp;<a href="/Note/Details/@pNote.Id"><span class="badge bg-light text-dark">| #@pNote.Id | @pNote.Title |</span></a></p>
+                    }
+                }
+                @*###############( Child Notes )###############*@
+                @if (CNotes != null)
+                {
+                    foreach (ThirdNote.Models.Note cNote in CNotes)
+                    {
+                        <p class="small">&ensp;<code>Cited by:</code>&emsp;<a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">| #@cNote.Id: | @cNote.Title |</span></a></p>
+                    }
                 }
             </div>
         }
