@@ -31,17 +31,18 @@
             <div class="col-4">
                 @*##########( Milestones )##########*@
                 @{
-                    List<int> milestones = new List<int> { 0, 1, 3, 5, 7, 10, 14, 21, 30, 44, 66, 99, 150, 200, 254, 365 };
+                    List<int> milestones = new List<int> { 0, 1, 2, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987 };
                     int strike = Model.Strikes.First();
                     int nextMile = milestones.Where(m => m > strike).Min();
-                    int percent = 100 * ((strike * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / ((nextMile * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
-                    double dpercent = 100.0 * ((strike * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / ((nextMile * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
-                    
+                    int lastMile = milestones.Where(m => m <= strike).Max();
+                    int percent = 100 * (((strike-lastMile) * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / (((nextMile-lastMile) * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
+                    double dpercent = 100.0 * (((strike - lastMile) * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute) / (((nextMile - lastMile) * 24 + DateTime.Now.Hour) * 60 + DateTime.Now.Minute);
+
                 }
                 @*#####( Dynamic Tag )#####*@
                 @*<div class="progress-circle p60">*@
                 <div class="@(percent<=50 ? "progress-circle p"+percent : "progress-circle over50 p"+percent)">
-                    <span style="text-shadow: 1px 1px 2px #888888;"><b>@Math.Round(@dpercent, 1)</b> </span>
+                    <span style="text-shadow: 1px 1px 2px #888888;"><b>@nextMile</b> </span>
                     <div class="left-half-clipper">
                         <div class="first50-bar"></div>
                         <div class="value-bar"></div>
@@ -57,33 +58,33 @@
                         string getNikename(int days)
                         {
                             string nike = "Astronaut";
-                            if (days > 365)
+                            if (days > 987)
                                 nike = "Immortal";
-                            else if (days > 254)
+                            else if (days > 610)
                                 nike = "King of Will Power";
-                            else if (days > 200)
+                            else if (days > 377)
                                 nike = "General";
-                            else if (days > 150)
+                            else if (days > 233)
                                 nike = "Commander";
-                            else if (days > 99)
+                            else if (days > 144)
                                 nike = "Champion";
-                            else if (days > 66)
+                            else if (days > 89)
                                 nike = "Master";
-                            else if (days > 44)
+                            else if (days > 55)
                                 nike = "Guardian";
-                            else if (days > 30)
+                            else if (days > 34)
                                 nike = "Cavalier";
                             else if (days > 21)
-                                nike = "Holy Knight (Warrior III)";
-                            else if (days > 14)
-                                nike = "Knight (Warrior II)";
-                            else if (days > 10)
+                                nike = "Holy Knight";
+                            else if (days > 13)
+                                nike = "Knight";
+                            else if (days > 8)
                                 nike = "Warrior";
-                            else if (days > 7)
-                                nike = "Sergeant";
                             else if (days > 5)
-                                nike = "Scout";
+                                nike = "Sergeant";
                             else if (days > 3)
+                                nike = "Scout";
+                            else if (days > 2)
                                 nike = "Soldier";
                             else if (days > 1)
                                 nike = "Man of Courage";

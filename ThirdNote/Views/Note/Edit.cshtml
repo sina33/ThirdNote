@@ -15,8 +15,36 @@
 
         <div class="row">
             @*####################( Vertical Control Buttons )####################*@
-            <div class="col-2 d-flex flex-column justify-content-between pb-3">
+            <div class="col-2 d-flex flex-column align-items-center">
                 <a class="btn btn-outline-warning btn-nav disabled" href="/Note/Edit/@Model.Id">Edit</a>
+
+                @*##########( Pin )##########*@
+                <div id="Pin" class="form-group invisible mb-3 align-self-stretch mt-auto">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                        @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "form-check-label mx-1 small" })
+                </div>
+                @*##########( Private )##########*@
+                <div id="Private" class="form-group invisible mb-3 align-self-stretch">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                        @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "form-check-label mx-1 small" })
+                </div>
+                @*##########( Markdown )##########*@
+                <div id="Markdown" class="form-group invisible mb-4 align-self-stretch">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Markdown, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                        @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "form-check-label mx-1 small" })
+                    @*<button type="button" class="btn btn-secondary">Secondary</button>*@
+                </div>
+
+
                 <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
             </div>
             @*####################( The Actual Note )####################*@
@@ -31,7 +59,7 @@
                 @*####################( Text )####################*@
                 <div class="form-group row mb-3">
                     <div class="col-10">
-                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 12 } })
+                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 11 } })
                         @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -43,63 +71,37 @@
                         @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
                     </div>
                 </div>
-                @*###############( Date, Time & Save )###############*@
-                <div class="row">
-                    @*##########( Date )##########*@
-                    <div class="col-4">
-                        <div class="input-group col-2">
+                @*####################( Extra Button | Date & Time | Save Button )####################*@
+                <div class="flex-row d-inline-flex flex-nowrap justify-content-between align-items-end col-10">
+                    @*###############( Extra Button )###############*@
+                    <div class="align-self-end">
+                        <input id="extraBtn" class="btn btn-outline-dark" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
+                    </div>
+                    @*###############( Date & Time )###############*@
+                    <div id="DatePicker" class="invisible">
+                        <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Written Date</div>
                             </div>
-                            @Html.TextBox("MyDate", Model.WrittenDate.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control", type = "date" })
+                            @Html.TextBox("MyDate", Model.WrittenDate.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end", type = "date" })
                         </div>
                     </div>
-                    @*##########( Time )##########*@
-                    <div class="col-3">
-                        <div class="input-group col-1">
+                    <div id="TimePicker" class="invisible">
+                        <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                                <div class="input-group-text">&#64;</div>
+                                <div class="input-group-text"><small>&#64;</small></div>
                             </div>
-                            @Html.TextBox("MyTime", Model.WrittenDate.ToString("hh:mm:ss"), htmlAttributes: new { @class = "form-control", type = "time" })
+                            @Html.TextBox("MyTime", Model.WrittenDate.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
                         </div>
                     </div>
-                    @*##########( Save )##########*@
-                    <div class="col-2 offset-1">
-                        <div class="form-group mb-3">
-                            <input type="submit" value="Save" class="btn btn-success form-control" />
+
+                    @*###############( Save Button )###############*@
+                    <div class="align-self-end">
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-success form-control px-5">
                         </div>
                     </div>
                 </div>
-            </div>
-            @*####################( Extra )####################*@
-            
-            <div class="row">
-                <div class="col-2"></div>
-                @*##########( Markdown )##########*@
-                <div class="form-group col-2 mb-2">
-                    <div class="checkbox d-inline">
-                        @Html.EditorFor(model => model.Markdown)
-                        @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "control-label mx-2" })
-                </div>
-                @*##########( Private )##########*@
-                <div class="form-group col-2 mb-2">
-                    <div class="checkbox d-inline">
-                        @Html.EditorFor(model => model.Hidden)
-                        @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "control-label mx-2" })
-                </div>
-                @*##########( Pin )##########*@
-                <div class="form-group col-2 mb-2">
-                    <div class="checkbox d-inline">
-                        @Html.EditorFor(model => model.Pin)
-                        @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label mx-2" })
-                </div>
-                <div class="col"></div>
             </div>
         </div>
     </div>
@@ -108,6 +110,18 @@
 
 
 @section Scripts {
+    <script type="text/javascript">
+        function toggleExtraOptionsFunction() {
+            $("#DatePicker").toggleClass("invisible");
+            $("#TimePicker").toggleClass("invisible");
+            $("#Markdown").toggleClass("invisible");
+            $("#Private").toggleClass("invisible")
+            $("#Pin").toggleClass("invisible");
+            $("#extraBtn").toggleClass("active");
+        }
+    </script>
+
+
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/dir-auto")
 }

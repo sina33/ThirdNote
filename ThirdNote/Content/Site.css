@@ -216,3 +216,7 @@ audio {
     white-space: nowrap;
     max-width: 100%;
 }
+
+#Markdown, #Pin, #Private {
+    padding-left: 1.5rem;
+}
