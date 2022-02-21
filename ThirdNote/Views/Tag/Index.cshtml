@@ -16,35 +16,26 @@
     }
 }
 
-@{
-    string basePath = "/Tag/Index";
-    string pathLang = "?lang=fa";
-    string pathSort = ",sort=alpha";
-    string pathCol = ",columns=4";
-    pathLang = "en".Equals(L) ? "?lang=en" : pathLang;
-    pathSort = "num".Equals(Z) ? ",sort=num" : "group".Equals(Z) ? ",sort=group" : pathSort;
-    pathCol = ",columns=" + K;
-}
+
 <i class="mx-3">
     Lang:
-    <small>@Html.ActionLink("en", "Index", new { lang = "en", sort = L, columns = K })</small> |
-    <small>@Html.ActionLink("fa", "Index", new { lang = "fa", sort = L, columns = K })</small>
+    <small>@Html.ActionLink("en", "Index", new { lang = "en", sort = Z, columns = K }, new { @class = "btn btn-outline-info btn-sm" })</small>
+    <small>@Html.ActionLink("fa", "Index", new { lang = "fa", sort = Z, columns = K }, new { @class = "btn btn-outline-info btn-sm active" })</small>
 </i>
 
 <i class="mx-3">
     Sort:
-    <small>@Html.ActionLink("abc", "Index", new { lang = Request.Params["lang"], sort = "alpha", columns = Request.Params["columns"] })</small> |
-    <small>@Html.ActionLink("123", "Index", new { lang = Request.Params["lang"], sort = "num", columns = Request.Params["columns"] })</small> |
-    <small><a href="\Note\Details\@X"> grp </a></small>
-    @*<small>@Html.ActionLink("grp", "Index", new { lang = Request.Params["lang"], sort = "group", columns = Request.Params["columns"] })</small>*@
+    <small>@Html.ActionLink("alpha", "Index", new { lang = L, sort = "alpha", columns = K }, new { @class = "btn btn-outline-info btn-sm active" })</small>
+    <small>@Html.ActionLink("num", "Index", new { lang = L, sort = "num", columns = K }, new { @class = "btn btn-outline-info btn-sm" })</small>
+    <small>@Html.ActionLink("grp", "Details", "Note", new { id = X } , new { @class = "btn btn-outline-info btn-sm" })</small> 
 </i>
 
 <i class="mx-3">
     Columns:
-    <small>@Html.ActionLink("1", "Index", new { lang = Request.Params["lang"], sort = Request.Params["sort"], columns = 1 })</small> |
-    <small>@Html.ActionLink("2", "Index", new { lang = Request.Params["lang"], sort = Request.Params["sort"], columns = 2 })</small> |
-    <small>@Html.ActionLink("3", "Index", new { lang = Request.Params["lang"], sort = Request.Params["sort"], columns = 3 })</small> |
-    <small>@Html.ActionLink("4", "Index", new { lang = Request.Params["lang"], sort = Request.Params["sort"], columns = 4 })</small>
+    <small>@Html.ActionLink("1", "Index", new { lang = L, sort = Z, columns = 1 }, new { @class = "btn btn-outline-info btn-sm" })</small> 
+    <small>@Html.ActionLink("2", "Index", new { lang = L, sort = Z, columns = 2 }, new { @class = "btn btn-outline-info btn-sm" })</small> 
+    <small>@Html.ActionLink("3", "Index", new { lang = L, sort = Z, columns = 3 }, new { @class = "btn btn-outline-info btn-sm" })</small> 
+    <small>@Html.ActionLink("4", "Index", new { lang = L, sort = Z, columns = 4 }, new { @class = "btn btn-outline-info btn-sm active" })</small>
 </i>
 <hr />
 
@@ -237,3 +228,33 @@ else
 
 
 <br />
+
+<script>
+
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+    };
+
+    const btn = document.getElementsByClassName("btn-sm");
+    for (let i = 0; i < btn.length; i++) {
+        if (btn[i].textContent == getUrlParameter("lang"))
+            btn[i].classList.add("active");
+        else if (btn[i].textContent == getUrlParameter("sort"))
+            btn[i].classList.add("active");
+        else if (btn[i].textContent == getUrlParameter("columns"))
+            btn[i].classList.add("active");
+        else if (btn[i].classList.contains("active"))
+            btn[i].classList.toggle("active");
+    }
+</script>
