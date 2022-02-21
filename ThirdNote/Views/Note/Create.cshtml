@@ -17,33 +17,32 @@
             @*####################( Vertical Control Buttons )####################*@
             <div class="col-2 d-flex flex-column align-items-center">
                 <a class="btn btn-outline-warning btn-nav" href="/Note/Index">Dashboard</a>
+
                 @*##########( Pin )##########*@
-                <div id="Pin" class="form-group invisible mb-3 align-self-stretch mx-4 mt-auto">
-                    <div class="checkbox d-inline">
-                        @Html.EditorFor(model => model.Pin)
+                <div id="Pin" class="form-group invisible mb-3 align-self-stretch mt-auto">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role="switch" } })
                         @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
                     </div>
-                    @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "control-label mx-1 small" })
+                    @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "form-check-label mx-1 small" })
                 </div>
                 @*##########( Private )##########*@
-                <div id="Private" class="form-group invisible mb-3 align-self-stretch mx-4">
-                    <div class="checkbox d-inline">
-                        @Html.EditorFor(model => model.Hidden)
+                <div id="Private" class="form-group invisible mb-3 align-self-stretch">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
                         @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
                     </div>
-                    @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "control-label mx-1 small" })
+                    @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "form-check-label mx-1 small" })
                 </div>
                 @*##########( Markdown )##########*@
-                <div id="Markdown" class="form-group invisible mb-4 align-self-stretch mx-4">
-                    <div class="checkbox d-inline">
-                        @Html.EditorFor(model => model.Markdown)
+                <div id="Markdown" class="form-group invisible mb-4 align-self-stretch">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Markdown, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
                         @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
                     </div>
-                    @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "control-label mx-1 small" })
+                    @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "form-check-label mx-1 small" })
                     @*<button type="button" class="btn btn-secondary">Secondary</button>*@
                 </div>
-
-
 
                 <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
             </div>
