@@ -78,19 +78,19 @@
                     </div>
                     @*###############( Date & Time )###############*@
                     <div id="DatePicker" class="invisible">
-                        <div class="input-group align-items-center">
+                        <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                                <div class="input-group-text "><small>Written Date</small></div>
+                                <div class="input-group-text">Written Date</div>
                             </div>
-                            @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end", type = "date", @style = "height:35px;" })
+                            @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end", type = "date" })
                         </div>
                     </div>
                     <div id="TimePicker" class="invisible">
-                        <div class="input-group">
+                        <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><small>&#64;</small></div>
                             </div>
-                            @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control float-end", type = "time", @style = "height:35px;" })
+                            @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
                         </div>
                     </div>
                     @*###############( Save Button )###############*@
