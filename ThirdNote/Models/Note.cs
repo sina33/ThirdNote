@@ -32,7 +32,7 @@ namespace ThirdNote.Models
         [DataType(DataType.Date)]
         public DateTime WrittenDate { get; set; }
         public Boolean Markdown { get; set; }
-        //[Display(Name ="PV")]
+        [Display(Name = "Private")]
         public Boolean Hidden { get; set; }
         public Boolean Pin { get; set; }
         //public Boolean Actionable { get; set; }
