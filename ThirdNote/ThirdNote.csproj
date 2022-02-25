@@ -260,8 +260,13 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\pin-icon.png" />
+    <Content Include="Content\Style\site.css">
+      <DependentUpon>site.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Style\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap.css.bkp" />
     <Content Include="Content\bootstrap.min.css.bkp" />
     <Content Include="favicon.png" />
@@ -295,6 +300,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\Style\site.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\Style\_variables.scss" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

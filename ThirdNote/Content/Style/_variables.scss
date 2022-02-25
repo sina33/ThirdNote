@@ -1,0 +1,63 @@
+﻿// palette parrot
+$color-parrot-dark-blue: #1B2D51;
+$color-parrot-primary-blue: #124F8E;
+$color-parrot-light-blue: #0680CB;
+$color-parrot-green: #639236;
+$color-parrot-yellow: #F6A609;
+$color-parrot-red: #F32E25;
+
+// palette autumn
+$color-black: #000000;
+$color-autumn-dark-purple: #46333E;
+$color-autumn-red: #BE141A;
+$color-autumn-pale-orange: #E36C32;
+$color-autumn-grey: #B9BCB4;
+$color-white: #ffffff;
+
+// palette frog
+$color-frog-dark-green: #141d02;
+$color-frog-green: #141d02;
+$color-frog-blue: #3a91a2;
+$color-frog-yellow: #fff701;
+$color-frog-pepper-red: #9a0002;
+
+// palette coffee
+$color-coffee-black: #0d1110;
+$color-coffee-dark-brown: #43241a;
+$color-coffee-light-brown: #8c5c43;
+$color-coffee-dark-grey: #8c5c43;
+$color-coffee-light-grey: #d0cec1;
+
+
+
+
+$font-stack: Helvetica, sans-serif;
+$primary-color: $color-autumn-dark-purple;
+
+// navbar
+$navbar-background-color: transparent;
+$navbar-text-color: $color-coffee-dark-brown;
+$navbar-hover-color: $color-coffee-dark-brown;
+$navbar-shadow-color: $color-coffee-dark-brown;
+
+// body
+$background-color: $color-white;
+
+// table
+$table-row-hover-color: $color-white;
+$table-row-hover-bg-color: rgba($color-coffee-light-brown, 0.6);
+$table-header-bg-color: rgba($color-coffee-light-brown, 1.0);
+$table-header-color: $color-white;
+
+// buttun
+$button-color: $color-coffee-light-brown;
+
+// task todo
+$task-todo-color: $color-parrot-light-blue;
+$task-notdo-color: rgba($color-autumn-grey, 0.8);
+$task-doing-color: $color-parrot-yellow;
+$task-done-color: rgba($color-parrot-green,0.7);
+
+
+
+

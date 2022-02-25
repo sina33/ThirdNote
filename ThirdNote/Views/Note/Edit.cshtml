@@ -16,7 +16,7 @@
         <div class="row">
             @*####################( Vertical Control Buttons )####################*@
             <div class="col-2 d-flex flex-column align-items-center">
-                <a class="btn btn-outline-warning btn-nav disabled" href="/Note/Edit/@Model.Id">Edit</a>
+                <a class="btn btn-outline-secondary btn-nav disabled" href="/Note/Edit/@Model.Id">Edit</a>
 
                 @*##########( Pin )##########*@
                 <div id="Pin" class="form-group invisible mb-3 align-self-stretch mt-auto">
@@ -45,7 +45,7 @@
                 </div>
 
 
-                <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
+                <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
             </div>
             @*####################( The Actual Note )####################*@
             <div class="col">
@@ -75,7 +75,7 @@
                 <div class="flex-row d-inline-flex flex-nowrap justify-content-between align-items-end col-10">
                     @*###############( Extra Button )###############*@
                     <div class="align-self-end">
-                        <input id="extraBtn" class="btn btn-outline-dark" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
+                        <input id="extraBtn" class="btn btn-outline-secondary" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
                     </div>
                     @*###############( Date & Time )###############*@
                     <div id="DatePicker" class="invisible">
@@ -98,7 +98,7 @@
                     @*###############( Save Button )###############*@
                     <div class="align-self-end">
                         <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-success form-control px-5">
+                            <input type="submit" value="Save" class="btn btn-primary form-control px-5">
                         </div>
                     </div>
                 </div>

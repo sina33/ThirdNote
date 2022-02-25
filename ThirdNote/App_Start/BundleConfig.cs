@@ -26,7 +26,7 @@ namespace ThirdNote
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery-ui.css",
-                      "~/Content/site.css"));
+                      "~/Content/Style/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/dir-auto").Include(
                 //"~/Scripts/tags-autocomplete.js",

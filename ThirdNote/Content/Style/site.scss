@@ -1,13 +1,47 @@
-﻿body {
+﻿@import "_variables.scss";
+@import "../bootstrap.css";
+
+
+body {
+    /*font: 100% $font-stack;*/
+    /*color: $primary-color;*/
+    background-color: $background-color;
     padding-top: 0px;
     padding-bottom: 20px;
     /*background: -webkit-linear-gradient(left, #25c481, #25b7c4);
     background: linear-gradient(to right, #25c481, #25b7c4);*/
     /*font-family: 'Roboto', sans-serif;*/
 }
+
+
+.navbar-nav {
+    flex-direction: row;
+    display: flex;
+    gap: 0.5rem;
+    background: $navbar-background-color;
+
+    a {
+        flex: 1;
+        color: $navbar-text-color;
+        padding: 0.5rem;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.5s ease-out;
+    }
+
+    a:hover {
+        text-shadow: 0 0 10px $navbar-shadow-color;
+        /*background-color: #d4d9df;*/
+        color: $navbar-hover-color;
+    }
+}
+
+
+
+
 form {
-     margin-left:100px;
- }
+    margin-left: 100px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -26,7 +60,7 @@ input,
 select,
 textarea {
     /*max-width: 80%;*/
-    outline:none;
+    outline: none;
     border: none;
 }
 
@@ -34,28 +68,6 @@ footer {
     font-size: 0.8rem;
 }
 
-.navbar-nav {
-    flex-direction: row;
-    display: flex;
-    gap: 0.5rem;
-}
-
-.navbar-nav a {
-    flex: 1;
-    /*background-color: #333;*/
-    /*color: #fff;*/
-    /*border: 1px solid;*/
-    padding: 0.5rem;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.5s ease-out;
-}
-
-.navbar-nav a:hover {
-    text-shadow: 0 0 10px #000000;
-    /*background-color: #d4d9df;*/
-    color: #333;
-}
 
 label {
     text-align: end;
@@ -82,6 +94,7 @@ dl {
 dl.timeline {
     list-style-type: none;
     position: relative;
+    
 }
 
 dl.timeline:before {
@@ -117,105 +130,107 @@ dl.timeline > dd:before {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 10em;
+    max-width: 100%;
 }
 
-.ui-autocomplete {
-    max-height: 100px;
-    overflow-y: auto;
-    /* prevent horizontal scrollbar */
-    overflow-x: hidden;
-}
 
 table {
     table-layout: fixed;
     width: 100%;
+    /* Table Sticky Header */
+    th {
+        --bs-table-bg: $table-header-bg-color;
+        color: $table-header-color;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    tr:hover {
+        color: $table-row-hover-color;
+        background-color: $table-row-hover-bg-color;
+    }
+
+    td a {
+        text-decoration: none;
+        display: block;
+        color: $color-coffee-black;
+
+        &:hover {
+            color: $table-row-hover-color;
+            text-shadow: 0 0 3px $table-row-hover-color;
+        }
+    }
 }
 
-td {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-/* Table Sticky Header */
-table th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
+
+
+
+
 
 .right {
     float: right;
 }
 
 blockquote {
-    
-}
-
-.link-row a {
-
-    text-decoration: none;
-    color: inherit;
-
-}
-.link-row:hover a {
-    color:darkorange;
-}
-
-.link-row:hover{
-    background-color: beige;
 }
 
 .btn-nav {
     width: 70%;
-    align-self:center;
+    align-self: center;
     flex-flow: column;
     display: flex;
-    vertical-align:unset;
-}
-
-.btn {
     vertical-align: unset;
 }
 
-#collapseDiv {
-    display:none;
-    transition: all 1s linear;
-}
+
 
 p {
     margin-bottom: 0;
     margin-top: 0;
 }
 
-.task-todo  {
-    color: darkblue;
+%task {
+
+    &:hover {
+        text-shadow: 0 0 1px;
+        text-decoration: none;
+    }
 }
+
+
+.task-todo {
+    @extend %task;
+    color: $task-todo-color ;
+}
+
 .task-doing {
-    color: darkorange;
+    @extend %task;
+    color: $task-doing-color;
 }
-.task-done  {
-    opacity: 50%;
-    color: forestgreen;
-    text-decoration:line-through;
+
+.task-done {
+    @extend %task;
+    color: $task-done-color;
+    text-decoration: line-through;
+    text-decoration-style: dotted;
 }
+
 .task-notdo {
-    opacity: 50%;
-    text-decoration:line-through;
+    @extend %task;
+    color: $task-notdo-color;
+    text-decoration: line-through;
+    text-decoration-style: double;
 }
+
 img[alt=doc] {
     width: 100%;
 }
+
 audio {
     width: 100%;
 }
 
-.ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
-}
 
 #Markdown, #Pin, #Private {
     padding-left: 1.5rem;
