@@ -28,7 +28,8 @@ namespace ThirdNote.Models
         //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime WrittenDate { get; set; }
         public Boolean Markdown { get; set; }

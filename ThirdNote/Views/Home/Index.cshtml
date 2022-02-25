@@ -19,69 +19,66 @@
 @if (Model.Pinned.Count() > 0)
 {
 
-    <table class="table table-sm caption-top mb-3 dir-rtl">
-        <caption class="dir-ltr"><img src="~/Content/pin-icon.png" style="width:16px; height:auto;margin-right:5px;" /> Pinned Notes</caption>
-        <tr class="table-light">
-            <th style="width:5%;">
-                #
-            </th>
-            <th style="width:55%;">
-                Title
-            </th>
+<table class="table table-sm caption-top mb-3 dir-rtl">
+    <caption class="dir-ltr"><img src="~/Content/pin-icon.png" style="width:16px; height:auto;margin-right:5px;" /> <b>Pinned Notes</b></caption>
+    <tr class="table-light">
+        <th style="width:5%;">
+            #
+        </th>
+        <th style="width:55%;">
+            Title
+        </th>
 
-            <th style="width:18%;">
-                Written Date
-            </th>
-            <th style="width:4%;">
-                Md
-            </th>
-            <th style="width:4%;">
-                Hd
-            </th>
-            <th style="width:4%;">
-                Pin
-            </th>
+        <th style="width:18%;">
+            Written Date
+        </th>
+        <th style="width:4%;">
+            Md
+        </th>
+        <th style="width:4%;">
+            Hd
+        </th>
+        <th style="width:4%;">
+            Pin
+        </th>
 
-            <th style="width:6%;">
-                View
-            </th>
-            <th style="width:160px;"></th>
+        <th style="width:6%;">
+            View
+        </th>
+        @*<th style="width:160px;"></th>*@
+    </tr>
+
+    @foreach (var item in Model.Pinned.OrderBy(p => p.Title))
+    {
+        <tr class="link-row">
+
+            <td>
+                <a href="/Note/Details/@item.Id">@item.Id</a>
+            </td>
+            <td>
+                <a href="/Note/Details/@item.Id"><div class="crop">@item.Title</div></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WrittenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Markdown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hidden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewCount)
+            </td>
+
         </tr>
 
-        @foreach (var item in Model.Pinned.OrderBy(p=>p.Title))
-        {
-            <tr class="link-row">
-                <td>
-                    <a href="/Note/Details/@item.Id">@item.Id</a>
-                </td>
-                <td>
-                    <a href="/Note/Details/@item.Id" class="link-row"><div class="ellipsis">@item.Title</div></a>
-                    @*@Html.DisplayFor(modelItem => item.Title)*@
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WrittenDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Markdown)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hidden)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ViewCount)
-                </td>
-                <td>
-                    <a href="/Note/Edit/@item.Id">Edit</a> |
-                    <a href="/Note/Details/@item.Id">Details</a> |
-                    <a href="/Note/Delete/@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+    }
 
-    </table>
+</table>
 }
 
 @Html.Partial("~/Views/Note/List.cshtml", Model.Sorted)
