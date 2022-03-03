@@ -14,12 +14,12 @@
         <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
     </div>
     @*####################(  Form )####################*@
-    <div class="col-6 mb-2">
+    <div class="col-6">
         <dl>
             <dt></dt>
             @*###############( Title & Date )###############*@
             <dd>
-                <div class="dir-txt-auto">
+                <div class="dir-txt-auto text-center">
                     @Html.Raw("<b>" + Model.Title + "</b>")
                     <br />
                     <small dir="ltr">
@@ -74,7 +74,7 @@
         @*###############( Child Notes )###############*@
         @if (CNotes != null)
         {
-            <div class="mb-3">
+            <div class="">
                 @foreach (ThirdNote.Models.Note cNote in CNotes)
                 {
                     <p class="small"><code>Cited in &nbsp;&nbsp;&nbsp; #@cNote.Id: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
