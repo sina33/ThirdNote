@@ -20,8 +20,8 @@ namespace ThirdNote.Controllers
     {
         public static int ACCORDION_NOTE_ID = 4113;
         public static int REF_TAG_ID = 1049;
-        private NotebookDbContext db = new NotebookDbContext();
-        private MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
+        private readonly NotebookDbContext db = new NotebookDbContext();
+        private readonly MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
 
         // GET: Note
         public ActionResult Index()
