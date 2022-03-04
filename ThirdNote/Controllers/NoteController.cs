@@ -80,10 +80,25 @@ namespace ThirdNote.Controllers
                 t => t.ID, 
                 (nt, t) => t);
 
+            // stitching notes
+            string snpattern = @"sn#\d+";
+            note.Text = Regex.Replace(note.Text, snpattern, delegate (Match match)
+            {
+                int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
+                string nText = db.Notes.Find(nId).Text;//String.Format("{0}[n#{1}]", db.Notes.Find(nId).Text, nId);
+                return nText+"n#"+nId;
+                //return (db.Notes.Find(nId).Markdown && !note.Markdown ? Markdown.ToHtml(note.Text, pipeline) : nText);
+            });
+            if (note.Markdown)
+            {
+                var result = Markdown.ToHtml(note.Text, pipeline);
+                note.Text = result;
+            }
+
             string npattern = @"(?<=n#)\d+";
             HashSet<Note> PNotes = new HashSet<Note>();
             // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
-            if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))
+            if (db.NoteTags.Any(nt => nt.NoteID == note.Id /*&& nt.TagID == REF_TAG_ID*/))
             {
                 Match mc = Regex.Match(note.Text, npattern, RegexOptions.IgnoreCase);
                 while (mc.Success)
@@ -108,11 +123,10 @@ namespace ThirdNote.Controllers
             CNotes.RemoveWhere(n => n.Id == note.Id);  // remove self-citation
             ViewBag.CNotes = CNotes.ToArray();
 
-            if (note.Markdown)
-            {
-                var result = Markdown.ToHtml(note.Text, pipeline);
-                note.Text = result;
-            }
+
+
+
+
             //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
             ViewBag.TimeAgo = note.WrittenDate.Humanize(false);
             return View(note);
