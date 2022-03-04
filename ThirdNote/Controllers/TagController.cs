@@ -44,12 +44,11 @@ namespace ThirdNote.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)] // will disable caching for Index only
         public ActionResult Details(int id)
         {
-            var tag = db.Tags.Where(t => t.ID == id).First();
-            ViewBag.Tag = tag;
-            //ViewBag.TagId = tag.ID;
-
-            var data = db.Notes.Include(s => s.NoteTags).Where(n => n.NoteTags.Any(nt => nt.TagID == id))
-                .OrderByDescending(n=>n.WrittenDate);
+            ViewBag.Tag = db.Tags.Find(id);
+            var data = db.Notes.Include(s => s.NoteTags)
+                               .Where(n => n.NoteTags.Any(nt => nt.TagID == id))
+                               .OrderByDescending(n => n.WrittenDate)
+                               .AsNoTracking();
             return View(data);
         }
 
