@@ -19,21 +19,26 @@
             <dt></dt>
             @*###############( Title & Date )###############*@
             <dd>
-                <div class="dir-txt-auto text-center">
-                    @Html.Raw("<b>" + Model.Title + "</b>")
-                    @if (CNotes.Count() > 0) {
-                        @Html.Raw(String.Format("<span class=\"badge bg-dark left\">{0}</span>", CNotes.Count()));
-                    }
-                    @if (PNotes.Count() > 0) { 
-                        @Html.Raw(String.Format("<span class=\"badge bg-secondary right\">{0}</span>", PNotes.Count())); 
-                    }
-
-                    <br />
-                    <small dir="ltr">
-                        <b>@ViewBag.TimeAgo</b> at
-                        <i>@Model.WrittenDate.ToString("d")</i>
-                    </small>
-                    <br />
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column justify-content-around">
+                        @if (CNotes.Count() > 0)
+                        {
+                            @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
+                        }
+                        @if (PNotes.Count() > 0)
+                        {
+                            @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \">{0}</div>", PNotes.Count()));
+                        }
+                    </div>
+                    <div class="dir-txt-auto text-center flex-fill">
+                        @Html.Raw("<b>" + Model.Title + "</b>")
+                        <br />
+                        <small dir="ltr">
+                            <b>@ViewBag.TimeAgo</b> at
+                            <i>@Model.WrittenDate.ToString("d")</i>
+                        </small>
+                        <br />
+                    </div>
                 </div>
             </dd>
             @*###############( Text )###############*@
