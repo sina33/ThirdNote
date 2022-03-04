@@ -11,6 +11,7 @@ using ThirdNote.ViewModels;
 using Markdig;
 using Humanizer;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace ThirdNote.Controllers
 {
@@ -82,9 +83,17 @@ namespace ThirdNote.Controllers
             int x = 0;
             char[] delimiters = new char[] { ',', '،', ' ', '\n', ']', '[', ')', '(' };
             // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
-            if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))             
+            if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))
             {
                 List<Note> PNotes = new List<Note>();
+/*                string pattern = @"\bn\#\d+";
+                Match m = Regex.Match(note.Text, pattern, RegexOptions.IgnoreCase);
+                while(m.Success)
+                {
+                    PNotes.Add(db.Notes.Find(Int32.Parse(m.Value)));
+                    m.NextMatch();
+                }*/
+
                 foreach (var parentId in note.Text.Split('#').Skip(1).Select(s => s.Split(' ').First()).Where(s=>Int32.TryParse(s, out x)))
                 {
                     PNotes.Add(db.Notes.Find(Int32.Parse(parentId)));

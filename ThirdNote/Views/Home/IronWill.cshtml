@@ -31,7 +31,7 @@
             <div class="col-4">
                 @*##########( Milestones )##########*@
                 @{
-                    List<int> milestones = new List<int> { 0, 1, 2, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987 };
+                    List<int> milestones = new List<int> { 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987 };
                     int strike = Model.Strikes.First();
                     int nextMile = milestones.Where(m => m > strike).Min();
                     int lastMile = milestones.Where(m => m <= strike).Max();
@@ -65,27 +65,27 @@
                             else if (days > 377)
                                 nike = "General";
                             else if (days > 233)
-                                nike = "Commander";
+                                nike = "Colonel";
                             else if (days > 144)
-                                nike = "Champion";
+                                nike = "Commander";
                             else if (days > 89)
-                                nike = "Master";
+                                nike = "Champion";
                             else if (days > 55)
-                                nike = "Guardian";
+                                nike = "Master";
                             else if (days > 34)
-                                nike = "Cavalier";
+                                nike = "Guardian";
                             else if (days > 21)
-                                nike = "Holy Knight";
-                            else if (days > 13)
                                 nike = "Knight";
-                            else if (days > 8)
-                                nike = "Warrior";
-                            else if (days > 5)
+                            else if (days > 13)
                                 nike = "Sergeant";
+                            else if (days > 8)
+                                nike = "Corporal";
+                            else if (days > 5)
+                                nike = "Private";
                             else if (days > 3)
-                                nike = "Scout";
-                            else if (days > 2)
                                 nike = "Soldier";
+                            else if (days > 2)
+                                nike = "Warrior";
                             else if (days > 1)
                                 nike = "Man of Courage";
                             return nike;
