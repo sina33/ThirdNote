@@ -123,10 +123,6 @@ namespace ThirdNote.Controllers
             CNotes.RemoveWhere(n => n.Id == note.Id);  // remove self-citation
             ViewBag.CNotes = CNotes.ToArray();
 
-
-
-
-
             //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
             ViewBag.TimeAgo = note.WrittenDate.Humanize(false);
             return View(note);

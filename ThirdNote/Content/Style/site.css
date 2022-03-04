@@ -58,7 +58,7 @@ label {
 .dir-rtl {
   direction: rtl;
   text-align: justify;
-  text-justify: kashida; }
+  text-justify: inter-word; }
 
 .dir-ltr {
   direction: ltr;
