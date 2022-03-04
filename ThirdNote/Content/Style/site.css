@@ -128,6 +128,9 @@ table {
 .right {
   float: right; }
 
+.left {
+  float: left; }
+
 .btn-nav {
   width: 70%;
   align-self: center;

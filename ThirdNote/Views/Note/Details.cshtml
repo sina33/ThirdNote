@@ -22,10 +22,10 @@
                 <div class="dir-txt-auto text-center">
                     @Html.Raw("<b>" + Model.Title + "</b>")
                     @if (CNotes.Count() > 0) {
-                        @Html.Raw(String.Format("<span class=\"badge rounded-pill bg-dark\">{0}</span>", CNotes.Count()));
+                        @Html.Raw(String.Format("<span class=\"badge bg-dark left\">{0}</span>", CNotes.Count()));
                     }
                     @if (PNotes.Count() > 0) { 
-                        @Html.Raw(String.Format("<span class=\"badge rounded-pill bg-secondary\">{0}</span>", PNotes.Count())); 
+                        @Html.Raw(String.Format("<span class=\"badge bg-secondary right\">{0}</span>", PNotes.Count())); 
                     }
 
                     <br />
