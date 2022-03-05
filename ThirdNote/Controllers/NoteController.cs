@@ -80,30 +80,32 @@ namespace ThirdNote.Controllers
                 t => t.ID, 
                 (nt, t) => t);
 
-            int x = 0;
-            char[] delimiters = new char[] { ',', '،', ' ', '\n', ']', '[', ')', '(' };
+            string npattern = @"(?<=n#)\d+";
+            HashSet<Note> PNotes = new HashSet<Note>();
             // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
             if ( db.NoteTags.Any(nt => nt.NoteID == note.Id && nt.TagID == REF_TAG_ID))
             {
-                List<Note> PNotes = new List<Note>();
-/*                string pattern = @"\bn\#\d+";
-                Match m = Regex.Match(note.Text, pattern, RegexOptions.IgnoreCase);
-                while(m.Success)
+                Match mc = Regex.Match(note.Text, npattern, RegexOptions.IgnoreCase);
+                while (mc.Success)
                 {
-                    PNotes.Add(db.Notes.Find(Int32.Parse(m.Value)));
-                    m.NextMatch();
-                }*/
-
-                foreach (var parentId in note.Text.Split('#').Skip(1).Select(s => s.Split(' ').First()).Where(s=>Int32.TryParse(s, out x)))
-                {
-                    PNotes.Add(db.Notes.Find(Int32.Parse(parentId)));
+                    PNotes.Add(db.Notes.Find(Convert.ToInt32(mc.Value)));
+                    mc = mc.NextMatch();
                 }
                 ViewBag.PNotes = PNotes;
             }
+            string idpattern = @"(?<=n#)" + id;
+            HashSet<Note> CNotes = new HashSet<Note>();
             // CNotes (Child Notes) are referring to this note
-            List<Note> CNotes = new List<Note>();
-            CNotes.AddRange(db.Notes.Include(n => n.NoteTags).Where(n => n.NoteTags.Any(
-                            nt => nt.TagID == REF_TAG_ID && n.Text.Contains("n#" + note.Id + " "))));
+            foreach (Note no in db.Notes)
+            {
+                //bool isRef = db.NoteTags.Any(nt=>nt.TagID==REF_TAG_ID && nt.NoteID==note.Id) ? true : false;
+                Match match = Regex.Match(no.Text, idpattern, RegexOptions.IgnoreCase);
+                if (match.Success /*&& isRef*/)
+                {
+                    CNotes.Add(db.Notes.Find(no.Id));
+                }
+            }
+            CNotes.RemoveWhere(n => n.Id == note.Id);  // remove self-citation
             ViewBag.CNotes = CNotes.ToArray();
 
             if (note.Markdown)
