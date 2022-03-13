@@ -106,8 +106,9 @@ namespace ThirdNote.Controllers
                     PNotes.Add(db.Notes.Find(Convert.ToInt32(mc.Value)));
                     mc = mc.NextMatch();
                 }
-                ViewBag.PNotes = PNotes;
             }
+            ViewBag.PNotes = PNotes;
+
             string idpattern = @"(?<=n#)" + id;
             HashSet<Note> CNotes = new HashSet<Note>();
             // CNotes (Child Notes) are referring to this note
