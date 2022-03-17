@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<ThirdNote.Models.Relapse>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Relapses History";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
+<p class="mb-2">
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th style="width:15%;">
             @Html.DisplayNameFor(model => model.Subject)
         </th>
-        <th>
+        <th style="width:15%;">
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        <th>
+        <th style="width:40%;">
             @Html.DisplayNameFor(model => model.Message)
         </th>
-        <th></th>
+        <th style="width:30%;"></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Reverse()) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Subject)
@@ -35,9 +35,11 @@
             @Html.DisplayFor(modelItem => item.Message)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <div class="justify-content-end d-flex">
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "px-2" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "px-2" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "px-2" })
+            </div>
         </td>
     </tr>
 }
