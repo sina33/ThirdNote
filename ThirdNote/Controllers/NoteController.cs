@@ -95,7 +95,8 @@ namespace ThirdNote.Controllers
                 note.Text = result;
             }
 
-            string npattern = @"\b(?<=n#)\d+\b";
+
+            string npattern = @"\b(?<=n#)\d+\b"; ;
             HashSet<Note> PNotes = new HashSet<Note>();
             // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
             if (db.NoteTags.Any(nt => nt.NoteID == note.Id /*&& nt.TagID == REF_TAG_ID*/))
@@ -124,6 +125,15 @@ namespace ThirdNote.Controllers
             CNotes.RemoveWhere(n => n.Id == note.Id);  // remove self-citation
             ViewBag.CNotes = CNotes.ToArray();
 
+            // Convert each reference to badge link
+            string npatternFull = @"\bn#\d+\b";
+            note.Text = Regex.Replace(note.Text, npatternFull, delegate (Match match)
+            {
+                int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
+                string nTitle = db.Notes.Find(nId).Title;
+                string sub = "<a href='/Note/Details/" + nId.ToString() + "'><span class='badge bg-info'>#" + nId.ToString() + "</span></a>";
+                return sub;
+            });
             //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
             ViewBag.TimeAgo = note.WrittenDate.Humanize(false);
             return View(note);
