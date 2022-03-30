@@ -55,7 +55,8 @@
                         @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
                         foreach (var txt in Model.Text.Split('\n'))
                         {
-                            @Html.Raw(HttpUtility.HtmlEncode(txt));
+                            @Html.Raw(txt);
+                            @*@Html.Raw(HttpUtility.HtmlEncode(txt));*@
                             @Html.Raw("<br />");
                         }
                     }

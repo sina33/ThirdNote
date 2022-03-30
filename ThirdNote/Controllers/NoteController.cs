@@ -93,6 +93,9 @@ namespace ThirdNote.Controllers
             {
                 var result = Markdown.ToHtml(note.Text, pipeline);
                 note.Text = result;
+            } else
+            {
+                note.Text = HttpUtility.HtmlEncode(note.Text);
             }
 
 
