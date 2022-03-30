@@ -81,7 +81,7 @@ namespace ThirdNote.Controllers
                 (nt, t) => t);
 
             // stitching notes
-            string snpattern = @"sn#\d+";
+            string snpattern = @"\bsn#\d+\b";
             note.Text = Regex.Replace(note.Text, snpattern, delegate (Match match)
             {
                 int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
@@ -95,7 +95,7 @@ namespace ThirdNote.Controllers
                 note.Text = result;
             }
 
-            string npattern = @"(?<=n#)\d+";
+            string npattern = @"\b(?<=n#)\d+\b";
             HashSet<Note> PNotes = new HashSet<Note>();
             // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
             if (db.NoteTags.Any(nt => nt.NoteID == note.Id /*&& nt.TagID == REF_TAG_ID*/))
@@ -109,7 +109,7 @@ namespace ThirdNote.Controllers
             }
             ViewBag.PNotes = PNotes;
 
-            string idpattern = @"(?<=n#)" + id;
+            string idpattern = @"\b(?<=n#)" + id + @"\b";
             HashSet<Note> CNotes = new HashSet<Note>();
             // CNotes (Child Notes) are referring to this note
             foreach (Note no in db.Notes)
