@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/png" href="~/favicon.png" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Content/prism.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     @*<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>*@
 
@@ -48,6 +49,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/prism.js"></script>
 
     <script>
         $(".nav .nav-link").on("click", function () {

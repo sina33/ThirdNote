@@ -72,6 +72,9 @@
     <Reference Include="Markdig, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.0.26.0\lib\net452\Markdig.dll</HintPath>
     </Reference>
+    <Reference Include="Markdig.Prism, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebStoating.Markdig.Prism.1.0.0\lib\netstandard2.0\Markdig.Prism.dll</HintPath>
+    </Reference>
     <Reference Include="Markdig.SyntaxHighlighting, Version=1.1.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.SyntaxHighlighting.1.1.7\lib\portable45-net45+win8+wp8+wpa81\Markdig.SyntaxHighlighting.dll</HintPath>
     </Reference>
@@ -260,6 +263,7 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\pin-icon.png" />
+    <Content Include="Content\prism.css" />
     <Content Include="Content\Style\site.css">
       <DependentUpon>site.scss</DependentUpon>
     </Content>
@@ -325,6 +329,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\tags-autocomplete.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

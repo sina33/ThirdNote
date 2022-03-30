@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Markdig;
 using Markdig.SyntaxHighlighting;
+using Markdig.Prism;
 
 namespace ThirdNote.App_Start
 {
@@ -11,7 +12,7 @@ namespace ThirdNote.App_Start
     {
         public static MarkdownPipeline pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions().UseYamlFrontMatter().UseEmojiAndSmiley()
-            .UseSoftlineBreakAsHardlineBreak().UseSmartyPants().UseSyntaxHighlighting().Build();
+            .UseSoftlineBreakAsHardlineBreak().UseSmartyPants().UsePrism().Build();
             //.UseTaskLists()
             //.UseMediaLinks()
             //.UseCustomContainers()
