@@ -11,7 +11,7 @@ namespace ThirdNote.App_Start
     {
         public static MarkdownPipeline pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions().UseYamlFrontMatter().UseEmojiAndSmiley()
-            .UseSoftlineBreakAsHardlineBreak().Build();
+            .UseSoftlineBreakAsHardlineBreak().UseSmartyPants().UseSyntaxHighlighting().Build();
             //.UseTaskLists()
             //.UseMediaLinks()
             //.UseCustomContainers()
