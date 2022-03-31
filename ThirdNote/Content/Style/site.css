@@ -181,3 +181,7 @@ em {
 
 cite {
   color: purple; }
+
+.indent {
+  display: inline-block;
+  width: 115px; }

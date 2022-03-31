@@ -78,7 +78,7 @@
             <div class="mt-3">
                 @foreach (ThirdNote.Models.Note pNote in PNotes)
                 {
-                    <p class="small"><code>Reference to #@pNote.Id: </code><a href="/Note/Details/@pNote.Id"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+                    <p class="small"><code class="indent">refer to #@pNote.Id </code><code>: </code><a href="/Note/Details/@pNote.Id"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
                 }
             </div>
         }
@@ -88,7 +88,7 @@
             <div class="">
                 @foreach (ThirdNote.Models.Note cNote in CNotes)
                 {
-                    <p class="small"><code>Cited in &nbsp;&nbsp;&nbsp; #@cNote.Id: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+                    <p class="small"><code class="indent">cited in #@cNote.Id </code><code>: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
                 }
             </div>
         }
