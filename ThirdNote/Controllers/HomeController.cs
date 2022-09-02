@@ -17,8 +17,8 @@ namespace ThirdNote.Controllers
         {
             Dashboard indexViewData = new Dashboard()
             {
-                Pinned = db.Notes.Where(n => n.Pin).ToList(),
-                Sorted = db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList()
+                Pinned = db.Notes.Where(n => n.Pin && !n.Hidden).ToList(),
+                Sorted = db.Notes.Where(p=>!p.Hidden).OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList()
             };
             if (db.Relapses.Count() > 0)
             {

@@ -7,7 +7,7 @@
 
 <div class="container mt-5 mb-5">
 
-    @foreach (var item in Model.Where(t => !t.Hidden))
+    @foreach (var item in Model)
     {
         <div class="row m-1">
             <div class="col-6 offset-3 timeline">
@@ -15,9 +15,16 @@
                     <dt></dt>
                     <dd>
                         <div class=" dir-txt-auto">
-                            <a href="/Note/Details/@item.Id"><b>@item.Title</b></a>
+                            @if (item.Markdown)
+                            {
+                                <a href="/Note/Details/@item.Id">@Html.Raw("<b>" + item.Title + "</b>")</a>
+                            }
+                            else
+                            {
+                                <a href="/Note/Details/@item.Id"><b>@item.Title</b></a>
+                            }
                             <br />
-                            <small>
+                            <small dir="ltr">
                                 @{ string days = (DateTime.Now - item.WrittenDate).Duration().Days.ToString(); }
                                 <i>@days days</i> ago
                             </small>
@@ -45,11 +52,12 @@
                 </dl>
             </div>
         </div>
-}
-                        
-                   
-                    
-               
+    }
+
+</div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

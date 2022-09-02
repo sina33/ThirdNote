@@ -29,7 +29,7 @@ namespace ThirdNote.Controllers
             Dashboard indexViewData = new Dashboard()
             {
                 Pinned = db.Notes.Where(n => n.Pin).ToList(),
-                Sorted = db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList()
+                Sorted = db.Notes.OrderByDescending(a=>a.WrittenDate).ThenByDescending(b=>b.Id)
             };
             if (db.Relapses.Count() > 0)
             {
@@ -59,7 +59,7 @@ namespace ThirdNote.Controllers
         // GET: Note/List
         public ActionResult List() 
         {
-            return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList());
+            return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).Where(p => !p.Hidden).ToList());
         }
 
         // GET: Note/Details/5
@@ -95,7 +95,7 @@ namespace ThirdNote.Controllers
                 note.Text = result;
             } else
             {
-                note.Text = HttpUtility.HtmlEncode(note.Text);
+                //note.Text = HttpUtility.HtmlEncode(note.Text);
             }
 
 
@@ -327,7 +327,7 @@ namespace ThirdNote.Controllers
 
             //return View(db.Notes.OrderByDescending(n => n.WrittenDate).ToList());
 
-            List<Note> notes = db.Notes.OrderByDescending(n => n.WrittenDate).ToList();
+            List<Note> notes = db.Notes.OrderByDescending(n => n.WrittenDate).Where(no => no.Hidden != true).ToList();
             foreach (Note note in notes)
             {
                 if (note.Markdown)

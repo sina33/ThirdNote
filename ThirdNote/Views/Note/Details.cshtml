@@ -31,7 +31,14 @@
                         }
                     </div>
                     <div class="dir-txt-auto text-center flex-fill">
-                        @Html.Raw("<b>" + Model.Title + "</b>")
+                        @if (Model.Markdown)
+                        {
+                            @Html.Raw("<b>" + Model.Title + "</b>")
+                        }
+                        else
+                        {
+                            <b>@Model.Title</b>
+                        }
                         <br />
                         <small dir="ltr">
                             <b>@ViewBag.TimeAgo</b> at
@@ -43,11 +50,10 @@
             </dd>
             @*###############( Text )###############*@
             <dd>
-                <br />
-                <div class="dir-txt-auto">
+                <dl>
                     @if (Model.Markdown) // it's been converted to html in controller
                     {
-                        @Html.Raw(Model.Text);
+                        <div class="dir-txt-auto mb-1">@Html.Raw(Model.Text)</div>
                     }
                     else if (!string.IsNullOrEmpty(Model.Text))
                     {
@@ -55,12 +61,18 @@
                         @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
                         foreach (var txt in Model.Text.Split('\n'))
                         {
-                            @Html.Raw(txt);
-                            @*@Html.Raw(HttpUtility.HtmlEncode(txt));*@
-                            @Html.Raw("<br />");
+                            <p class="dir-txt-auto mb-1">
+                                @Html.Raw(txt)
+                                @*@Html.Raw(HttpUtility.HtmlEncode(txt))*@
+                            </p>
+
                         }
                     }
-                </div>
+                    else
+                    {
+                        @Html.Raw("<br/>")
+                    }
+                </dl>
             </dd>
             @*###############( Tags )###############*@
             <dd>

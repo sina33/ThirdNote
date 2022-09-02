@@ -12,18 +12,19 @@ namespace ThirdNote.App_Start
     {
         public static MarkdownPipeline pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions().UseYamlFrontMatter().UseEmojiAndSmiley()
-            .UseSoftlineBreakAsHardlineBreak().UseSmartyPants().UsePrism().Build();
-            //.UseTaskLists()
-            //.UseMediaLinks()
-            //.UseCustomContainers()
-            //.UseYamlFrontMatter()
-            //.UseDefinitionLists()
-            //.UseGenericAttributes()
-            //.UseGlobalization()
-            //.UseAdvancedExtensions()
-            //.UseEmphasisExtras()
-            //.UseSyntaxHighlighting()
-            //.Build();
+            .UseSmartyPants().UsePrism().Build();
+        //.UseSoftlineBreakAsHardlineBreak()
+        //.UseTaskLists()
+        //.UseMediaLinks()
+        //.UseCustomContainers()
+        //.UseYamlFrontMatter()
+        //.UseDefinitionLists()
+        //.UseGenericAttributes()
+        //.UseGlobalization()
+        //.UseAdvancedExtensions()
+        //.UseEmphasisExtras()
+        //.UseSyntaxHighlighting()
+        //.Build();
 
         public static MarkdownPipeline GetPipeline()
         {

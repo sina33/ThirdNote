@@ -47,6 +47,7 @@ namespace ThirdNote.Controllers
             ViewBag.Tag = db.Tags.Find(id);
             var data = db.Notes.Include(s => s.NoteTags)
                                .Where(n => n.NoteTags.Any(nt => nt.TagID == id))
+                               .Where(n => !n.Hidden)
                                .OrderByDescending(n => n.WrittenDate)
                                .AsNoTracking();
             return View(data);
