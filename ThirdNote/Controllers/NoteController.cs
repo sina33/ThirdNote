@@ -95,7 +95,7 @@ namespace ThirdNote.Controllers
                 note.Text = result;
             } else
             {
-                //note.Text = HttpUtility.HtmlEncode(note.Text);
+                note.Text = HttpUtility.HtmlEncode(note.Text);
             }
 
 
