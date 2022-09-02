@@ -59,42 +59,30 @@
 }
 else if (K == 2)
 {
-    <div class="row">
-        <div class="col-6">
-            <div class="row">
-                @foreach (var tag in Model.Take((Model.Count() + 1) / 2))
+<div class="row">
+
+    @foreach (var group in Model.GroupBy(t => t.Label).OrderByDescending(g => g.Count()).Select(g => new { key = g.Key, count = g.Count() }))
+    {
+        <div class="col-3">
+
+            <p class="text-secondary mt-2">@group.key (@group.count)</p>
+        @foreach (var tag in Model.Where(t => t.Label == group.key))
+        {
+            <div class="col-12">
+                @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
                 {
-                    <div class="col-12">
-                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                        {
-                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                        }
-                        else
-                        {
-                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                        }
-                    </div>
+                    <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
+                }
+                else
+                {
+                    <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
                 }
             </div>
+        }
+
         </div>
-        <div class="col-6">
-            <div class="row">
-                @foreach (var tag in Model.Skip((Model.Count() + 1) / 2))
-                {
-                    <div class="col-12">
-                        @if (!String.IsNullOrEmpty(Request.Params["lang"]) && Request.Params["lang"].Equals("en"))
-                        {
-                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_en (@tag.NoteTags.Count)</a>
-                        }
-                        else
-                        {
-                            <a href="\Tag\Details\@tag.ID"> @tag.Lable_fa (@tag.NoteTags.Count)</a>
-                        }
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
+    }
+</div>
 }
 else if (K == 3)
 {
