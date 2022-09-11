@@ -226,6 +226,10 @@
     <Compile Include="Migrations\202201031127184_tagLabel_fa.Designer.cs">
       <DependentUpon>202201031127184_tagLabel_fa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209111202460_note_name_base64.cs" />
+    <Compile Include="Migrations\202209111202460_note_name_base64.Designer.cs">
+      <DependentUpon>202209111202460_note_name_base64.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Relapse.cs" />
     <Compile Include="Models\NotebookDbContext.cs" />
@@ -422,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201031127184_tagLabel_fa.resx">
       <DependentUpon>202201031127184_tagLabel_fa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209111202460_note_name_base64.resx">
+      <DependentUpon>202209111202460_note_name_base64.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 
 <style>
     .table {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI';
     }
 </style>
 
@@ -24,11 +24,11 @@
 
     }
     <tr class="table-light">
-        <th style="width:7%;">
+        <th style="width:8%;" >
             #
         </th>
-        <th style="width:77%;">
-            @*@Html.DisplayNameFor(model => model.Title)*@
+        <th style="width:76%;" class="text-center">
+            @Html.DisplayNameFor(model => model.Title)
         </th>
 
         @*<th style="width:30%;">
@@ -61,10 +61,10 @@
     @foreach (var item in Model)
     {
         <tr class="link-row">
-            <td>
-                <a href="/Note/Details/@item.Id">@item.Id</a>
+            <td style="font-family: monospace; background-color:aliceblue; color:black;" class="text-center">
+                @item.Name
             </td>
-            <td>
+            <td class="pe-3">
                 @*@Html.DisplayFor(modelItem => item.Title)*@
                 <a href="\Note\Details\@item.Id">
                     <div class="crop">
