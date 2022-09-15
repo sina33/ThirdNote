@@ -20,14 +20,19 @@
         @*###############( Title & Date )###############*@
         <dd>
             <div class="d-flex flex-row">
-                <div class="d-flex flex-column justify-content-around">
+                <div class="d-flex flex-column ">
                     @if (CNotes.Count() > 0)
                     {
-                        @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
+                        //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
+
+
+                        <div class="d-flex align-items-baseline"><i class="fa fa-quote-right me-3"></i>@CNotes.Count()</div>
                     }
                     @if (PNotes.Count() > 0)
                     {
-                        @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \">{0}</div>", PNotes.Count()));
+                        //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \"></div>{0}", PNotes.Count()));
+                        <div class="d-flex align-items-baseline"><i class="fa fa-link me-3"></i>@PNotes.Count()</div>
+
                     }
                 </div>
                 <div class="dir-txt-auto text-center flex-fill">
@@ -91,11 +96,11 @@
             {
                 if (pNote.Markdown)
                 {
-                    <p class="small"><code class="indent">refer to #@pNote.Name </code><code>: </code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
+                    <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
                 }
                 else
                 {
-                    <p class="small"><code class="indent">refer to #@pNote.Name </code><code>: </code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+                    <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
                 }
             }
         </div>
@@ -108,11 +113,11 @@
             {
                 if (cNote.Markdown)
                 {
-                    <p class="small"><code class="indent">cited in #@cNote.Name </code><code>: </code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
+                    <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
                 }
                 else
                 {
-                    <p class="small"><code class="indent">refer to #@cNote.Name </code><code>: </code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+                    <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
                 }
             }
         </div>
