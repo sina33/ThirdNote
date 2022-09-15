@@ -84,9 +84,14 @@ namespace ThirdNote.Controllers
             string snpattern = @"\bsn#\w{8}\b";
             note.Text = Regex.Replace(note.Text, snpattern, delegate (Match match)
             {
-                string nId = (match.ToString().Split('#')[1]);
-                string nText = db.Notes.Where(n => n.Name == nId).First().Text;//String.Format("{0}[n#{1}]", db.Notes.Find(nId).Text, nId);
-                return nText+"n#"+nId;
+                string nName = (match.Value.Split('#').Last());
+                Note x = db.Notes.Where(n => n.Name == nName).SingleOrDefault();
+                if(x != null)
+                {
+                    string nText = x.Text;//String.Format("{0}[n#{1}]", db.Notes.Find(nId).Text, nId);
+                    return nText + "n#" + nName;
+                }
+                return nName;
                 //return (db.Notes.Find(nId).Markdown && !note.Markdown ? Markdown.ToHtml(note.Text, pipeline) : nText);
             });
             if (note.Markdown)
