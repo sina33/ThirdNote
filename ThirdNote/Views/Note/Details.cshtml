@@ -3,107 +3,121 @@
     IEnumerable<ThirdNote.Models.Tag> Tags = ViewBag.Tags as IEnumerable<ThirdNote.Models.Tag>;
     IEnumerable<ThirdNote.Models.Note> PNotes = ViewBag.PNotes as IEnumerable<ThirdNote.Models.Note>;
     IEnumerable<ThirdNote.Models.Note> CNotes = ViewBag.CNotes as IEnumerable<ThirdNote.Models.Note>;
-    ViewBag.Title = "Note " + Model.Id;
+    ViewBag.Title = "Note | " + Model.Name;
 }
 
 
 <div class="row">
     @*####################( Vertical Control Buttons )####################*@
     <div class="col-2 offset-1 d-flex flex-column justify-content-between">
-        <a class="btn btn-outline-secondary btn-nav" href="/Note/Edit/@Model.Id">Edit</a>
+        <a class="btn btn-outline-secondary btn-nav" href="/Note/Edit/@Model.Name">Edit</a>
         <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
     </div>
     @*####################(  Form )####################*@
-    <div class="col-6">
-        <dl>
-            <dt></dt>
-            @*###############( Title & Date )###############*@
-            <dd>
-                <div class="d-flex flex-row">
-                    <div class="d-flex flex-column justify-content-around">
-                        @if (CNotes.Count() > 0)
-                        {
-                            @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
-                        }
-                        @if (PNotes.Count() > 0)
-                        {
-                            @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \">{0}</div>", PNotes.Count()));
-                        }
-                    </div>
-                    <div class="dir-txt-auto text-center flex-fill">
-                        @if (Model.Markdown)
-                        {
-                            @Html.Raw("<b>" + Model.Title + "</b>")
-                        }
-                        else
-                        {
-                            <b>@Model.Title</b>
-                        }
-                        <br />
-                        <small dir="ltr">
-                            <b>@ViewBag.TimeAgo</b> at
-                            <i>@Model.WrittenDate.ToString("d")</i>
-                        </small>
-                        <br />
-                    </div>
-                </div>
-            </dd>
-            @*###############( Text )###############*@
-            <dd>
-                <dl>
-                    @if (Model.Markdown) // it's been converted to html in controller
+<div class="col-6">
+    <dl>
+        <dt></dt>
+        @*###############( Title & Date )###############*@
+        <dd>
+            <div class="d-flex flex-row">
+                <div class="d-flex flex-column justify-content-around">
+                    @if (CNotes.Count() > 0)
                     {
-                        <div class="dir-txt-auto mb-1">@Html.Raw(Model.Text)</div>
+                        @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
                     }
-                    else if (!string.IsNullOrEmpty(Model.Text))
+                    @if (PNotes.Count() > 0)
                     {
-                        //Html.Raw(string.Join("", Model.Text.Split('\n').Select(p => HttpUtility.HtmlEncode(p) + "<br />")));
-                        @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
-                        foreach (var txt in Model.Text.Split('\n'))
-                        {
-                            <p class="dir-txt-auto mb-1">
-                                @Html.Raw(txt)
-                                <br />
-                            </p>
-                        }
+                        @Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \">{0}</div>", PNotes.Count()));
+                    }
+                </div>
+                <div class="dir-txt-auto text-center flex-fill">
+                    @if (Model.Markdown)
+                    {
+                        @Html.Raw("<b>" + Model.Title + "</b>")
                     }
                     else
                     {
-                        @Html.Raw("<br/>")
+                        <b>@Model.Title</b>
                     }
-                </dl>
-            </dd>
-            @*###############( Tags )###############*@
-            <dd>
-                <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pt-2">
-                    @foreach (var tag in Tags)
-                    {
-                        <a class="mx-2" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
-                    }
+                    <br />
+                    <small dir="ltr">
+                        <b>@ViewBag.TimeAgo</b> at
+                        <i>@Model.WrittenDate.ToString("d")</i>
+                    </small>
+                    <br />
                 </div>
-            </dd>
-        </dl>
-        @*###############( Parent Notes )###############*@
-        @if (PNotes != null)
-        {
-            <div class="mt-3">
-                @foreach (ThirdNote.Models.Note pNote in PNotes)
+            </div>
+        </dd>
+        @*###############( Text )###############*@
+        <dd>
+            <dl>
+                @if (Model.Markdown) // it's been converted to html in controller
                 {
-                    <p class="small"><code class="indent">refer to #@pNote.Id </code><code>: </code><a href="/Note/Details/@pNote.Id"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+                    <div class="dir-txt-auto mb-1">@Html.Raw(Model.Text)</div>
+                }
+                else if (!string.IsNullOrEmpty(Model.Text))
+                {
+                    //Html.Raw(string.Join("", Model.Text.Split('\n').Select(p => HttpUtility.HtmlEncode(p) + "<br />")));
+                    @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
+                    foreach (var txt in Model.Text.Split('\n'))
+                    {
+                        <p class="dir-txt-auto mb-1">
+                            @Html.Raw(txt)
+                            <br />
+                        </p>
+                    }
+                }
+                else
+                {
+                    @Html.Raw("<br/>")
+                }
+            </dl>
+        </dd>
+        @*###############( Tags )###############*@
+        <dd>
+            <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pt-2">
+                @foreach (var tag in Tags)
+                {
+                    <a class="mx-2" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
                 }
             </div>
-        }
-        @*###############( Child Notes )###############*@
-        @if (CNotes != null)
-        {
-            <div class="">
-                @foreach (ThirdNote.Models.Note cNote in CNotes)
+        </dd>
+    </dl>
+    @*###############( Parent Notes )###############*@
+    @if (PNotes != null)
+    {
+        <div class="mt-3">
+            @foreach (ThirdNote.Models.Note pNote in PNotes)
+            {
+                if (pNote.Markdown)
                 {
-                    <p class="small"><code class="indent">cited in #@cNote.Id </code><code>: </code><a href="/Note/Details/@cNote.Id" class=""><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+                    <p class="small"><code class="indent">refer to #@pNote.Name </code><code>: </code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
                 }
-            </div>
-        }
-    </div>
+                else
+                {
+                    <p class="small"><code class="indent">refer to #@pNote.Name </code><code>: </code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+                }
+            }
+        </div>
+    }
+    @*###############( Child Notes )###############*@
+    @if (CNotes != null)
+    {
+        <div>
+            @foreach (ThirdNote.Models.Note cNote in CNotes)
+            {
+                if (cNote.Markdown)
+                {
+                    <p class="small"><code class="indent">cited in #@cNote.Name </code><code>: </code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
+                }
+                else
+                {
+                    <p class="small"><code class="indent">refer to #@cNote.Name </code><code>: </code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+                }
+            }
+        </div>
+    }
+</div>
 </div>
 
 
