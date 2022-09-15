@@ -7,82 +7,22 @@
 
 
 <div class="row">
-    <div class="col-2 offset-1 d-flex flex-column justify-content-between">
+    <div class="col-2 offset-1 d-flex flex-row justify-content-center">
         <a class="btn btn-outline-warning btn-nav" href="/Tag/Edit/@ViewBag.Tag.ID">Edit Tag</a>
-        <p class="btn btn-outline-primary btn-nav" onclick="window.history.go(-1); return alse;">Back</p>
     </div>
-    <div class="col-8">
-        <h2 class="d-inline-flex"><span class="badge bg-dark bg-gradient text-light rounded-pill">@ViewBag.Tag.Lable_fa</span></h2>
-        @*####################( Only Tagged Notes )####################*@
-        <table class="table table-sm caption-top mb-5 dir-rtl">
-            <caption>Tagged with <i>@ViewBag.Tag.Lable_en</i></caption>
-            <tr class="table-light">
-                <th style="width:7%;">
-                    #
-                </th>
-                <th style="width:53%;">
-                    Title
-                </th>
-                <th style="width:18%;">
-                    Written Date
-                </th>
-                <th style="width:4%;">
-                    Md
-                </th>
-                <th style="width:4%;">
-                    Hd
-                </th>
-                <th style="width:4%;">
-                    Pin
-                </th>
-                <th style="width:6%;">
-                    View
-                </th>
-                @*<th style="width:160px;"></th>*@
-            </tr>
-
-            @foreach (var item in Model)
-            {
-        <tr class="link-row">
-            <td>
-                <a href="/Note/Details/@item.Id">@item.Id</a>
-            </td>
-            <td>
-                <a href="/Note/Details/@item.Id"><div class="crop">@item.Title</div></a>
-            </td>
-
-            <td>
-                @Convert.ToDateTime(item.WrittenDate).ToString("dd/MM/yyyy")
-                @*@Html.DisplayFor(modelItem => item.WrittenDate, "{0:dd/MM/yyyy}", new { @class = "form-control" })*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Markdown)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hidden)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ViewCount)
-            </td>
-            @* 
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            *@
-
-        </tr> 
-            }
-</table>
+    <div class="col-8 d-flex align-items-center">
+        <h2 style="margin-bottom:0;"><span class="badge bg-dark bg-gradient text-light rounded-pill">@ViewBag.Tag.Lable_fa</span></h2>
     </div>
 </div>
+    <div class="row">
+        <div class="col-12">
+            @*####################( Only Tagged Notes )####################*@
+            @Html.Partial("~/Views/Note/List.cshtml", Model)
+        </div>
+    </div>
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/dir-auto")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/dir-auto")
+    }
