@@ -17,11 +17,11 @@
                         <div class=" dir-txt-auto">
                             @if (item.Markdown)
                             {
-                                <a href="/Note/Details/@item.Id">@Html.Raw("<b>" + item.Title + "</b>")</a>
+                                <a href="/Note/Details/@item.Name">@Html.Raw("<b>" + item.Title + "</b>")</a>
                             }
                             else
                             {
-                                <a href="/Note/Details/@item.Id"><b>@item.Title</b></a>
+                                <a href="/Note/Details/@item.Name"><b>@item.Title</b></a>
                             }
                             <br />
                             <small dir="ltr">

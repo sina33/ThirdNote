@@ -95,7 +95,7 @@ namespace ThirdNote.Controllers
                 //db.Entry(tag).State = System.Data.Entity.EntityState.Modified;
                 db.Set<Tag>().AddOrUpdate(tag);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = tag.ID });
             }
             return View();
         }
