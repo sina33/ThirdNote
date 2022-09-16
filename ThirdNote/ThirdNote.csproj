@@ -226,6 +226,10 @@
     <Compile Include="Migrations\202201031127184_tagLabel_fa.Designer.cs">
       <DependentUpon>202201031127184_tagLabel_fa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209161142291_note_handle.cs" />
+    <Compile Include="Migrations\202209161142291_note_handle.Designer.cs">
+      <DependentUpon>202209161142291_note_handle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Relapse.cs" />
     <Compile Include="Models\NotebookDbContext.cs" />
@@ -343,6 +347,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\tags-autocomplete.js" />
     <Content Include="Web.config" />
@@ -422,6 +427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201031127184_tagLabel_fa.resx">
       <DependentUpon>202201031127184_tagLabel_fa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209161142291_note_handle.resx">
+      <DependentUpon>202209161142291_note_handle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

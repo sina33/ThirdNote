@@ -132,9 +132,10 @@ namespace ThirdNote.Controllers
             string npatternFull = @"\bn#\d+\b";
             note.Text = Regex.Replace(note.Text, npatternFull, delegate (Match match)
             {
-                int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
-                string nTitle = db.Notes.Find(nId).Title;
-                string sub = "<a href='/Note/Details/" + nId.ToString() + "'><span class='badge bg-info'>#" + nId.ToString() + "</span></a>";
+            int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
+            string nTitle = db.Notes.Find(nId).Title;
+            //string sub = "<a href='/Note/Details/" + nId.ToString() + "'><span class='badge bg-info'>#" + nId.ToString() + "</span></a>";
+            string sub = string.Format("< button type = 'button' class='btn btn-secondary' data-bs-toggle='tooltip' data-bs-placement='top' title='Tooltip on top'>{0}</button>", nTitle);
                 return sub;
             });
             //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
