@@ -141,7 +141,8 @@ namespace ThirdNote.Controllers
                 if(x != null)
                 {
                     string nTitle = x.Title;
-                    string sub = "<a href='/Note/Details/" + nName + "'><span class='badge bg-info'>#" + nName + "</span></a>";
+                    //string sub = "<a href='/Note/Details/" + nName + "'><span class='badge bg-info'>#" + nName + "</span></a>";
+                    string sub = string.Format("<button type='button' class='badge bg-info' data-bs-toggle='tooltip' data-bs-placement='bottom' title='{1}'><a href='/Note/Details/{0}' class=''>#{2}</a></ button >", nName, nTitle, nName);
                     return sub;
                 }
                 return match.Value;

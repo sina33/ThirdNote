@@ -185,3 +185,7 @@ cite {
 .indent {
   display: inline-block;
   width: 90px; }
+
+.badge a {
+  text-decoration: none;
+  color: whitesmoke; }
