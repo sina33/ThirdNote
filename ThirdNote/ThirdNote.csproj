@@ -230,6 +230,10 @@
     <Compile Include="Migrations\202209111202460_note_name_base64.Designer.cs">
       <DependentUpon>202209111202460_note_name_base64.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209161550502_note_handle.cs" />
+    <Compile Include="Migrations\202209161550502_note_handle.Designer.cs">
+      <DependentUpon>202209161550502_note_handle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Relapse.cs" />
     <Compile Include="Models\NotebookDbContext.cs" />
@@ -345,6 +349,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\tags-autocomplete.js" />
     <Content Include="Web.config" />
@@ -427,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209111202460_note_name_base64.resx">
       <DependentUpon>202209111202460_note_name_base64.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209161550502_note_handle.resx">
+      <DependentUpon>202209161550502_note_handle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
