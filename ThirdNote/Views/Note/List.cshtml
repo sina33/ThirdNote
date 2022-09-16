@@ -7,7 +7,7 @@
 
 <style>
     .table {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI';
     }
 </style>
 
@@ -16,19 +16,19 @@
 <table class="table table-sm caption-top mb-5 dir-rtl">
     @if (Model.All(n => n.Pin))
     {
-        <caption class="dir-ltr"><img src="~/Content/pin-icon.png" style="width:16px; height:auto;margin-right:10px;" /><b>Pinned Notes</b> (@Model.Count() notes)</caption>
+        <caption class="dir-ltr"><i class="fa fa-map-pin me-2"></i><b>Pinned Notes</b> (@Model.Count() notes)</caption>
     }
     else
     {
-        <caption class="dir-ltr"><img src="~/Content/all-icon.png" style="width:16px; height:auto;margin-right:10px;" /><b>All Notes</b> (@Model.Count() notes)</caption>
+        <caption class="dir-ltr"><i class="fa fa-globe me-2"></i><b>All Notes</b> (@Model.Count() notes)</caption>
 
     }
     <tr class="table-light">
-        <th style="width:7%;">
+        <th style="width:8%;">
             #
         </th>
-        <th style="width:77%;">
-            @*@Html.DisplayNameFor(model => model.Title)*@
+        <th style="width:76%;" class="text-center">
+            @Html.DisplayNameFor(model => model.Title)
         </th>
 
         @*<th style="width:30%;">
@@ -61,12 +61,12 @@
     @foreach (var item in Model)
     {
         <tr class="link-row">
-            <td>
-                <a href="/Note/Details/@item.Id">@item.Id</a>
+            <td style="font-family: monospace; background-color:aliceblue; color:black;" class="text-center">
+                @item.Name
             </td>
-            <td>
+            <td class="pe-3">
                 @*@Html.DisplayFor(modelItem => item.Title)*@
-                <a href="\Note\Details\@item.Id">
+                <a href="\Note\Details\@item.Name">
                     <div class="crop">
                         @if (item.Markdown)
                         {

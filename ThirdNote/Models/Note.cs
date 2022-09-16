@@ -20,7 +20,12 @@ namespace ThirdNote.Models
 
     public class Note
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [StringLength(8)]
+        //[Index(IsUnique = true)]
+        public string Name { get; set; } 
         public string Title { get; set; }
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
@@ -45,6 +50,14 @@ namespace ThirdNote.Models
         public Note()
         {
             this.CreatedDate = DateTime.Now;
+            string guid = Guid.NewGuid().ToString();
+            this.Name = guid.Substring(guid.Length - 8, 8).ToLower();
+        }
+        public static string GetBase64Name(int length)
+        {
+            string guid = Convert.ToBase64String(Guid.NewGuid().ToByteArray())
+                                    .Replace("=", "").Replace("+", "");
+            return guid.Substring(guid.Length - length);
         }
     }
 }

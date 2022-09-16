@@ -63,16 +63,16 @@ namespace ThirdNote.Controllers
         }
 
         // GET: Note/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string name)
         {
-            if (id == null)
+            if (name == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = db.Notes.Find(id);
+            Note note = db.Notes.Where(n=>n.Name==name).SingleOrDefault();
             if (note == null)
             {
-                return HttpNotFound();
+                return HttpNotFound(name + " not found");
             }
             ViewBag.Tags = db.NoteTags.Where(nt => nt.NoteID == note.Id)
                 .Join(db.Tags, 
@@ -81,12 +81,17 @@ namespace ThirdNote.Controllers
                 (nt, t) => t);
 
             // stitching notes
-            string snpattern = @"\bsn#\d+\b";
+            string snpattern = @"\bsn#\w{8}\b";
             note.Text = Regex.Replace(note.Text, snpattern, delegate (Match match)
             {
-                int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
-                string nText = db.Notes.Find(nId).Text;//String.Format("{0}[n#{1}]", db.Notes.Find(nId).Text, nId);
-                return nText+"n#"+nId;
+                string nName = (match.Value.Split('#').Last());
+                Note x = db.Notes.Where(n => n.Name == nName).SingleOrDefault();
+                if(x != null)
+                {
+                    string nText = x.Text;//String.Format("{0}[n#{1}]", db.Notes.Find(nId).Text, nId);
+                    return nText + "n#" + nName;
+                }
+                return nName;
                 //return (db.Notes.Find(nId).Markdown && !note.Markdown ? Markdown.ToHtml(note.Text, pipeline) : nText);
             });
             if (note.Markdown)
@@ -99,44 +104,47 @@ namespace ThirdNote.Controllers
             }
 
 
-            string npattern = @"\b(?<=n#)\d+\b"; ;
+            string npattern = @"\b(?<=n#)\w{8}\b";
             HashSet<Note> PNotes = new HashSet<Note>();
-            // this note has reference tag, PNotes (Parent Notes) are referred to, in this note
-            if (db.NoteTags.Any(nt => nt.NoteID == note.Id /*&& nt.TagID == REF_TAG_ID*/))
+            Match mc = Regex.Match(note.Text, npattern, RegexOptions.IgnoreCase);
+            while (mc.Success)
             {
-                Match mc = Regex.Match(note.Text, npattern, RegexOptions.IgnoreCase);
-                while (mc.Success)
+                Note x = db.Notes.Where(n => n.Name == mc.Value).SingleOrDefault();
+                if (x != null)
                 {
-                    PNotes.Add(db.Notes.Find(Convert.ToInt32(mc.Value)));
-                    mc = mc.NextMatch();
+                    PNotes.Add(x);
                 }
+                mc = mc.NextMatch();
             }
             ViewBag.PNotes = PNotes;
 
-            string idpattern = @"\b(?<=n#)" + id + @"\b";
+            string idpattern = @"\b(?<=n#)" + note.Name + @"\b";
             HashSet<Note> CNotes = new HashSet<Note>();
             // CNotes (Child Notes) are referring to this note
             foreach (Note no in db.Notes)
             {
-                //bool isRef = db.NoteTags.Any(nt=>nt.TagID==REF_TAG_ID && nt.NoteID==note.Id) ? true : false;
                 Match match = Regex.Match(no.Text, idpattern, RegexOptions.IgnoreCase);
-                if (match.Success /*&& isRef*/)
+                if (match.Success)
                 {
-                    CNotes.Add(db.Notes.Find(no.Id));
+                    CNotes.Add(no);
                 }
             }
             CNotes.RemoveWhere(n => n.Id == note.Id);  // remove self-citation
             ViewBag.CNotes = CNotes.ToArray();
 
             // Convert each reference to badge link
-            string npatternFull = @"\bn#\d+\b";
+            string npatternFull = @"\bn#\w{8}\b";
             note.Text = Regex.Replace(note.Text, npatternFull, delegate (Match match)
             {
-            int nId = Convert.ToInt32(match.ToString().Split('#')[1]);
-            string nTitle = db.Notes.Find(nId).Title;
-            //string sub = "<a href='/Note/Details/" + nId.ToString() + "'><span class='badge bg-info'>#" + nId.ToString() + "</span></a>";
-            string sub = string.Format("< button type = 'button' class='btn btn-secondary' data-bs-toggle='tooltip' data-bs-placement='top' title='Tooltip on top'>{0}</button>", nTitle);
-                return sub;
+                string nName = match.Value.Split('#').Last();
+                Note x = db.Notes.Where(n => n.Name == nName).SingleOrDefault();
+                if(x != null)
+                {
+                    string nTitle = x.Title;
+                    string sub = "<a href='/Note/Details/" + nName + "'><span class='badge bg-info'>#" + nName + "</span></a>";
+                    return sub;
+                }
+                return match.Value;
             });
             //ViewBag.TimeAgo = note.WrittenDate.Humanize(false,null,new CultureInfo("fa"));
             ViewBag.TimeAgo = note.WrittenDate.Humanize(false);
@@ -156,7 +164,7 @@ namespace ThirdNote.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
+        public ActionResult Create([Bind(Include = "Id,Name,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {            
             if (ModelState.IsValid)
             {
@@ -199,30 +207,31 @@ namespace ThirdNote.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Details", new { id = note.Id });
+            return RedirectToAction("Details", new { name = note.Name });
         }
 
         // GET: Note/Edit/5
         [ValidateInput(false)]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string name)
         {
-            if (id == null)
+            if (name == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = db.Notes.Find(id);
+            Note note = db.Notes.Where(n => n.Name.Equals(name)).First();
+            if (note == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound); //HttpNotFound();
+            }
             var tagLabels = db.NoteTags
-                .Where(nt => nt.NoteID == id)
+                .Where(nt => nt.NoteID == note.Id)
                 .Join(db.Tags,
                     nt => nt.TagID,
                     t => t.ID,
                     (nt, t) => t.Lable_fa
                 ).ToList() ;
             ViewBag.tagString = String.Join(",", tagLabels);
-            if (note == null)
-            {
-                return HttpNotFound();
-            }
+
             return View(note);
         }
 
@@ -231,7 +240,7 @@ namespace ThirdNote.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "Id,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
+        public ActionResult Edit([Bind(Include = "Id,Name,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
         {
             if (ModelState.IsValid)
             {
@@ -283,18 +292,18 @@ namespace ThirdNote.Controllers
                 db.Entry(note).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Details", new { id = note.Id });
+            return RedirectToAction("Details", new { name = note.Name });
 
         }
 
         // GET: Note/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string name)
         {
-            if (id == null)
+            if (name == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = db.Notes.Find(id);
+            Note note = db.Notes.Where(n => n.Name.Equals(name)).First();
             if (note == null)
             {
                 return HttpNotFound();
@@ -305,9 +314,9 @@ namespace ThirdNote.Controllers
         // POST: Note/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string name)
         {
-            Note note = db.Notes.Find(id);
+            Note note = db.Notes.Where(n=>n.Name.Equals(name)).First();
             db.Notes.Remove(note);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
@@ -337,6 +346,12 @@ namespace ThirdNote.Controllers
                 }
             }
             return View(notes);
+        }
+
+        public RedirectToRouteResult Show(string name)
+        {
+            Note note = db.Notes.Where(n => n.Name.Equals(name)).First();
+            return RedirectToAction("Details", new { note.Name });
         }
 
     }
