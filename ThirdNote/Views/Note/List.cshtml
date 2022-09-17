@@ -13,115 +13,122 @@
 
 
 @*####################( All Notes )####################*@
-<table class="table table-sm caption-top mb-5 dir-rtl">
-    @if (Model.All(n => n.Pin))
-    {
-        <caption class="dir-ltr"><i class="fa fa-map-pin me-2"></i><b>Pinned Notes</b> (@Model.Count() notes)</caption>
-    }
-    else
-    {
-        <caption class="dir-ltr"><i class="fa fa-globe me-2"></i><b>All Notes</b> (@Model.Count() notes)</caption>
+<div class="table-responsive">
+    <table class="table table-sm caption-top table-hover sticky-top  mb-2 dir-rtl">
+        @if (Model.All(n => n.Pin))
+        {
+            <caption class="dir-ltr small"><i class="fa fa-thumb-tack me-2"></i><b>Pinned Notes</b> (@Model.Count() notes)</caption>
+        }
+        else
+        {
+            <caption class="dir-ltr small"><i class="fa fa-globe me-2"></i><b>All Notes</b> (@Model.Count() notes)</caption>
 
-    }
-    <tr class="table-light">
-        <th style="width:8%;">
-            #
-        </th>
-        <th style="width:76%;" class="text-center">
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
+        }
+        <thead class="table-dark sticky-top">
+            <tr>
+                <th @*style="width:10%;"*@ class="text-center col-2">
+                    #
+                </th>
+                <th @*style="width:60%;"*@ class="text-center col-6">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
 
-        @*<th style="width:30%;">
-                @Html.DisplayNameFor(model => model.Text)
-            </th>*@
+                @*<th style="width:30%;">
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>*@
 
-        <th style="width:10%;">
-            @*@Html.DisplayNameFor(model => model.CreatedDate)*@
-            Written Date
-        </th>
-        <!--<th style="width:4%;">-->
-        @*@Html.DisplayNameFor(model => model.Markdown)*@
-        <!--Md
-        </th>-->
-        <th style="width:3%;">
-            @*@Html.DisplayNameFor(model => model.Hidden)*@
-            Hd
-        </th>
-        <th style="width:3%;">
-            @*@Html.DisplayNameFor(model => model.Pin)*@
-            Pin
-        </th>
+                <th @*style="width:20%;"*@ class="text-center col-2">
+                    @*@Html.DisplayNameFor(model => model.CreatedDate)*@
+                    <i class="fa fa-clock-o"></i>
+                </th>
+                <!--<th style="width:4%;">-->
+                @*@Html.DisplayNameFor(model => model.Markdown)*@
+                <!--Md
+            </th>-->
+                
+                <th @*style="width:5%;"*@ class="text-center ">
+                    @*@Html.DisplayNameFor(model => model.Hidden)*@
+                    <i class="fa fa-lock"></i>
+                </th>
+                <th @*style="width:5%;"*@ class="text-center ">
+                    @*@Html.DisplayNameFor(model => model.Pin)*@
+                    <i class="fa fa-thumb-tack"></i>
+                </th>
 
-        <!--<th style="width:6%;">-->
-        @*@Html.DisplayNameFor(model => model.ViewCount)*@
-        <!--View
-        </th>-->
-        @*<th style="width:160px;"></th>*@
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr class="link-row">
-            <td style="font-family: monospace; background-color:aliceblue; color:black;" class="text-center">
-                @item.Name
-            </td>
-            <td class="pe-3">
-                @*@Html.DisplayFor(modelItem => item.Title)*@
-                <a href="\Note\Details\@item.Name">
-                    <div class="crop">
-                        @if (item.Markdown)
+                <!--<th style="width:6%;">-->
+                @*@Html.DisplayNameFor(model => model.ViewCount)*@
+                <!--View
+            </th>-->
+                @*<th style="width:160px;"></th>*@
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="link-row">
+                    <td style="font-family: monospace; background-color:aliceblue; color:black;" class="text-center">
+                        @item.Name
+                    </td>
+                    <td class="pe-3">
+                        @*@Html.DisplayFor(modelItem => item.Title)*@
+                        <a href="\Note\Details\@item.Name">
+                            <div class="crop">
+                                @if (item.Markdown)
+                                {
+                                    @Html.Raw("<b>" + item.Title + "</b>")
+                                }
+                                else
+                                {
+                                    @item.Title
+                                }
+                            </div>
+
+                        </a>
+
+                    </td>
+
+                    @*<td style="width:300px;">
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>*@
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.WrittenDate)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Markdown)
+                    </td>*@
+                    <td class="text-center">
+                        @if (item.Hidden)
                         {
-                            @Html.Raw("<b>" + item.Title + "</b>")
+                            <i class="fa fa-key text-center''"></i>
                         }
-                        else
+                        @*@Html.DisplayFor(modelItem => item.Hidden)*@
+                    </td>
+                    <td class="text-center">
+                        @if (item.Pin)
                         {
-                            @item.Title
+                            <i class="fa fa-star"></i>
                         }
-                    </div>
+                        @*else
+                        {
+                            <i class="fa fa-star-o"></i>
+                        }*@
+                        @*@Html.DisplayFor(modelItem => item.Pin)*@
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Actionable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>*@
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.ViewCount)
+                    </td>*@
 
-                </a>
-
-            </td>
-
-            @*<td style="width:300px;">
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.WrittenDate)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Markdown)
-                </td>*@
-            <td>
-                @if (item.Hidden)
-                {
-                    <i class="fa fa-key"></i>
-                }
-                @*@Html.DisplayFor(modelItem => item.Hidden)*@
-            </td>
-            <td>
-                @if (item.Pin)
-                {
-                    <i class="fa fa-star"></i>
-                }
-                @*else
-                    {
-                        <i class="fa fa-star-o"></i>
-                    }*@
-                @*@Html.DisplayFor(modelItem => item.Pin)*@
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Actionable)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>*@
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.ViewCount)
-                </td>*@
-
-        </tr>
-    }
-
-</table>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>
 
 
