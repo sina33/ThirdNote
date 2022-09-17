@@ -108,22 +108,23 @@ table {
   table-layout: fixed;
   width: 100%;
   /* Table Sticky Header */ }
+  table caption {
+    padding-top: 0rem;
+    padding-bottom: 0.2rem; }
   table th {
-    --bs-table-bg: #8c5c43;
     color: #ffffff;
     position: sticky;
     top: 0;
     z-index: 1; }
   table tr:hover {
-    color: #ffffff;
-    background-color: rgba(140, 92, 67, 0.6); }
+    color: #0d1110; }
   table td a {
     text-decoration: none;
     display: block;
     color: #0d1110; }
     table td a:hover {
-      color: #ffffff;
-      text-shadow: 0 0 3px #ffffff; }
+      color: #0d1110;
+      text-shadow: 0 0 3px #0d1110; }
 
 .right {
   float: right; }

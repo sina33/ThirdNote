@@ -9,39 +9,39 @@
 }
 
 
-<div class="row">
+<div class="row justify-content-center">
     @*####################( Vertical Control Buttons )####################*@
-    <div class="col-2 offset-1 d-flex flex-column justify-content-between">
+    <div class="col-2 d-flex flex-column justify-content-between">
         <a class="btn btn-outline-secondary btn-nav" href="/Note/Edit/@Model.Name">Edit</a>
         <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
     </div>
     @*####################(  Form )####################*@
-<div class="col-6">
-    <dl>
-        <dt></dt>
-        @*###############( Title & Date )###############*@
-        <dd>
-            <div class="d-flex flex-row">
-                @* Reference and Citation *@
-                <div class="d-flex flex-column ">
-                    @if (CNotes.Count() > 0)
+    <div class="col-8">
+        <dl>
+            <dt></dt>
+            @*###############( Title & Date )###############*@
+            <dd>
+                <div class="d-flex flex-row">
+                    @* Reference and Citation *@
+                    <div class="d-flex flex-column ">
+                        @if (CNotes.Count() > 0)
                     {
                         //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
 
 
                         <div class="d-flex align-items-baseline"><i class="fa fa-quote-right me-3"></i>@CNotes.Count()</div>
                     }
-                    @if (PNotes.Count() > 0)
+                        @if (PNotes.Count() > 0)
                     {
                         //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \"></div>{0}", PNotes.Count()));
                         <div class="d-flex align-items-baseline"><i class="fa fa-link me-3"></i>@PNotes.Count()</div>
 
                     }
 
-                </div>
-                @* Title and Date *@
-                <div class="dir-txt-auto text-center flex-fill">
-                    @if (Model.Markdown)
+                    </div>
+                    @* Title and Date *@
+                    <div class="dir-txt-auto text-center flex-fill">
+                        @if (Model.Markdown)
                     {
                         @Html.Raw("<b>" + Model.Title + "</b>")
                     }
@@ -49,28 +49,28 @@
                     {
                         <b>@Model.Title</b>
                     }
-                    <br />
-                    <small dir="ltr">
-                        <b>@ViewBag.TimeAgo</b> at
-                        <i>@Model.WrittenDate.ToString("d")</i>
-                    </small>
-                    <br />
-                </div>
-                @* Like Button *@
-            <div class="d-flex flex-column ">
-                @using (Html.BeginForm("Details", "Note", FormMethod.Post, new { name = Model.Name, likes = Model.ViewCount+1 }))
+                        <br />
+                        <small dir="ltr">
+                            <b>@ViewBag.TimeAgo</b> at
+                            <i>@Model.WrittenDate.ToString("d")</i>
+                        </small>
+                        <br />
+                    </div>
+                    @* Like Button *@
+                    <div class="d-flex flex-column ">
+                        @using (Html.BeginForm("Details", "Note", FormMethod.Post, new { name = Model.Name, likes = Model.ViewCount+1 }))
                 {
 
-                    <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>
+                        <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>
                 }
-                @*<div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>*@
-            </div>
-            </div>
-        </dd>
-        @*###############( Text )###############*@
-        <dd>
-            <dl>
-                @if (Model.Markdown) // it's been converted to html in controller
+                        @*<div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>*@
+                    </div>
+                </div>
+            </dd>
+            @*###############( Text )###############*@
+            <dd>
+                <dl>
+                    @if (Model.Markdown) // it's been converted to html in controller
                 {
                     <div class="dir-txt-auto mb-1">@Html.Raw(Model.Text)</div>
                 }
@@ -80,63 +80,63 @@
                     @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
                     foreach (var txt in Model.Text.Split('\n'))
                     {
-                        <p class="dir-txt-auto mb-1">
-                            @Html.Raw(txt)
-                            <br />
-                        </p>
+                    <p class="dir-txt-auto mb-1">
+                        @Html.Raw(txt)
+                        <br />
+                    </p>
                     }
                 }
                 else
                 {
                     @Html.Raw("<br/>")
                 }
-            </dl>
-        </dd>
-        @*###############( Tags )###############*@
-        <dd>
-            <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pt-2">
-                @foreach (var tag in Tags)
+                </dl>
+            </dd>
+            @*###############( Tags )###############*@
+            <dd>
+                <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pt-2">
+                    @foreach (var tag in Tags)
                 {
                     <a class="mx-2" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
                 }
-            </div>
-        </dd>
-    </dl>
-    @*###############( Parent Notes )###############*@
-    @if (PNotes != null)
+                </div>
+            </dd>
+        </dl>
+        @*###############( Parent Notes )###############*@
+        @if (PNotes != null)
     {
         <div class="mt-3">
             @foreach (ThirdNote.Models.Note pNote in PNotes)
             {
                 if (pNote.Markdown)
                 {
-                    <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
+            <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
                 }
                 else
                 {
-                    <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+            <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
                 }
             }
         </div>
     }
-    @*###############( Child Notes )###############*@
-    @if (CNotes != null)
+        @*###############( Child Notes )###############*@
+        @if (CNotes != null)
     {
         <div>
             @foreach (ThirdNote.Models.Note cNote in CNotes)
             {
                 if (cNote.Markdown)
                 {
-                    <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
+            <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
                 }
                 else
                 {
-                    <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+            <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
                 }
             }
         </div>
     }
-</div>
+    </div>
 </div>
 
 

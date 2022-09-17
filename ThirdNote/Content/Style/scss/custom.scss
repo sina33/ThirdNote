@@ -136,11 +136,15 @@ dl.timeline > dd:before {
 
 
 table {
+    caption {
+        padding-top: 0rem;
+        padding-bottom: 0.2rem;
+    }
     table-layout: fixed;
     width: 100%;
     /* Table Sticky Header */
     th {
-        --bs-table-bg: $table-header-bg-color;
+        //--bs-table-bg: $table-header-bg-color;
         color: $table-header-color;
         position: sticky;
         top: 0;
@@ -149,7 +153,7 @@ table {
 
     tr:hover {
         color: $table-row-hover-color;
-        background-color: $table-row-hover-bg-color;
+        //background-color: $table-row-hover-bg-color;
     }
 
     td a {
