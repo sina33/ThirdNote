@@ -74,6 +74,11 @@ namespace ThirdNote.Controllers
             {
                 return HttpNotFound(name + " not found");
             }
+            // Like
+            {
+                note.ViewCount += 1;
+                db.SaveChanges();
+            }
             ViewBag.Tags = db.NoteTags.Where(nt => nt.NoteID == note.Id)
                 .Join(db.Tags, 
                 nt => nt.TagID, 
