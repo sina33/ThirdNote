@@ -249,40 +249,38 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addnote.png" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-tagsinput.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.rtl.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-tagsinput.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap.rtl.css" />
+    <Content Include="Content\Style\bootstrap\bootstrap.rtl.min.css" />
     <Content Include="Content\css-circular-prog-bar.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\prism.css" />
-    <Content Include="Content\Style\site.css">
-      <DependentUpon>site.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\Style\site.min.css">
-      <DependentUpon>site.css</DependentUpon>
-    </Content>
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Style\custom.css" />
+    <Content Include="Content\Style\custom.min.css">
+      <DependentUpon>custom.css</DependentUpon>
+    </Content>
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\bootstrap.css.bkp" />
-    <Content Include="Content\bootstrap.min.css.bkp" />
+    <Content Include="Content\Style\bootstrap\bootstrap.css.bkp" />
+    <Content Include="Content\Style\bootstrap\bootstrap.min.css.bkp" />
     <Content Include="favicon.png" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap-tagsinput.min.js" />
@@ -298,28 +296,28 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\Style\site.scss" />
+    <Content Include="Content\Style\bootstrap\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap.rtl.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-utilities.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-reboot.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.min.css.map" />
+    <Content Include="Content\Style\bootstrap\bootstrap-grid.css.map" />
+    <Content Include="Content\Style\scss\custom.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Content\Style\_variables.scss" />
+    <Content Include="Content\Style\scss\_variables.scss" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />

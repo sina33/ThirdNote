@@ -1,5 +1,5 @@
 ﻿@import "_variables.scss";
-@import "../bootstrap.css";
+@import "../bootstrap/bootstrap.css";
 
 
 body {
@@ -266,7 +266,7 @@ cite {
     
 }
 
-#likes_heart_btn:focus {
+#likes_heart_btn :focus {
     outline: none;
     box-shadow: none;
 }
