@@ -3,6 +3,8 @@
     IEnumerable<ThirdNote.Models.Tag> Tags = ViewBag.Tags as IEnumerable<ThirdNote.Models.Tag>;
     IEnumerable<ThirdNote.Models.Note> PNotes = ViewBag.PNotes as IEnumerable<ThirdNote.Models.Note>;
     IEnumerable<ThirdNote.Models.Note> CNotes = ViewBag.CNotes as IEnumerable<ThirdNote.Models.Note>;
+    // Global Variables
+    int likes = Model.ViewCount;
     ViewBag.Title = "Note | " + Model.Name;
 }
 
@@ -20,6 +22,7 @@
         @*###############( Title & Date )###############*@
         <dd>
             <div class="d-flex flex-row">
+                @* Reference and Citation *@
                 <div class="d-flex flex-column ">
                     @if (CNotes.Count() > 0)
                     {
@@ -34,7 +37,9 @@
                         <div class="d-flex align-items-baseline"><i class="fa fa-link me-3"></i>@PNotes.Count()</div>
 
                     }
+
                 </div>
+                @* Title and Date *@
                 <div class="dir-txt-auto text-center flex-fill">
                     @if (Model.Markdown)
                     {
@@ -51,6 +56,15 @@
                     </small>
                     <br />
                 </div>
+                @* Like Button *@
+            <div class="d-flex flex-column ">
+                @using (Html.BeginForm("Details", "Note", FormMethod.Post, new { name = Model.Name, likes = Model.ViewCount+1 }))
+                {
+
+                    <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>
+                }
+                @*<div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>*@
+            </div>
             </div>
         </dd>
         @*###############( Text )###############*@
@@ -129,4 +143,16 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/dir-auto")
+<script>
+    $(document).ready(function () {
+        $('#likes_heart_btn').click(function () {
+            $('#likes_number_p').html("" + (@likes + 1));
+            $('#likes_heart_btn').html("<h5>❤️</h5>");
+            $('#likes_heart_btn').prop("disabled", true);
+            console.log(@(Model.Name));
+
+        });
+    })
+
+</script>
 }
