@@ -12,53 +12,62 @@
 </style>
 
 
-@*####################( All Notes )####################*@
+
 <div class="table-responsive">
     <table class="table table-sm caption-top table-hover sticky-top  mb-2 dir-rtl">
-        @if (Model.All(n => n.Pin))
-        {
-            <caption class="dir-ltr small"><i class="fa fa-thumb-tack me-2"></i><b>Pinned Notes</b> (@Model.Count() notes)</caption>
-        }
-        else
-        {
-            <caption class="dir-ltr small"><i class="fa fa-globe me-2"></i><b>All Notes</b> (@Model.Count() notes)</caption>
-
-        }
+        <caption class="dir-ltr small"><i class="fa fa-bars me-2"></i><b>@Model.Count()</b> Notes</caption>
         <thead class="table-dark sticky-top">
             <tr>
                 <th @*style="width:10%;"*@ class="text-center col-2">
-                    #
+                    <a href="/Home/Index?sortOrder=name">
+                        <i class="fa fa-hashtag" style="text-decoration:none;color:white"></i>
+                    </a>
                 </th>
                 <th @*style="width:60%;"*@ class="text-center col-6">
-                    @Html.DisplayNameFor(model => model.Title)
+                    <a href="/Home/Index" style="text-decoration:none;color:white">
+                        Title
+                    </a>
                 </th>
 
                 @*<th style="width:30%;">
-                    @Html.DisplayNameFor(model => model.Text)
-                </th>*@
+                        @Html.DisplayNameFor(model => model.Text)
+                    </th>*@
 
                 <th @*style="width:20%;"*@ class="text-center col-2">
                     @*@Html.DisplayNameFor(model => model.CreatedDate)*@
-                    <i class="fa fa-clock-o"></i>
+                    <a href="/Home/Index?sortOrder=date">
+                        <i class="fa fa-clock-o" style="text-decoration:none;color:white"></i>
+                    </a>
                 </th>
                 <!--<th style="width:4%;">-->
                 @*@Html.DisplayNameFor(model => model.Markdown)*@
                 <!--Md
-            </th>-->
-                
+                </th>-->
+
                 <th @*style="width:5%;"*@ class="text-center ">
                     @*@Html.DisplayNameFor(model => model.Hidden)*@
-                    <i class="fa fa-lock"></i>
+
+                        @*<a href="/Note/Index?sortOrder=private" style="text-decoration:none;color:white">
+                            <i class="fa fa-lock"></i>
+                        </a>*@
+                        <i class="fa fa-lock" ></i>
                 </th>
                 <th @*style="width:5%;"*@ class="text-center ">
                     @*@Html.DisplayNameFor(model => model.Pin)*@
-                    <i class="fa fa-thumb-tack"></i>
+                    <a href="/Home/Index?sortOrder=pin">
+                        <i class="fa fa-thumb-tack" style="text-decoration:none;color:white"></i>
+                    </a>
                 </th>
-
+                <th @*style="width:5%;"*@ class="text-center ">
+                    @*@Html.DisplayNameFor(model => model.Pin)*@
+                    <a href="/Home/Index?sortOrder=likes">
+                        <i class="fa fa-heart" style="text-decoration:none;color:white"></i>
+                    </a>
+                </th>
                 <!--<th style="width:6%;">-->
                 @*@Html.DisplayNameFor(model => model.ViewCount)*@
                 <!--View
-            </th>-->
+                </th>-->
                 @*<th style="width:160px;"></th>*@
             </tr>
         </thead>
@@ -89,14 +98,14 @@
                     </td>
 
                     @*<td style="width:300px;">
-                        @Html.DisplayFor(modelItem => item.Text)
-                    </td>*@
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>*@
                     <td class="text-center">
                         @Html.DisplayFor(modelItem => item.WrittenDate)
                     </td>
                     @*<td>
-                        @Html.DisplayFor(modelItem => item.Markdown)
-                    </td>*@
+                            @Html.DisplayFor(modelItem => item.Markdown)
+                        </td>*@
                     <td class="text-center">
                         @if (item.Hidden)
                         {
@@ -110,25 +119,40 @@
                             <i class="fa fa-star"></i>
                         }
                         @*else
-                        {
-                            <i class="fa fa-star-o"></i>
-                        }*@
+                            {
+                                <i class="fa fa-star-o"></i>
+                            }*@
                         @*@Html.DisplayFor(modelItem => item.Pin)*@
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Actionable)
+                    <td class="text-center">
+                        @if (item.ViewCount > 0)
+                        {
+                            @item.ViewCount;
+                        }
+                        @*@Html.DisplayFor(modelItem => item.Hidden)*@
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>*@
                     @*<td>
-                        @Html.DisplayFor(modelItem => item.ViewCount)
-                    </td>*@
+                            @Html.DisplayFor(modelItem => item.Actionable)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.ViewCount)
+                        </td>*@
 
                 </tr>
             }
-            </tbody>
+        </tbody>
     </table>
 </div>
 
 
+@section scripts{
+    $(document).ready(function () {
+        $('thead a').click(function () {
+            $(this).addClass("active");
+        })
+    })
+
+}
