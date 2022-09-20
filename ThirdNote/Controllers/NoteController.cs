@@ -24,12 +24,13 @@ namespace ThirdNote.Controllers
         private readonly MarkdownPipeline pipeline = App_Start.MarkdownConfig.GetPipeline();
 
         // GET: Note
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            Dashboard indexViewData = new Dashboard()
+            Home NoteIndexViewData = new Home()
             {
-                Pinned = db.Notes.Where(n => n.Pin).OrderByDescending(d=>d.ViewCount).ToList(),
-                Sorted = db.Notes.OrderByDescending(c=>c.ViewCount).ThenByDescending(a=>a.WrittenDate).ThenByDescending(b=>b.Id)
+                Private = db.Notes.OrderByDescending(n => n.WrittenDate),
+                Sorted =  db.Notes.Where(n => !n.Hidden).OrderByDescending(n => n.WrittenDate)
+                //Sorted = db.Notes.Where(n => !n.Hidden)
             };
             if (db.Relapses.Count() > 0)
             {
@@ -43,23 +44,86 @@ namespace ThirdNote.Controllers
                     recentRelapseDate = item;
                 }
                 //Strikes.Reverse();
-                indexViewData.Strikes = Strikes;
+                NoteIndexViewData.Strikes = Strikes;
                 //indexViewData.LastStrike = (DateTime.Now - db.Relapses.OrderByDescending(r => r.Date).First().Date).Days;
-                System.Diagnostics.Debug.WriteLine(dates);
-                System.Diagnostics.Debug.WriteLine(Strikes);
+                //System.Diagnostics.Debug.WriteLine(dates);
+                //System.Diagnostics.Debug.WriteLine(Strikes);
             }
             else
             {
-                indexViewData.Strikes = new List<int> { 0 };
+                NoteIndexViewData.Strikes = new List<int> { 0 };
             }
             //return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList());
-            return View(indexViewData);
+            var notes = db.Notes.Where(n => !n.Hidden);
+
+            switch (sortOrder)
+            {
+                case "name":
+                    notes = notes.OrderBy(n => n.Name).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "pin":
+                    notes = notes.OrderByDescending(n => n.Pin).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "date":
+                    notes = notes.OrderBy(n => n.WrittenDate).ThenBy(n => n.Id);
+                    break;
+                case "date_desc":
+                    notes = notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id);
+                    break;
+                case "likes":
+                    notes = notes.OrderByDescending(n => n.ViewCount).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "private":
+                    notes = db.Notes.OrderByDescending(n => n.Hidden).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "markdown":
+                    notes = notes.OrderByDescending(n => n.Markdown).ThenByDescending(n => n.WrittenDate);
+                    break;
+                default:
+                    notes = notes.OrderByDescending(n => n.WrittenDate);
+                    break;
+            }
+            NoteIndexViewData.Sorted = notes;
+            return View(NoteIndexViewData);
         }
 
         // GET: Note/List
-        public ActionResult List() 
+        public ActionResult List(string sortOrder) 
         {
-            return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).Where(p => !p.Hidden).ToList());
+            Home indexViewData = new Home()
+            {
+                Private = db.Notes.OrderByDescending(n => n.Hidden).OrderByDescending(n=>n.WrittenDate),
+                Sorted = db.Notes.Where(n => !n.Hidden).OrderByDescending(n => n.WrittenDate)
+                //Sorted = db.Notes.Where(n => !n.Hidden)
+            };
+            var notes = db.Notes.Where(n => !n.Hidden);
+
+            switch (sortOrder)
+            {
+                case "name":
+                    notes = notes.OrderBy(n => n.Name).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "pin":
+                    notes = notes.OrderByDescending(n => n.Pin).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "date":
+                    notes = notes.OrderBy(n => n.WrittenDate).ThenBy(n => n.Id);
+                    break;
+                case "date_desc":
+                    notes = notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id);
+                    break;
+                case "likes":
+                    notes = notes.OrderByDescending(n => n.ViewCount).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "markdown":
+                    notes = notes.OrderByDescending(n => n.Markdown).ThenByDescending(n => n.WrittenDate);
+                    break;
+                default:
+                    notes = notes.OrderByDescending(n => n.WrittenDate);
+                    break;
+            }
+            return View(notes.ToList());
+            //return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).Where(p => !p.Hidden).ToList());
             //return View(db.Notes.OrderByDescending(n => n.ViewCount).ThenByDescending(n => n.WrittenDate));
         }
 

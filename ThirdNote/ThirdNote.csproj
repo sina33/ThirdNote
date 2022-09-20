@@ -245,7 +245,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Dashboard.cs" />
+    <Compile Include="ViewModels\Home.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addnote.png" />

@@ -1,4 +1,4 @@
-﻿@model ThirdNote.ViewModels.Dashboard
+﻿@model ThirdNote.ViewModels.Home
 @*@model IEnumerable<ThirdNote.Models.Note>*@
 
 @{
@@ -13,5 +13,11 @@
 </style>
 
 
-@Html.Partial("~/Views/Note/List.cshtml", Model.Pinned)
-@Html.Partial("~/Views/Note/List.cshtml", Model.Sorted)
+@if (ViewBag.sortOrder == "private")
+{
+    @Html.Partial("~/Views/Note/List.cshtml", Model.Private)
+}
+else
+{
+    @Html.Partial("~/Views/Note/List.cshtml", Model.Sorted)
+}

@@ -1,11 +1,13 @@
 ﻿
 
-@model ThirdNote.ViewModels.Dashboard
+@model ThirdNote.ViewModels.Home
 @*@model IEnumerable<ThirdNote.Models.Note>*@
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "Home";
 }
+
+
 
 
 @*<br />*@
@@ -17,6 +19,4 @@
 </style>
 
 
-
-@Html.Partial("~/Views/Note/List.cshtml", Model.Pinned)
 @Html.Partial("~/Views/Note/List.cshtml", Model.Sorted)

@@ -13,36 +13,45 @@ namespace ThirdNote.Controllers
 
         private NotebookDbContext db = new NotebookDbContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            Dashboard indexViewData = new Dashboard()
+            Home HomeViewData = new Home()
             {
-                Pinned = db.Notes.Where(n => n.Pin && !n.Hidden).ToList(),
-                Sorted = db.Notes.Where(p=>!p.Hidden).OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList()
+                Private = db.Notes.Where(n => !n.Hidden).OrderByDescending(n => n.WrittenDate),
+                Sorted = db.Notes.Where(n => !n.Hidden).OrderByDescending(n => n.WrittenDate)
+                //Sorted = db.Notes.Where(n => !n.Hidden)
             };
-            if (db.Relapses.Count() > 0)
+            var notes = db.Notes.Where(n => !n.Hidden);
+
+            switch (sortOrder)
             {
-                var dates = db.Relapses.OrderByDescending(r => r.Date).Select(r => r.Date).ToList();
-                var recentRelapseDate = DateTime.Now;
-                List<int> Strikes = new List<int>();
-                foreach (var item in dates)
-                {
-                    int offset = (recentRelapseDate - item).Days;
-                    Strikes.Add(offset);
-                    recentRelapseDate = item;
-                }
-                //Strikes.Reverse();
-                indexViewData.Strikes = Strikes;
-                //indexViewData.LastStrike = (DateTime.Now - db.Relapses.OrderByDescending(r => r.Date).First().Date).Days;
-                System.Diagnostics.Debug.WriteLine(dates);
-                System.Diagnostics.Debug.WriteLine(Strikes);
+                case "name":
+                    notes = notes.OrderBy(n => n.Name).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "pin":
+                    notes = notes.OrderByDescending(n => n.Pin).ThenByDescending(n => n.WrittenDate);
+                    break;
+
+                case "date":
+                    notes = notes.OrderBy(n => n.WrittenDate);
+                    break;
+                case "date_desc":
+                    notes = notes.OrderByDescending(n => n.WrittenDate);
+                    break;
+                case "likes":
+                    notes = notes.OrderByDescending(n => n.ViewCount).ThenByDescending(n => n.WrittenDate);
+                    break;
+                case "markdown":
+                    notes = notes.OrderByDescending(n => n.Markdown).ThenByDescending(n => n.WrittenDate);
+                    break;
+                default:
+                    notes = notes.OrderByDescending(n => n.WrittenDate);
+                    break;
             }
-            else
-            {
-                indexViewData.Strikes = new List<int> { 0 };
-            }
-            //return View(db.Notes.OrderByDescending(n => n.WrittenDate).ThenByDescending(n => n.Id).ToList());
-            return View(indexViewData);
+            HomeViewData.Sorted = notes;
+            return View(HomeViewData);
+
+            //return RedirectToAction("Index", "Note");
         }
 
         public ActionResult About()
