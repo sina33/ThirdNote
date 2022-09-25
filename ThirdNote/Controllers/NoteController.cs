@@ -311,7 +311,7 @@ namespace ThirdNote.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "Id,Name,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin")] Note note, FormCollection formCollection)
+        public ActionResult Edit([Bind(Include = "Id,Name,Title,Text,CreatedDate,WrittenDate,Markdown,Hidden,Pin,ViewCount")] Note note, FormCollection formCollection)
         {
             if (ModelState.IsValid)
             {
