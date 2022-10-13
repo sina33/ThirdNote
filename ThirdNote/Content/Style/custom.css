@@ -26,9 +26,9 @@ body {
     /*background-color: #d4d9df;*/
     color: #1B2D51; }
 
-form {
+/*form {
   margin-left: 100px; }
-
+*/
 /* Set padding to keep content from hitting the edges */
 .body-content {
   padding-left: 15px;
@@ -133,7 +133,7 @@ table {
   float: left; }
 
 .btn-nav {
-  width: 70%;
+  /*width: 70%;*/
   align-self: center;
   flex-flow: column;
   display: flex;
