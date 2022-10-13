@@ -9,14 +9,15 @@
 }
 
 
-<div class="row justify-content-center">
+<div class="row">
     @*####################( Vertical Control Buttons )####################*@
-    <div class="col-2 d-flex flex-column justify-content-between">
-        <a class="btn btn-outline-secondary btn-nav" href="/Note/Edit/@Model.Name">Edit</a>
-        <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
+    <div class="col-3 d-flex flex-column align-items-start">
+        @*##########( Back Button )##########*@
+        <p class="btn btn-outline-danger btn-nav col-8 mb-3" onclick="window.history.go(-1); return false;">Back</p>
+        <a class="btn btn-outline-warning btn-nav col-8" href="/Note/Edit/@Model.Name">Edit</a>
     </div>
     @*####################(  Form )####################*@
-    <div class="col-8">
+    <div class="col col-8 shadow-sm">
         <dl>
             <dt></dt>
             @*###############( Title & Date )###############*@
