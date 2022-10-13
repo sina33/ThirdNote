@@ -67,9 +67,7 @@
                 </div>
                 @*###############( Save Button )###############*@
                 <div class=" btn-nav mb-3 mt-2 col-8">
-             
-                        <input type="submit" class="btn btn-outline-success" value="Save" >
-                 
+                    <input type="submit" class="btn btn-outline-success" value="Save" >
                 </div>
             </div>
             @*####################( The Actual Note )####################*@
@@ -77,21 +75,21 @@
                 @*####################( Title )####################*@
                 <div class="form-group row mb-3">
                     <div class="col">
-                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0", autofocus = "autofocus", placeholder = "Title" } })
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0 ", autofocus = "autofocus" } })
                         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @*####################( Text )####################*@
                 <div class="form-group row mb-3">
                     <div class="col">
-                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0", rows = 13, placeholder = "Text" } })
+                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0", rows = 13 } })
                         @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @*####################( Tags )####################*@
                 <div class="form-group row mb-3">
                     <div class="col">
-                        <input type="text" class="form-control dir-auto shadow-none" id="tagsInput" name="tagsInput" placeholder="Tags">
+                        <input type="text" class="form-control dir-auto dir-rtl shadow-none " id="tagsInput" name="tagsInput">
                         @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
                         @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
                     </div>
