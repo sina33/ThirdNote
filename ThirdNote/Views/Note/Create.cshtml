@@ -10,16 +10,13 @@
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-
         <div class="row">
             @*####################( Vertical Control Buttons )####################*@
-            <div class="col-2 d-flex flex-column align-items-center">
-                <a class="btn btn-outline-secondary btn-nav" href="/Note/Index">Dashboard</a>
+            <div class="col-2 d-flex flex-column align-items-start">
+                <p class="btn btn-warning btn-nav px-3" onclick="window.history.go(-1); return false;">Back</p>
 
                 @*##########( Pin )##########*@
-                <div id="Pin" class="form-group invisible mb-3 align-self-stretch mt-auto">
+                <div id="Pin" class="form-group invisible align-self-auto mt-auto ms-4">
                     <div class="form-switch d-inline">
                         @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role="switch" } })
                         @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
@@ -27,7 +24,7 @@
                     @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "form-check-label mx-1 small" })
                 </div>
                 @*##########( Private )##########*@
-                <div id="Private" class="form-group invisible mb-3 align-self-stretch">
+                <div id="Private" class="form-group invisible align-self-stretch ms-4">
                     <div class="form-switch d-inline">
                         @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
                         @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
@@ -35,7 +32,7 @@
                     @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "form-check-label mx-1 small" })
                 </div>
                 @*##########( Markdown )##########*@
-                <div id="Markdown" class="form-group invisible mb-4 align-self-stretch">
+                <div id="Markdown" class="form-group invisible align-self-stretch ms-4 mb-3">
                     <div class="form-switch d-inline">
                         @Html.EditorFor(model => model.Markdown, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
                         @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
@@ -43,38 +40,44 @@
                     @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "form-check-label mx-1 small" })
                     @*<button type="button" class="btn btn-secondary">Secondary</button>*@
                 </div>
+                @*###############( Save Button )###############*@
 
-                <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
+                <div class="align-self-center">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-success form-control px-4">
+                    </div>
+                </div>
             </div>
             @*####################( The Actual Note )####################*@
-            <div class="col">
+            <div class="col col-8">
                 @*####################( Title )####################*@
                 <div class="form-group row mb-3">
-                    <div class="col-10">
+                    <div class="col">
                         @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto", autofocus = "autofocus", placeholder = "Title" } })
                         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @*####################( Text )####################*@
                 <div class="form-group row mb-3">
-                    <div class="col-10">
+                    <div class="col">
                         @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 11 } })
                         @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @*####################( Tags )####################*@
                 <div class="form-group row mb-3">
-                    <div class="col-10">
+                    <div class="col">
                         <input type="text" class="form-control dir-auto" id="tagsInput" name="tagsInput" placeholder="Tags">
                         @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
                         @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
                     </div>
                 </div>
+
                 @*####################( Extra Button | Date & Time | Save Button )####################*@
-                <div class="flex-row d-inline-flex flex-nowrap justify-content-between align-items-end col-10">
+                <div class="flex-row d-inline-flex flex-nowrap justify-content-between align-items-end col-10 animate__animated animate__bounce">
                     @*###############( Extra Button )###############*@
                     <div class="align-self-end">
-                        <input id="extraBtn" class="btn btn-outline-secondary" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
+                        <input id="extraBtn" class="btn btn-outline-primary" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
                     </div>
                     @*###############( Date & Time )###############*@
                     <div id="DatePicker" class="invisible">
@@ -93,12 +96,7 @@
                             @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
                         </div>
                     </div>
-                    @*###############( Save Button )###############*@
-                    <div class="align-self-end">
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-outline-primary form-control px-5">
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
