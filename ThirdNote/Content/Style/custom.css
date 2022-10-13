@@ -165,9 +165,6 @@ img[alt=doc] {
 audio {
   width: 100%; }
 
-#Markdown, #Pin, #Private {
-  padding-left: 1.5rem; }
-
 mark {
   color: #831;
   background: rgba(250, 250, 100, 0.5);
