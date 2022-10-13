@@ -8,104 +8,101 @@
 {
     @*@Html.AntiForgeryToken()*@
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.CreatedDate)
-        @Html.HiddenFor(model => model.ViewCount)
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.ViewCount)
 
-        <div class="row">
-            @*####################( Vertical Control Buttons )####################*@
-            <div class="col-2 d-flex flex-column align-items-center">
-                <a class="btn btn-outline-secondary btn-nav disabled" href="/Note/Edit/@Model.Id">Edit</a>
-
-                @*##########( Pin )##########*@
-                <div id="Pin" class="form-group invisible mb-3 align-self-stretch mt-auto">
-                    <div class="form-switch d-inline">
-                        @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
-                        @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+    <div class="row">
+        @*####################( Vertical Control Buttons )####################*@
+        <div class="col-3 d-flex flex-column align-items-start">
+            @*##########( Back Button )##########*@
+            <p class="btn btn-outline-danger btn-nav col-8" onclick="window.history.go(-1); return false;">Back</p>
+            @*###############( Date & Time )###############*@
+            <div id="DatePicker" class="mb-2 mt-3 align-self-center mt-auto font-monospace form-control-sm">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    @Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "form-check-label mx-1 small" })
+                    @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end small", type = "date" })
                 </div>
-                @*##########( Private )##########*@
-                <div id="Private" class="form-group invisible mb-3 align-self-stretch">
-                    <div class="form-switch d-inline">
-                        @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
-                        @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+            </div>
+            <div id="TimePicker" class="mb-2 align-self-center font-monospace form-control-sm">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><small><i class="fa fa-clock-o"></i></small></div>
+                        @*<div class="input-group-text"><small>&#64;</small></div>*@
                     </div>
-                    @Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "form-check-label mx-1 small" })
+                    @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
                 </div>
+            </div>
+            <div class="align-self-center mt-2">
                 @*##########( Markdown )##########*@
-                <div id="Markdown" class="form-group invisible mb-4 align-self-stretch">
+                <div id="Markdown" class="form-group align-self-start mb-2">
                     <div class="form-switch d-inline">
                         @Html.EditorFor(model => model.Markdown, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
                         @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
                     </div>
-                    @Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "form-check-label mx-1 small" })
-                    @*<button type="button" class="btn btn-secondary">Secondary</button>*@
+                    <svg class="ms-3 form-label" style="width:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M593.8 59.1H46.2C20.7 59.1 0 79.8 0 105.2v301.5c0 25.5 20.7 46.2 46.2 46.2h547.7c25.5 0 46.2-20.7 46.1-46.1V105.2c0-25.4-20.7-46.1-46.2-46.1zM338.5 360.6H277v-120l-61.5 76.9-61.5-76.9v120H92.3V151.4h61.5l61.5 76.9 61.5-76.9h61.5v209.2zm135.3 3.1L381.5 256H443V151.4h61.5V256H566z" /></svg>
+                    @*@Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "form-check-label mx-1 small" })*@
                 </div>
-
-
-                <p class="btn btn-outline-secondary btn-nav" onclick="window.history.go(-1); return false;">Back</p>
+                @*##########( Pin )##########*@
+                <div id="Pin" class="form-group align-self-start mb-2">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                        @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                    </div>
+                    <i class="fa fa-thumb-tack ms-4 form-label"></i>
+                    @*@Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "form-check-label mx-1 small" })*@
+                </div>
+                @*##########( Private )##########*@
+                <div id="Private" class="form-group align-self-start mb-2">
+                    <div class="form-switch d-inline">
+                        @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                        @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+                    </div>
+                    <i class="fa fa-lock ms-4 form-label"></i>
+                    @*@Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "form-check-label mx-1 small" })*@
+                </div>
             </div>
-            @*####################( The Actual Note )####################*@
-            <div class="col">
-                @*####################( Title )####################*@
-                <div class="form-group row mb-3">
-                    <div class="col-10">
-                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto" } })
-                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                @*####################( Text )####################*@
-                <div class="form-group row mb-3">
-                    <div class="col-10">
-                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto", rows = 11 } })
-                        @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                @*####################( Tags )####################*@
-                <div class="form-group row mb-3">
-                    <div class="col-10">
-                        <input type="text" class="form-control dir-auto" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ..." value="@ViewBag.tagString">
-                        @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
-                        @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
-                    </div>
-                </div>
-                @*####################( Extra Button | Date & Time | Save Button )####################*@
-                <div class="flex-row d-inline-flex flex-nowrap justify-content-between align-items-end col-10">
-                    @*###############( Extra Button )###############*@
-                    <div class="align-self-end">
-                        <input id="extraBtn" class="btn btn-outline-secondary" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
-                    </div>
-                    @*###############( Date & Time )###############*@
-                    <div id="DatePicker" class="invisible">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Written Date</div>
-                            </div>
-                            @Html.TextBox("MyDate", Model.WrittenDate.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end", type = "date" })
-                        </div>
-                    </div>
-                    <div id="TimePicker" class="invisible">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><small>&#64;</small></div>
-                            </div>
-                            @Html.TextBox("MyTime", Model.WrittenDate.ToString("HH:mm:ss"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
-                        </div>
-                    </div>
 
-                    @*###############( Save Button )###############*@
-                    <div class="align-self-end">
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary form-control px-5">
-                        </div>
-                    </div>
+            @*###############( Extra Button )###############*@
+            <div class="btn-nav mb-2 mt-2 col-8 ">
+                <input id="extraBtn" class="btn btn-outline-primary rounded rounded-pill" type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
+            </div>
+            @*###############( Save Button )###############*@
+            <div class=" btn-nav mb-3 mt-2 col-8">
+                <input type="submit" class="btn btn-outline-success" value="Save">
+            </div>
+        </div>
+        @*####################( The Actual Note )####################*@
+        <div class="col col-8 shadow-sm">
+            @*####################( Title )####################*@
+            <div class="form-group row mb-3">
+                <div class="col">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @id = "Title", @class = "form-control dir-auto shadow-none border-0", autofocus = "autofocus" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*####################( Text )####################*@
+            <div class="form-group row mb-3">
+                <div class="col">
+                    @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @id="Text", @class = "form-control dir-auto shadow-none border-0", rows = 13 } })
+                    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*####################( Tags )####################*@
+            <div class="form-group row mb-3">
+                <div class="col">
+                    <input type="text" class="form-control dir-auto shadow-none" id="tagsInput" name="tagsInput" value="@ViewBag.tagString">
+                    @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
+                    @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
                 </div>
             </div>
         </div>
     </div>
+</div>
 }
 
 
@@ -120,8 +117,13 @@
             $("#Pin").toggleClass("invisible");
             $("#extraBtn").toggleClass("active");
         }
+        $(document).ready(function () {
+            var input = $("#Title");
+            var len = input.val().length;
+            input[0].focus();
+            input[0].setSelectionRange(len, len);
+        })
     </script>
-
 
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/dir-auto")
