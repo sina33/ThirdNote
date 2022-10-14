@@ -152,6 +152,9 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -267,12 +270,9 @@
     <Content Include="Content\Style\bootstrap\bootstrap.rtl.css" />
     <Content Include="Content\Style\bootstrap\bootstrap.rtl.min.css" />
     <Content Include="Content\css-circular-prog-bar.css" />
-    <Content Include="Content\font-awesome.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\prism.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Style\custom.css" />
     <Content Include="Content\Style\custom.min.css">
       <DependentUpon>custom.css</DependentUpon>
@@ -604,11 +604,6 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\Style\scss\_variables.scss" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

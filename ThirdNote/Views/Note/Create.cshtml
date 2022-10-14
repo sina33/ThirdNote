@@ -13,83 +13,91 @@
             @*####################( Vertical Control Buttons )####################*@
             <div class="col-3 d-flex flex-column align-items-start">
                 @*##########( Back Button )##########*@
-                <p class="btn btn-outline-danger btn-nav col-8" onclick="window.history.go(-1); return false;">Back</p>
+                <p class="btn btn-link link-dark" onclick="window.history.go(-1); return false;"><i class="fa-solid fa-arrow-left-long fa-2x" title="Back"></i></p>
                 @*###############( Date & Time )###############*@
-                <div id="DatePicker" class="invisible mb-2 mt-3 align-self-center mt-auto font-monospace form-control-sm">
+                <div id="DatePicker" class="invisible mb-2 mt-auto font-monospace form-control-sm">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                         </div>
                         @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end small", type = "date" })
                     </div>
                 </div>
-                <div id="TimePicker" class="invisible mb-2 align-self-center font-monospace form-control-sm">
+                <div id="TimePicker" class="invisible mb-2 font-monospace form-control-sm">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
-                            <div class="input-group-text"><small><i class="fa fa-clock-o"></i></small></div>
-                            @*<div class="input-group-text"><small>&#64;</small></div>*@
+                            <span class="input-group-text"><i class="fa fa-clock-o fa-fw"></i></span>
                         </div>
                         @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
                     </div>
                 </div>
-                <div class="align-self-center mt-2">
+                <div>
                     @*##########( Markdown )##########*@
-                    <div id="Markdown" class="form-group invisible align-self-start mb-2">
-                        <div class="form-switch d-inline">
-                            @Html.EditorFor(model => model.Markdown, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
-                            @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
+                    <div id="Markdown" class="form-group invisible form-control-sm mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <svg style="width: 20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M593.8 59.1H46.2C20.7 59.1 0 79.8 0 105.2v301.5c0 25.5 20.7 46.2 46.2 46.2h547.7c25.5 0 46.2-20.7 46.1-46.1V105.2c0-25.4-20.7-46.1-46.2-46.1zM338.5 360.6H277v-120l-61.5 76.9-61.5-76.9v120H92.3V151.4h61.5l61.5 76.9 61.5-76.9h61.5v209.2zm135.3 3.1L381.5 256H443V151.4h61.5V256H566z" /></svg>
+                                </div>
+                            </div>
+                            <div class="form-switch d-inline my-auto ms-3">
+                                @Html.EditorFor(model => model.Markdown, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                                @Html.ValidationMessageFor(model => model.Markdown, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <svg class="ms-3 form-label" style="width:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M593.8 59.1H46.2C20.7 59.1 0 79.8 0 105.2v301.5c0 25.5 20.7 46.2 46.2 46.2h547.7c25.5 0 46.2-20.7 46.1-46.1V105.2c0-25.4-20.7-46.1-46.2-46.1zM338.5 360.6H277v-120l-61.5 76.9-61.5-76.9v120H92.3V151.4h61.5l61.5 76.9 61.5-76.9h61.5v209.2zm135.3 3.1L381.5 256H443V151.4h61.5V256H566z" /></svg>
-                        @*@Html.LabelFor(model => model.Markdown, htmlAttributes: new { @class = "form-check-label mx-1 small" })*@
                     </div>
                     @*##########( Pin )##########*@
-                    <div id="Pin" class="form-group invisible align-self-start mb-2">
-                        <div class="form-switch d-inline">
-                            @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
-                            @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                    <div id="Pin" class="form-group invisible form-control-sm mb-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-thumb-tack fa-fw"></i></div>
+                            </div>
+                            <div class="form-switch d-inline my-auto ms-3">
+                                @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                                @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <i class="fa fa-thumb-tack ms-4 form-label"></i>
-                        @*@Html.LabelFor(model => model.Pin, htmlAttributes: new { @class = "form-check-label mx-1 small" })*@
                     </div>
                     @*##########( Private )##########*@
-                    <div id="Private" class="form-group invisible align-self-start mb-2">
-                        <div class="form-switch d-inline">
-                            @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
-                            @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+                    <div id="Private" class="form-group invisible form-control-sm mb-3">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-lock fa-fw"></i></div>
+                            </div>
+                            <div class="form-switch d-inline my-auto ms-3">
+                                @Html.EditorFor(model => model.Hidden, new { htmlAttributes = new { @class = "form-check-input", role = "switch" } })
+                                @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <i class="fa fa-lock ms-4 form-label"></i>
-                        @*@Html.LabelFor(model => model.Hidden, htmlAttributes: new { @class = "form-check-label mx-1 small" })*@
                     </div>
                 </div>
                 @*###############( Extra Button )###############*@
-                <div class="btn-nav mb-2 mt-2 col-8 ">
-                    <input id="extraBtn" class="btn btn-outline-primary rounded rounded-pill"  type="button" value="Extra" onclick="toggleExtraOptionsFunction();" />
-                </div>
+                <p id="extraBtn" class="btn btn-link link-dark mb-3" onclick="toggleExtraOptionsFunction();"><i class="fa fa-circle-plus fa-2x"></i></p>
                 @*###############( Save Button )###############*@
-                <div class=" btn-nav mb-3 mt-2 col-8">
-                    <input type="submit" class="btn btn-outline-success" value="Save" >
-                </div>
+                <button type="submit" class="btn btn-link link-dark mb-3" style="box-shadow:none;">
+                    <i class="fa fa-save fa-2x"></i>
+                </button>
             </div>
             @*####################( The Actual Note )####################*@
             <div class="col col-8 shadow-sm">
                 @*####################( Title )####################*@
                 <div class="form-group row mb-3">
                     <div class="col">
-                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0 ", autofocus = "autofocus" } })
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0 border-bottom border-light", autofocus = "autofocus" } })
                         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @*####################( Text )####################*@
                 <div class="form-group row mb-3">
                     <div class="col">
-                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0", rows = 13 } })
+                        @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control dir-auto shadow-none border-0 border-bottom border-light", rows = 13, style = "resize: none;" } })
                         @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @*####################( Tags )####################*@
                 <div class="form-group row mb-3">
                     <div class="col">
-                        <input type="text" class="form-control dir-auto dir-rtl shadow-none " id="tagsInput" name="tagsInput">
+                        <input type="text" class="form-control dir-auto dir-rtl shadow-none border-bottom border-light" id="tagsInput" name="tagsInput">
                         @*<input class="ui-button dir-auto" data-role="tagsinput" id="tagsInput" name="tagsInput" placeholder="write comma-separated values ...">*@
                         @*<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />*@
                     </div>
@@ -109,6 +117,7 @@
             $("#Private").toggleClass("invisible")
             $("#Pin").toggleClass("invisible");
             $("#extraBtn").toggleClass("active");
+            $("#extraBtn").find('i').toggleClass("fa-circle-plus").toggleClass("fa-circle-xmark");
         };
       
     </script>
