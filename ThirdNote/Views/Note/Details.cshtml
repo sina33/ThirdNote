@@ -30,12 +30,12 @@
                         //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
 
 
-                        <div class="d-flex align-items-baseline"><i class="fa fa-quote-right me-3"></i>@CNotes.Count()</div>
+                        <div class="d-flex align-items-baseline"><i class="fa fa-quote-right fa-fw me-2"></i>@CNotes.Count()</div>
                     }
                         @if (PNotes.Count() > 0)
                     {
                         //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \"></div>{0}", PNotes.Count()));
-                        <div class="d-flex align-items-baseline"><i class="fa fa-link me-3"></i>@PNotes.Count()</div>
+                        <div class="d-flex align-items-baseline"><i class="fa fa-link fa-fw me-2"></i>@PNotes.Count()</div>
 
                     }
 
@@ -62,7 +62,7 @@
                         @using (Html.BeginForm("Details", "Note", FormMethod.Post, new { name = Model.Name, likes = Model.ViewCount+1 }))
                 {
 
-                        <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>
+                        <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link shadow-none " style="text-decoration:none;"><h6>🖤</h6></button><p id="likes_number_p">@likes</p></div>
                 }
                         @*<div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>*@
                     </div>
@@ -148,7 +148,7 @@
     $(document).ready(function () {
         $('#likes_heart_btn').click(function () {
             $('#likes_number_p').html("" + (@likes + 1));
-            $('#likes_heart_btn').html("<h5>❤️</h5>");
+            $('#likes_heart_btn').html("<h6>❤️</h6>");
             $('#likes_heart_btn').prop("disabled", true);
             console.log(@(Model.Name));
 
