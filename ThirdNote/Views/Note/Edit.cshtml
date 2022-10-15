@@ -25,7 +25,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-calendar fa-fw"></i></div>
                     </div>
-                    @Html.TextBox("MyDate", DateTime.Now.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end small", type = "date" })
+                    @Html.TextBox("MyDate", Model.WrittenDate.ToString("yyyy-MM-dd"), htmlAttributes: new { @class = "form-control float-end small", type = "date" })
                 </div>
             </div>
             <div id="TimePicker" class="mb-2 font-monospace form-control-sm">
@@ -34,7 +34,7 @@
                         <div class="input-group-text"><small><i class="fa fa-clock-o fa-fw"></i></small></div>
                         @*<div class="input-group-text"><small>&#64;</small></div>*@
                     </div>
-                    @Html.TextBox("MyTime", DateTime.Now.ToString("HH:mm"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
+                    @Html.TextBox("MyTime", Model.WrittenDate.ToString("HH:mm"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
                 </div>
             </div>
 
