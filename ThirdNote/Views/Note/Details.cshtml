@@ -9,7 +9,7 @@
 }
 
 
-<div class="row">
+<div class="row mb-2">
     @*####################( Vertical Control Buttons )####################*@
     <div class="col-3 d-flex flex-column align-items-start">
         @*##########( Back Button )##########*@
@@ -17,7 +17,7 @@
         <a class="btn btn-link link-dark shadow-none" href="/Note/Edit/@Model.Name"><i class="fa fa-edit fa-2x"></i></a>
     </div>
     @*####################(  Form )####################*@
-    <div class="col col-8 shadow-sm">
+    <div class="col col-8 shadow-sm p-3">
         <dl>
             <dt></dt>
             @*###############( Title & Date )###############*@
@@ -26,30 +26,30 @@
                     @* Reference and Citation *@
                     <div class="d-flex flex-column ">
                         @if (CNotes.Count() > 0)
-                    {
-                        //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
+                        {
+                            //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-dark \">{0}</div>", CNotes.Count()));
 
 
-                        <div class="d-flex align-items-baseline"><i class="fa fa-quote-right fa-fw me-2"></i>@CNotes.Count()</div>
-                    }
+                            <div class="d-flex align-items-baseline"><i class="fa fa-quote-right fa-fw me-2"></i>@CNotes.Count()</div>
+                        }
                         @if (PNotes.Count() > 0)
-                    {
-                        //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \"></div>{0}", PNotes.Count()));
-                        <div class="d-flex align-items-baseline"><i class="fa fa-link fa-fw me-2"></i>@PNotes.Count()</div>
+                        {
+                            //@Html.Raw(String.Format("<div class=\"d-inline-flex rounded-pill badge bg-secondary \"></div>{0}", PNotes.Count()));
+                            <div class="d-flex align-items-baseline"><i class="fa fa-link fa-fw me-2"></i>@PNotes.Count()</div>
 
-                    }
+                        }
 
                     </div>
                     @* Title and Date *@
                     <div class="dir-txt-auto text-center flex-fill">
                         @if (Model.Markdown)
-                    {
-                        @Html.Raw("<b>" + Model.Title + "</b>")
-                    }
-                    else
-                    {
-                        <b>@Model.Title</b>
-                    }
+                        {
+                            @Html.Raw("<b>" + Model.Title + "</b>")
+                        }
+                        else
+                        {
+                            <b>@Model.Title</b>
+                        }
                         <br />
                         <small dir="ltr">
                             <b>@ViewBag.TimeAgo</b> at
@@ -59,11 +59,11 @@
                     </div>
                     @* Like Button *@
                     <div class="d-flex flex-column ">
-                        @using (Html.BeginForm("Details", "Note", FormMethod.Post, new { name = Model.Name, likes = Model.ViewCount+1 }))
-                {
+                        @using (Html.BeginForm("Details", "Note", FormMethod.Post, new { name = Model.Name, likes = Model.ViewCount + 1 }))
+                        {
 
-                        <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link shadow-none " style="text-decoration:none;"><h6>🖤</h6></button><p id="likes_number_p">@likes</p></div>
-                }
+                            <div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link shadow-none " style="text-decoration:none;"><h6>🖤</h6></button><p id="likes_number_p">@likes</p></div>
+                        }
                         @*<div id="likes_number" class="d-flex align-items-baseline"><button id="likes_heart_btn" type="submit" class="btn btn-link rounded-circle p-0 mx-2" style="text-decoration:none;"><h6>❤️</h6></button><p id="likes_number_p">@likes</p></div>*@
                     </div>
                 </div>
@@ -72,79 +72,80 @@
             <dd>
                 <dl>
                     @if (Model.Markdown) // it's been converted to html in controller
-                {
-                    <div class="dir-txt-auto mb-1">@Html.Raw(Model.Text)</div>
-                }
-                else if (!string.IsNullOrEmpty(Model.Text))
-                {
-                    //Html.Raw(string.Join("", Model.Text.Split('\n').Select(p => HttpUtility.HtmlEncode(p) + "<br />")));
-                    @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
-                    foreach (var txt in Model.Text.Split('\n'))
                     {
-                    <p class="dir-txt-auto mb-1">
-                        @Html.Raw(txt)
-                        <br />
-                    </p>
+                        <div class="dir-txt-auto mb-1">@Html.Raw(Model.Text)</div>
                     }
-                }
-                else
-                {
-                    @Html.Raw("<br/>")
-                }
+                    else if (!string.IsNullOrEmpty(Model.Text))
+                    {
+                        //Html.Raw(string.Join("", Model.Text.Split('\n').Select(p => HttpUtility.HtmlEncode(p) + "<br />")));
+                        @*@Html.Raw(HttpUtility.HtmlEncode(Model.Text));*@
+                        foreach (var txt in Model.Text.Split('\n'))
+                        {
+                            <p class="dir-txt-auto mb-1">
+                                @Html.Raw(txt)
+                                <br />
+                            </p>
+                        }
+                    }
+                    else
+                    {
+                        @Html.Raw("<br/>")
+                    }
                 </dl>
             </dd>
-            @*###############( Tags )###############*@
-            <dd>
-                <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pt-2">
-                    @foreach (var tag in Tags)
-                {
-                    <a class="mx-2" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
-                }
-                </div>
-            </dd>
         </dl>
-        @*###############( Parent Notes )###############*@
-        @if (PNotes != null)
-    {
-        <div class="mt-3">
-            @foreach (ThirdNote.Models.Note pNote in PNotes)
-            {
-                if (pNote.Markdown)
-                {
-            <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
-                }
-                else
-                {
-            <p class="small"><code class="indent"><i class="fa fa-link mx-1"></i> #@pNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
-                }
-            }
-        </div>
-    }
+        <hr class="mt-5 mb-3" />
+
         @*###############( Child Notes )###############*@
         @if (CNotes != null)
-    {
-        <div>
-            @foreach (ThirdNote.Models.Note cNote in CNotes)
+        {
+            <div >
+                @foreach (ThirdNote.Models.Note cNote in CNotes)
+                {
+                    if (cNote.Markdown)
+                    {
+                        <p class="small"><code class="text-dark"><i class="fa fa-quote-right fa-fw me-2"></i><i class="fa fa-hashtag fa-fw "></i>@cNote.Name</code><span class="mx-1">:</span><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
+                    }
+                    else
+                    {
+                        <p class="small"><code class="text-dark"><i class="fa fa-quote-right fa-fw me-2"></i><i class="fa fa-hashtag fa-fw "></i>@cNote.Name</code><span class="mx-1">:</span><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
+                    }
+                }
+            </div>
+        }
+        @*###############( Parent Notes )###############*@
+        @if (PNotes != null)
+        {
+            <div>
+                @foreach (ThirdNote.Models.Note pNote in PNotes)
+                {
+                    if (pNote.Markdown)
+                    {
+                        <p class="small"><code class="text-dark"><i class="fa fa-link fa-fw me-2"></i><i class="fa fa-hashtag fa-fw "></i>@pNote.Name</code><span class="mx-1">:</span><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@pNote.Title + "</b>")</span></a></p>
+                    }
+                    else
+                    {
+                        <p class="small"><code class="text-dark"><i class="fa fa-link fa-fw me-2"></i><i class="fa fa-hashtag fa-fw "></i>@pNote.Name</code><span class="mx-1">:</span><a href="/Note/Details/@pNote.Name"><span class="badge bg-light text-dark">@pNote.Title</span></a></p>
+                    }
+                }
+            </div>
+        }
+        @*###############( Tags )###############*@
+        <div class="d-flex flex-row flex-wrap justify-content-start dir-txt-auto pt-2">
+            @foreach (var tag in Tags)
             {
-                if (cNote.Markdown)
-                {
-            <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@Html.Raw(@cNote.Title)</span></a></p>
-                }
-                else
-                {
-            <p class="small"><code class="indent"><i class="fa fa-quote-right mx-1"></i> #@cNote.Name</code><code class="mx-1">:</code><a href="/Note/Details/@cNote.Name"><span class="badge bg-light text-dark">@cNote.Title</span></a></p>
-                }
+                <a class="m-1 link-dark bg-light text-decoration-none btn btn-sm btn-outline-secondary rounded rounded-3" href="\Tag\Details\@tag.ID">@tag.Lable_fa</a>
             }
         </div>
-    }
     </div>
+
 </div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/dir-auto")
-<script>
+    <script>
     $(document).ready(function () {
         $('#likes_heart_btn').click(function () {
             $('#likes_number_p').html("" + (@likes + 1));
@@ -155,5 +156,5 @@
         });
     })
 
-</script>
+    </script>
 }
