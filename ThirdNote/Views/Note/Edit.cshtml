@@ -18,7 +18,7 @@
         @*####################( Vertical Control Buttons )####################*@
         <div class="col-3 d-flex flex-column align-items-start">
             @*##########( Back Button )##########*@
-            <p class="btn btn-link link-dark" onclick="window.history.go(-1); return false;"><i class="fa-solid fa-arrow-left-long fa-2x"></i></p>
+            <p class="btn btn-link link-dark" onclick="window.history.go(-1); return false;"><i class="fa fa-arrow-square-left fa-2x fa-fw"></i></p>
             @*###############( Date & Time )###############*@
             <div id="DatePicker" class="mb-2 mt-auto font-monospace form-control-sm">
                 <div class="input-group input-group-sm">
@@ -31,7 +31,7 @@
             <div id="TimePicker" class="mb-2 font-monospace form-control-sm">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
-                        <div class="input-group-text"><small><i class="fa fa-clock-o fa-fw"></i></small></div>
+                        <div class="input-group-text"><small><i class="fa fa-clock fa-fw"></i></small></div>
                         @*<div class="input-group-text"><small>&#64;</small></div>*@
                     </div>
                     @Html.TextBox("MyTime", Model.WrittenDate.ToString("HH:mm"), htmlAttributes: new { @class = "form-control float-end", type = "time" })
@@ -80,10 +80,10 @@
             </div>
 
             @*###############( Extra Button )###############*@
-            <p id="extraBtn" class="btn btn-link link-dark mb-3" onclick="toggleExtraOptionsFunction();"><i class="fa fa-circle-plus fa-2x"></i></p>
+            <p id="extraBtn" class="btn btn-link link-dark mb-3" onclick="toggleExtraOptionsFunction();"><i class="fa fa-circle-plus fa-2x fa-fw"></i></p>
             @*###############( Save Button )###############*@
             <button type="submit" class="btn btn-link link-dark mb-3" style="box-shadow:none;">
-                <i class="fa fa-save fa-2x"></i>
+                <i class="fa fa-save fa-2x fa-fw"></i>
             </button>
         </div>
         @*####################( The Actual Note )####################*@
