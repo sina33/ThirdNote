@@ -1,28 +1,28 @@
 ﻿@model IEnumerable<ThirdNote.Models.Note>
 
 @{
-    ViewBag.Title = "Tag | " + (string.IsNullOrEmpty(ViewBag.Tag.Lable_en)? ViewBag.Tag.Label:ViewBag.Tag.Lable_en).ToLower();
+    ViewBag.Title = "Tag | " + (string.IsNullOrEmpty(ViewBag.Tag.Lable_en) ? ViewBag.Tag.Label : ViewBag.Tag.Lable_en).ToLower();
     //"Tag " + ViewBag.Tag.Lable_en;
 }
 
 
-<div class="row">
-    <div class="col-2 offset-1 d-flex flex-row justify-content-center">
-        <a class="btn btn-outline-warning btn-nav" href="/Tag/Edit/@ViewBag.Tag.ID">Edit Tag</a>
-    </div>
-    <div class="col-8 d-flex align-items-center">
-        <h2 style="margin-bottom:0;"><span class="badge bg-dark bg-gradient text-light rounded-pill">@ViewBag.Tag.Lable_fa</span></h2>
+<div class="d-flex flex-row justify-content-start align-items-center mb-3">
+    <a class="btn shadow-none" href="/Tag/Edit/@ViewBag.Tag.ID"> <i class="fa fa-edit fa-2x fa-fw"></i> </a>
+    <div style="margin-bottom:0;" class="ms-3">
+        <p class="btn btn-outline-secondary btn-dark text-dark rounded rounded-3 me-1 disabled">@ViewBag.Tag.Lable_fa</p> :
+        <p class="btn btn-outline-secondary btn-dark text-dark rounded rounded-3 ms-1 disabled">@ViewBag.Tag.Lable_en</p>
     </div>
 </div>
-    <div class="row">
-        <div class="col-12">
-            @*####################( Only Tagged Notes )####################*@
-            @Html.Partial("~/Views/Note/List.cshtml", Model)
-        </div>
+
+<div class="row">
+    <div class="col-12">
+        @*####################( Only Tagged Notes )####################*@
+        @Html.Partial("~/Views/Note/List.cshtml", Model)
     </div>
+</div>
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/dir-auto")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dir-auto")
+}
