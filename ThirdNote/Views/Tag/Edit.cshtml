@@ -4,53 +4,52 @@
     ViewBag.Title = "Tag Edit";
 }
 
-<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Tag</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
 
-
-        <div class="form-group row mb-3">
-            @Html.LabelFor(model => model.Label, htmlAttributes: new { @class = "control-label col-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Label, new { htmlAttributes = new { @class = "form-control dir-auto" } })
-                @Html.ValidationMessageFor(model => model.Label, "", new { @class = "text-danger" })
+        <div class="row">
+            @*####################( Vertical Control Buttons )####################*@
+            <div class="col-1 d-flex flex-column align-items-start justify-content-between">
+                @*##########( Back Button )##########*@
+                <p class="btn btn-link link-dark" onclick="window.history.go(-1); return false;"><i class="fa fa-arrow-square-left fa-2x fa-fw" title="Back"></i></p>
+                @*###############( Save Button )###############*@
+                <button type="submit" class="btn btn-link link-dark" style="box-shadow:none;">
+                    <i class="fa fa-save fa-2x fa-fw"></i>
+                </button>
             </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            @Html.LabelFor(model => model.Lable_en, htmlAttributes: new { @class = "control-label col-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Lable_en, new { htmlAttributes = new { @class = "form-control dir-auto" } })
-                @Html.ValidationMessageFor(model => model.Lable_en, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            @Html.LabelFor(model => model.Lable_fa, htmlAttributes: new { @class = "control-label col-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Lable_fa, new { htmlAttributes = new { @class = "form-control dir-auto" } })
-                @Html.ValidationMessageFor(model => model.Lable_fa, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="col-8">
+                @Html.HiddenFor(model => model.ID)
 
 
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.Label, htmlAttributes: new { @class = "control-label col-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Label, new { htmlAttributes = new { @class = "form-control dir-auto" } })
+                        @Html.ValidationMessageFor(model => model.Label, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.Lable_en, htmlAttributes: new { @class = "control-label col-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Lable_en, new { htmlAttributes = new { @class = "form-control dir-auto" } })
+                        @Html.ValidationMessageFor(model => model.Lable_en, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    @Html.LabelFor(model => model.Lable_fa, htmlAttributes: new { @class = "control-label col-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Lable_fa, new { htmlAttributes = new { @class = "form-control dir-auto" } })
+                        @Html.ValidationMessageFor(model => model.Lable_fa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
