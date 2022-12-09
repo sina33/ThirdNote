@@ -252,6 +252,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addnote.png" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Style\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\Style\bootstrap\bootstrap-grid.min.css" />
     <Content Include="Content\Style\bootstrap\bootstrap-grid.rtl.css" />
@@ -277,30 +279,7 @@
     <Content Include="Content\Style\custom.min.css">
       <DependentUpon>custom.css</DependentUpon>
     </Content>
-    <Content Include="Content\Style\fontawesome\css\all.css" />
-    <Content Include="Content\Style\fontawesome\css\all.min.css" />
-    <Content Include="Content\Style\fontawesome\css\brands.css" />
-    <Content Include="Content\Style\fontawesome\css\brands.min.css" />
-    <Content Include="Content\Style\fontawesome\css\duotone.css" />
-    <Content Include="Content\Style\fontawesome\css\duotone.min.css" />
-    <Content Include="Content\Style\fontawesome\css\fontawesome.css" />
-    <Content Include="Content\Style\fontawesome\css\fontawesome.min.css" />
-    <Content Include="Content\Style\fontawesome\css\light.css" />
-    <Content Include="Content\Style\fontawesome\css\light.min.css" />
-    <Content Include="Content\Style\fontawesome\css\regular.css" />
-    <Content Include="Content\Style\fontawesome\css\regular.min.css" />
-    <Content Include="Content\Style\fontawesome\css\solid.css" />
-    <Content Include="Content\Style\fontawesome\css\solid.min.css" />
-    <Content Include="Content\Style\fontawesome\css\svg-with-js.css" />
-    <Content Include="Content\Style\fontawesome\css\svg-with-js.min.css" />
-    <Content Include="Content\Style\fontawesome\css\thin.css" />
-    <Content Include="Content\Style\fontawesome\css\thin.min.css" />
-    <Content Include="Content\Style\fontawesome\css\v4-font-face.css" />
-    <Content Include="Content\Style\fontawesome\css\v4-font-face.min.css" />
-    <Content Include="Content\Style\fontawesome\css\v4-shims.css" />
-    <Content Include="Content\Style\fontawesome\css\v4-shims.min.css" />
-    <Content Include="Content\Style\fontawesome\css\v5-font-face.css" />
-    <Content Include="Content\Style\fontawesome\css\v5-font-face.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Style\bootstrap\bootstrap.css.bkp" />
     <Content Include="Content\Style\bootstrap\bootstrap.min.css.bkp" />
@@ -341,20 +320,11 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\Style\scss\_variables.scss" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-brands-400.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-brands-400.woff2" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-duotone-900.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-duotone-900.woff2" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-light-300.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-light-300.woff2" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-regular-400.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-regular-400.woff2" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-solid-900.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-thin-100.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-thin-100.woff2" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-v4compatibility.ttf" />
-    <Content Include="Content\Style\fontawesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
